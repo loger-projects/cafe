@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::post('/home', 'HomeController@store');
+
+Route::get('/test', 'HomeController@method_1');
