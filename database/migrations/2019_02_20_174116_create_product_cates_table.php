@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostCatesTable extends Migration
+class CreateProductCatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreatePostCatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_cates', function (Blueprint $table) {
+        Schema::create('product_cates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreatePostCatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_cates');
+        Schema::dropIfExists('product_cates');
     }
 }

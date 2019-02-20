@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\PostComment::class, function (Faker $faker) {
+$factory->define(App\Models\PostComment::class, function (Faker $faker) {
     return [
         //
     ];

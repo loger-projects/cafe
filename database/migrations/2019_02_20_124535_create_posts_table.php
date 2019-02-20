@@ -15,7 +15,16 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('cate_id');
+            $table->unsignedInteger('user_id');
+            $table->string('title')->unique();
+            $table->string('slug')->unique();
+            $table->text('content');
+            $table->string('excerpt');
+            $table->string('thubnail')->default('/img/PostDefaultThumbnail.jpg');
             $table->timestamps();
+            $table->foreign('cate_id')->references('id')->on('post_cates');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

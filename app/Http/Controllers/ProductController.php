@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PostComment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class PostCommentController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class PostCommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\PostComment  $postComment
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(PostComment $postComment)
+    public function show(Product $product)
     {
         //
     }
@@ -52,10 +52,10 @@ class PostCommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PostComment  $postComment
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(PostComment $postComment)
+    public function edit(Product $product)
     {
         //
     }
@@ -64,10 +64,10 @@ class PostCommentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PostComment  $postComment
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PostComment $postComment)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -75,10 +75,10 @@ class PostCommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PostComment  $postComment
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostComment $postComment)
+    public function destroy(Product $product)
     {
         //
     }

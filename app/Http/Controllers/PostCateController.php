@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\PostCate;
+use App\Models\PostCate;
 use Illuminate\Http\Request;
 
 class PostCateController extends Controller
