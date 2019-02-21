@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenuTypesTable extends Migration
+class CreateImageProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateMenuTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_types', function (Blueprint $table) {
+        Schema::create('image_product', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->unsignedInteger('parent_id')->nullable(); // drink or food : 01 or 
+            $table->unsignedInteger('image_id');
+            $table->unsignedInteger('product_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateMenuTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_types');
+        Schema::dropIfExists('image_product');
     }
 }

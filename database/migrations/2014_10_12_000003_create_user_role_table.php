@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenuReviewsTable extends Migration
+class CreateUserRoleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateMenuReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_reviews', function (Blueprint $table) {
+        Schema::create('user_role', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('role_id');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateMenuReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_reviews');
+        Schema::dropIfExists('user_role');
     }
 }

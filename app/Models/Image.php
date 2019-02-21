@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductFavorite extends Model
+class Image extends Model
 {
     //
 }

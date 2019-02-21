@@ -15,15 +15,14 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('meal_id');
             $table->unsignedInteger('type_id');
             $table->string('name')->unique();
             $table->text('description');
             $table->string('price');
             $table->boolean('new')->default(false);
+            $table->boolean('food'); // true: food | false: drink
             $table->string('thumbnail');
             $table->timestamps();
-            $table->foreign('meal_id')->references('id')->on('meals');
             $table->foreign('type_id')->references('id')->on('menu_types');
         });
     }

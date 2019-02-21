@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->text('content');
             $table->string('excerpt');
+            $table->boolean('published');
+            $table->boolean('preview'); // save a copy to current column. and return to route /preview/post/post-slug
             $table->string('thubnail')->default('/img/PostDefaultThumbnail.jpg');
             $table->timestamps();
             $table->foreign('cate_id')->references('id')->on('post_cates');
