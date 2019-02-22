@@ -16,7 +16,7 @@ class CreateGalleriesTable extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('image_id');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->foreign('image_id')->references('id')->on('images');

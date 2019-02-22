@@ -21,6 +21,7 @@ class CreateMenusTable extends Migration
             $table->string('price');
             $table->boolean('new')->default(false);
             $table->boolean('food'); // true: food | false: drink
+            $table->unsignedInteger('rating');
             $table->string('thumbnail');
             $table->timestamps();
             $table->foreign('type_id')->references('id')->on('menu_types');

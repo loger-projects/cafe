@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ class CreateProductCatesTable extends Migration
     {
         Schema::create('product_cates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->timestamps();
         });
