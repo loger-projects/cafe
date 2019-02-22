@@ -19,8 +19,8 @@ class CreateMenusTable extends Migration
             $table->string('name')->unique();
             $table->text('description');
             $table->string('price');
-            $table->boolean('new')->default(false);
-            $table->boolean('food'); // true: food | false: drink
+            $table->boolean('is_new')->default(false);
+            $table->boolean('is_food'); // true: food | false: drink
             $table->unsignedInteger('rating');
             $table->string('thumbnail');
             $table->timestamps();

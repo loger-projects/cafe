@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Menu;
 
-class Ingredient extends Model
+class MenuMeal extends Model
 {
     /**
      * Undocumented variable
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'description'];
 
     /**
      * Undocumented function
@@ -21,6 +21,6 @@ class Ingredient extends Model
      */
     public function menus()
     {
-        return $this->belongsToMany(Menu::class, 'menu_ingredient', 'ingredient_id', 'menu_id');
+        return $this->belongsToMany(Menu::class, 'menu_meal', 'meal_id', 'menu_id');
     }
 }

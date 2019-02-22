@@ -20,9 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->unsingedInteger('price');
-            $table->boolean('stock');
-            $table->boolean('new');
-            $table->unsingedInteger('rating');
+            $table->boolean('in_stock');
+            $table->boolean('is_new');
+            $table->unsignedInteger('rating');
             $table->string('thumbnail');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

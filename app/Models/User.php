@@ -1,10 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Post;
+use PostComment;
+use Product;
+use ProductReview;
+use MenuReview;
+use Order;
+use Role;
 
 class User extends Authenticatable
 {
@@ -16,7 +23,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'role_id',
+        'name',
+        'email',
+        'password',
+        'avatar',
+        'phone',
+        'address',
+        'distric',
+        'city',
     ];
 
     /**
@@ -27,4 +42,80 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // hasMany: Post / PostComment
+    // hasMany: Product / ProductReview
+    // hasMany: MenuReview
+    // hasMany: Order
+    // belongsTo: Role
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function postComments()
+    {
+        return $this->hasMany(PostComment::class);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function Products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function productReviews()
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+    
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function MenuReviews()
+    {
+        return $this->hasMany(MenuReview::class);
+    }
+    
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
