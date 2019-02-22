@@ -4,14 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Menu;
+use MenuTypeCate;
 
 class MenuType extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'cate_id'];
 
-    // belongsTo: Menu
-    public function menu()
+    // hasMany: Menu
+    // belongsTo: MenuTypeCate
+
+    public function menus()
     {
-        $this->belongsTo(Menu::class, 'menu_id');
+        $this->hasMany(Menu::class, 'type_id');
+    }
+
+    public function cate()
+    {
+        $this->belongsTo(MenuTypeCate::class, 'cate_id');
     }
 }

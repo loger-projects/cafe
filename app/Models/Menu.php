@@ -16,14 +16,13 @@ class Menu extends Model
         'description', 
         'price',
         'is_new', 
-        'is_food', 
         'rating',
         'thumbnail'
     ];
 
-    // Many to many: Image / Meal
     // belongsTo: MenuType
     // hasMany: MenuReview
+    // belongsToMany: Image / Meal
 
     /**
      * Undocumented function
@@ -50,7 +49,7 @@ class Menu extends Model
      *
      * @return void
      */
-    public function meal()
+    public function meals()
     {
         return $this->belongsToMany(MenuMeal::class, 'menu_meal', 'menu_id', 'meal_id');
     }

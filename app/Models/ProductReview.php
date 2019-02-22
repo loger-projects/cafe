@@ -14,6 +14,8 @@ class ProductReview extends Model
         'rating',
         'content'
     ];
+
+    // belongsTo: Product / User
     
     /**
      * Undocumented function
