@@ -11,5 +11,5 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/src/home.js', 'public/js');
+mix.js('resources/src/views/SitePageHome.js', 'public/js');
    
