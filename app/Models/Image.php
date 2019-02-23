@@ -3,9 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Gallery;
-use Product;
-use Menu;
 
 class Image extends Model
 {

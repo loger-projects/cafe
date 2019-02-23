@@ -5,13 +5,6 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Post;
-use PostComment;
-use Product;
-use ProductReview;
-use MenuReview;
-use Order;
-use Role;
 
 class User extends Authenticatable
 {

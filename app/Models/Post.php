@@ -3,9 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use PostCate;
-use PostComment;
-use User;
 
 class Post extends Model
 {

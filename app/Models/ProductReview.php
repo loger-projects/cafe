@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Product;
-use User;
 
 class ProductReview extends Model
 {

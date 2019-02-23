@@ -22,6 +22,11 @@ class PageController extends Controller
         return view('process');
     }
 
+    public function about()
+    {
+        return view('home');
+    }
+
     /**
      * Undocumented function
      *
@@ -31,5 +36,6 @@ class PageController extends Controller
     {
         Route::get('/', 'PageController@home')->name('home');
         Route::get('/process', 'PageController@process')->name('process');
+        Route::get('/about', 'PageController@about')->name('about');
     }
 }

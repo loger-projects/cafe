@@ -3,10 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use User;
-use ProductCate;
-use ProductReview;
-use Image;
 
 class Product extends Model
 {
