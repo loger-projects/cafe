@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
 </head>
 <body>
