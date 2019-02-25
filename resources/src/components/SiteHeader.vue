@@ -1,10 +1,10 @@
 <template>
     <section id="section-header">
-        <slot name="site-header-bg-slot"></slot>
+        <slot name="site-header-background"></slot>
         <!-- Menu -->
         <site-header-nav></site-header-nav>
         <!-- slot - slider or  -->
-        <slot name="site-header-banner-slot"></slot>
+        <slot name="site-header-banner"></slot>
     </section>
 </template>
 

@@ -1,19 +1,19 @@
 <template>
-    <div id="site-page-home-container">
+    <div id="site-page-home">
         <site-header>
-            <template slot="site-header-bg-slot">
+            <template slot="site-header-background">
                 <site-page-home-header-slider></site-page-home-header-slider>
             </template>
-            <template slot="site-header-banner-slot">
+            <template slot="site-header-banner">
                 <site-page-home-header-banner></site-page-home-header-banner>
             </template>
         </site-header>
     </div>
 </template>
+
 <style lang="scss" scoped>
-    #section-header {
-        width: 100%;
-        height: 100vh;
+    div#site-page-home {
+        position: relative;
     }
 </style>
 
@@ -24,10 +24,20 @@ import SitePageHomeHeaderBanner from '../components/SitePageHomeHeaderBanner.vue
 
 export default {
     name: 'SitePageHome',
+    data() {
+        return {
+            SiteHeaderNavHeight: 0
+        }
+    },
     components: {
         'site-header': SiteHeader,
         'site-page-home-header-slider': SitePageHomeHeaderSlider,
         'site-page-home-header-banner': SitePageHomeHeaderBanner
+    },
+    mounted() {
+        var siteHeaderNavHeight = this.$el.querySelector('#site-header-nav').offsetHeight;
+        var windowHeight = window.innerHeight;
+        this.$el.querySelector('#site-page-home-header-banner').style.height = windowHeight - siteHeaderNavHeight +'px';
     }
 }
 </script>

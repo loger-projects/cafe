@@ -7,9 +7,6 @@
 </template>
 <style lang="scss" scoped>
     div#site-page-home-header-banner {
-        position: relative;
-        width: 100%;
-        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
