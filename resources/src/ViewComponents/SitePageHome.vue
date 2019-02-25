@@ -1,7 +1,7 @@
 <template>
     <div id="site-page-home-container">
         <site-header>
-            <template name="site-header-bg-slot">
+            <template slot="site-header-bg-slot">
                 <site-page-home-header-slider></site-page-home-header-slider>
             </template>
             <template slot="site-header-banner-slot">
@@ -10,6 +10,12 @@
         </site-header>
     </div>
 </template>
+<style lang="scss" scoped>
+    #section-header {
+        width: 100%;
+        height: 100vh;
+    }
+</style>
 
 <script>
 import SiteHeader from '../components/SiteHeader.vue'
