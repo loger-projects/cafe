@@ -1,25 +1,59 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
 .container {
     max-width: 100%;
 }
+.title {
+    font-family: 'Dancing Script', cursive;
+}
+.title-bold {
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+}
+.title-font-size {
+    font-size: 30px;
+}
+.slogan {
+    font-size: 20px;
+}
 @media(min-width: 576px) {
-
+    .title-font-size {
+        font-size: 40px;
+    }
+    .slogan {
+        font-size: 25px;
+    }
 }
 @media(min-width: 768px) {
-
+    .title-font-size {
+        font-size: 45px;
+    }
 }
 @media(min-width: 992px) {
-
+    .title-font-size {
+        font-size: 55px;
+    }
 }
 @media(min-width: 1200px) {
-    
+    .title-font-size {
+        font-size: 65px;
+    }
 }
 @media(min-width: 1367px) {
     .container {
         max-width: 90%;
+    }
+    .title-font-size {
+        font-size: 80px;
+    }
+    .slogan {
+        font-size: 30px;
     }
 }
 @media(min-width: 1500px) {
     .container {
         max-width: 1350px;
     }
+    
 }

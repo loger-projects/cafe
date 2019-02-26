@@ -14,6 +14,15 @@
 <style lang="scss" scoped>
     div#site-page-home {
         position: relative;
+        div#site-page-home-header-slider {
+            z-index: -1;
+        }
+        div#site-header-nav {
+            z-index: 3;
+        }
+        div#site-page-home-header-banner {
+            z-index: 1;
+        }
     }
 </style>
 
