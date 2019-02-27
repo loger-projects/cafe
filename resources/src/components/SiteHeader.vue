@@ -8,6 +8,12 @@
     </section>
 </template>
 
+<style lang="scss" scoped>
+    section#section-header {
+        position: relative;
+    }
+</style>
+
 <script>
 import SiteHeaderNav from './SiteHeaderNav.vue'
 

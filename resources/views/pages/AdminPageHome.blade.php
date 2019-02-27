@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/bulma.min.css">
-    <link rel="stylesheet" href="{{ asset('css/master.css') }}">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
     <div id="root">
-        @yield('content')
+        <admin-page-home></admin-page-home>
     </div>
-    @yield('js')
+    <script src="/js/AdminPageHome.js"></script>
 </body>
 </html>

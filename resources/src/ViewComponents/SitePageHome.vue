@@ -2,25 +2,26 @@
     <div id="site-page-home">
         <site-header>
             <template slot="site-header-background">
-                <site-page-home-header-slider></site-page-home-header-slider>
+                <header-slider></header-slider>
             </template>
             <template slot="site-header-banner">
-                <site-page-home-header-banner></site-page-home-header-banner>
+                <header-banner></header-banner>
             </template>
         </site-header>
+        <book-table></book-table>
     </div>
 </template>
 
 <style lang="scss" scoped>
     div#site-page-home {
         position: relative;
-        div#site-page-home-header-slider {
+        div#header-slider {
             z-index: -1;
         }
         div#site-header-nav {
             z-index: 3;
         }
-        div#site-page-home-header-banner {
+        div#header-banner {
             z-index: 1;
         }
     }
@@ -30,6 +31,7 @@
 import SiteHeader from '../components/SiteHeader.vue'
 import SitePageHomeHeaderSlider from '../components/SitePageHomeHeaderSlider.vue'
 import SitePageHomeHeaderBanner from '../components/SitePageHomeHeaderBanner.vue'
+import SitePageHomeBookTable from '../components/SitePageHomeBookTable.vue'
 
 export default {
     name: 'SitePageHome',
@@ -40,8 +42,9 @@ export default {
     },
     components: {
         'site-header': SiteHeader,
-        'site-page-home-header-slider': SitePageHomeHeaderSlider,
-        'site-page-home-header-banner': SitePageHomeHeaderBanner
+        'header-slider': SitePageHomeHeaderSlider,
+        'header-banner': SitePageHomeHeaderBanner,
+        'book-table': SitePageHomeBookTable
     },
     mounted() {
         var siteHeaderNavHeight = this.$el.querySelector('#site-header-nav').offsetHeight;

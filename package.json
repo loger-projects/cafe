@@ -12,6 +12,7 @@
     "devDependencies": {
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
+        "buefy": "^0.7.3",
         "cross-env": "^5.1",
         "hooper": "0.0.9",
         "jquery": "^3.2",

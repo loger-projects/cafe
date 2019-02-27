@@ -12,5 +12,6 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/src/views/SitePageHome.js', 'public/js')
+   .js('resources/src/views/AdminPageHome.js', 'public/js')
    .sass('resources/src/scss/master.scss', 'public/css');
    
