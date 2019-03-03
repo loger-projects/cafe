@@ -1,43 +1,49 @@
 <template>
-    <section>
+    <div>
         <admin-header></admin-header>
-        <div class="columns is-multiline is-gapless my-custom-div">
-            <div class="column is-5">Column 5</div>
-            <div class="column is-7">column</div>
-            <div class="column">Column</div>
-            <div class="column">Column</div>
-            <div class="column is-12">Column 12: .columns.is-gapless:not(:last-child) { margin-bottom: 1.5rem; }</div>
-        </div>
-        <div class="columns has-background-success has-text-danger">
-            <div class="column">No Gap</div>
-            <div class="column">No Gap</div>
-            <div class="column">No Gap</div>
-        </div>
-        <div class="columns has-background-grey-dark has-text-primary">
-            <div class="column">No Gap</div>
-            <div class="column">No Gap</div>
-            <div class="column">No Gap</div>
-        </div>
-    </section>
+        <admin-comment></admin-comment>
+        <section class="hero is-success">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        Title
+                    </h1>
+                    <h2 class="subtitle">
+                        Sub Title
+                    </h2>
+                </div>
+            </div>
+        </section>
+    </div>
 </template>
 
-<style lang="scss" scoped>
-    div.my-custom-div {
+<style lang="scss">
+    .test-section {
+        border-bottom: 1px solid black;
         div.column {
-            background-color: greenyellow;
-            padding-top: 30px !important;
-            padding-bottom: 30px !important;
+            background-color: rgb(78, 209, 148);
+            height: 100px;
+            border: 1px solid rgb(12, 13, 31);
+        }
+    }
+    .second-section {
+        border-bottom: 1px solid black;
+        div.column {
+            background-color: rgb(215, 224, 131);
+            border: 1px solid rgb(231, 10, 10);
         }
     }
 </style>
 
 <script>
 import AdminHeader from '../components/AdminHeader.vue'
+import AdminComment from '../components/AdminComment.vue'
 
 export default {
     name: 'AdminPageHome',
     components: {
-        'admin-header' :AdminHeader
+        'admin-header' : AdminHeader,
+        'admin-comment' : AdminComment
     },
     data() {
         return {

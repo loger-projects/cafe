@@ -335,3 +335,13 @@ fieldset {
 textarea {
     resize: vertical;
 }
+
+/**
+ * Bulma CSS Reset
+ */
+.columns {
+    margin: 0 !important;
+}
+.column {
+    padding: 0;
+}
