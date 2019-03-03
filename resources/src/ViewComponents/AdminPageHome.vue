@@ -1,8 +1,7 @@
 <template>
     <div>
         <admin-header></admin-header>
-        <admin-comment></admin-comment>
-        <section class="hero is-success">
+        <section class="hero is-success is-fullheight">
             <div class="hero-body">
                 <div class="container">
                     <h1 class="title">
@@ -14,6 +13,7 @@
                 </div>
             </div>
         </section>
+        <admin-comment></admin-comment>
     </div>
 </template>
 
