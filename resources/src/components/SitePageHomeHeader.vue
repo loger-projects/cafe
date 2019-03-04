@@ -1,25 +1,30 @@
 <template>
     <section id="sitePageHomeHeader">
-        <div class="hero is-fullheight is-dark">
-            <header-slider v-if="false"></header-slider>
+        <header-slider></header-slider>
+        <div class="hero is-fullheight">
             <div class="hero-head"><site-header></site-header></div>
             <div class="hero-body"><header-banner></header-banner></div>
-            <div class="hero-foot"><header-tab></header-tab></div>
-        </div>
-        <div class="hero is-fullheight is-success">
-            <div class="hero-body">
-                <p class="title">Title</p>
-                <p class="subtitle">SubTitle</p>
-            </div>
+            <div class="hero-foot"><header-footer></header-footer></div>
         </div>
     </section>
 </template>
+
+<style lang="scss" scoped>
+    #sitePageHomeHeader {
+        position: relative;
+        .hero {
+            .hero-body {
+                justify-content: center;
+            }
+        }
+    }
+</style>
 
 <script>
 import SiteHeader from './SiteHeader.vue'
 import SitePageHomeHeaderSlider from './SitePageHomeHeaderSlider.vue'
 import SitePageHomeHeaderBanner from './SitePageHomeHeaderBanner.vue'
-import SitePageHomeHeaderTab from './SitePageHomeHeaderTab.vue'
+import SitePageHomeHeaderFooter from './SitePageHomeHeaderFooter.vue'
 
 export default {
     name: 'SitePageHomeHeader',
@@ -27,7 +32,7 @@ export default {
         'header-slider': SitePageHomeHeaderSlider,
         'site-header': SiteHeader,
         'header-banner': SitePageHomeHeaderBanner,
-        'header-tab': SitePageHomeHeaderTab
+        'header-footer': SitePageHomeHeaderFooter
     }
 }
 </script>

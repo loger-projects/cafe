@@ -92,7 +92,7 @@ video {
 
 html,
 body {
-  font-size: 100%;
+  font-size: 16px;
 }
 
 /* make sure to set some focus styles for accessibility */
@@ -454,5 +454,26 @@ textarea {
 @font-face {
   font-family: "Dancing Script";
   src: url(/fonts/DancingScript-Regular.ttf?7da0d12156cf043d81d9130fadf2c59e);
+}
+
+@font-face {
+  font-family: "Pacifico";
+  src: url(/fonts/Pacifico-Regular.ttf?c1a28478f7a0cc5e25bb395d0543274d);
+}
+
+.title-pacifico {
+  font-family: "Pacifico";
+  color: #ffb606 !important;
+}
+
+.btn-yellow-dark {
+  background-color: #ffb606 !important;
+  color: #2a2a2a !important;
+  border: none !important;
+}
+
+.btn-yellow-dark:hover {
+  background-color: #2a2a2a !important;
+  color: #fff !important;
 }
 

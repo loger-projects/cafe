@@ -1,5 +1,5 @@
 <template>
-    <div id="sitePageHomeHeader">
+    <div id="sitePageHomeHeaderSlider">
         <ul class="background-slider">
             <li></li>
             <li></li>
@@ -11,7 +11,7 @@
     </div>
 </template>
 <style lang="scss" scoped>
-    div#SitePageHomeHeader {
+    div#sitePageHomeHeaderSlider {
         position: absolute;
         top: 0;
         left: 0;
@@ -21,6 +21,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: 50% 50%;
+        background-attachment: fixed;
         z-index: -1;
         div.slider-wrap {
             position: absolute;
@@ -41,7 +42,8 @@
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
-                animation-name: SitePageHeaderSliderAnimation;
+                background-attachment: fixed;
+                animation-name: SliderAnimation;
                 animation-duration: 30s;
                 animation-iteration-count: infinite;
                 animation-timing-function: ease-in-out;
@@ -67,7 +69,7 @@
             }
         }
     }
-    @keyframes SitePageHeaderSliderAnimation {
+    @keyframes SliderAnimation {
         0%  { opacity: 0 }
         10% { opacity: 1 }
         20% { opacity: 1 }

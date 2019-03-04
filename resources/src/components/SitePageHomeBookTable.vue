@@ -1,7 +1,16 @@
 <template>
     <section id="sitePageHomeBookTable">
         <div class="container">
-            <h1>Hello World. testing for combine bootstrap and bulma css</h1>
+            <div class="columns">
+                <div class="column">
+                    
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+
+                </div>
+            </div>
         </div>
     </section>
 </template>
