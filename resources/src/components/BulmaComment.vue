@@ -87,6 +87,6 @@
 
 <script>
 export default {
-    name: 'AdminComment'
+    name: 'BulmaComment'
 }
 </script>

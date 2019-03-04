@@ -17,6 +17,11 @@ class PageController extends Controller
         return view('pages.AdminPageHome');
     }
 
+    public function bulma()
+    {
+        return view('pages.Bulma');
+    }
+
     /**
      * Undocumented function
      *
@@ -36,5 +41,6 @@ class PageController extends Controller
     {
         Route::get('/', 'PageController@sitePageHome')->name('site.page.home');
         Route::get('/admin', 'PageController@adminPageHome')->name('admin.page.home');
+        route::get('/bulma', 'PageController@bulma')->name('bulma');
     }
 }
