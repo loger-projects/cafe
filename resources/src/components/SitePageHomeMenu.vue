@@ -1,9 +1,23 @@
 <template>
-    <div id="sitePageHomeMenu"></div>
+    <section id="sitePageHomeMenu">
+    </section>
 </template>
+
+<style lang="scss" scoped>
+    #sitePageHomeMenu {
+        padding-top: 100px;
+        text-align:center;
+    }
+</style>
 
 <script>
 export default {
-    name: 'SitePageHomeMenu'
+    name: 'SitePageHomeMenu',
+    data() {
+        return {
+        }
+    },
+    computed: {
+    }
 }
 </script>

@@ -17,11 +17,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('/img/SitePageHome/Slider_00.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        background-attachment: fixed;
         z-index: -1;
         div.slider-wrap {
             position: absolute;

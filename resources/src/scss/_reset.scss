@@ -337,6 +337,13 @@ textarea {
 }
 
 /**
+ * Reset Border
+ */
+button, input, select, option {
+    border: none;
+}
+
+/**
  * Bulma CSS Reset
  */
 .columns {

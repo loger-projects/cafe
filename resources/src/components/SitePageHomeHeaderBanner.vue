@@ -1,9 +1,9 @@
 <template>
     <div id="sitePageHomeHeaderBanner">
-        <p class="title is-4 title-pacifico">Dawat</p>
+        <p class="title is-4 is-pacifico text-yellow">Dawat</p>
         <p class="title is-1 has-text-white">Restaurant</p>
         <div class="slogan-wrap"><span class="slogan">The Best Restaurant in The World</span></div>
-        <div><a href="#" class="button is-small btn-yellow-dark">Look Menu</a></div>
+        <div><a href="#" class="button is-small btn-primary">Look Menu</a></div>
     </div>
 </template>
 <style lang="scss" scoped>

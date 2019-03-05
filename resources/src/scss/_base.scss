@@ -1,8 +1,26 @@
-.title-pacifico {
+html, body {
+    font-family: 'aileron' !important;
+}
+datalist {
+    max-height: 200px;
+    overflow: auto;
+}
+.is-pacifico {
     font-family: 'Pacifico';
+}
+.is-aileron {
+    font-family: 'aileron';
+}
+.is-aileron-bold {
+    font-family: 'aileron-bold';
+}
+.is-aileron-black {
+    font-family: 'aileron-black';
+}
+.text-yellow {
     color: #ffb606 !important;
 }
-.btn-yellow-dark {
+.btn-primary {
     background-color: #ffb606 !important;
     color: #2a2a2a !important;
     border: none !important;

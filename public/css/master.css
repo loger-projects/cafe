@@ -435,6 +435,17 @@ textarea {
 }
 
 /**
+ * Reset Border
+ */
+
+button,
+input,
+select,
+option {
+  border: none;
+}
+
+/**
  * Bulma CSS Reset
  */
 
@@ -461,18 +472,58 @@ textarea {
   src: url(/fonts/Pacifico-Regular.ttf?c1a28478f7a0cc5e25bb395d0543274d);
 }
 
-.title-pacifico {
+@font-face {
+  font-family: "aileron";
+  src: url(/fonts/Aileron-Regular.otf?ecf66f2e4c182ee2dfcca90357a9aef9);
+}
+
+@font-face {
+  font-family: "aileron-bold";
+  src: url(/fonts/Aileron-Bold.otf?0d1787667a5c3675ea4ebec35fa4ce36);
+}
+
+@font-face {
+  font-family: "aileron-black";
+  src: url(/fonts/Aileron-Black.otf?6d4e05823697958d8f798ee6f7cf3881);
+}
+
+html,
+body {
+  font-family: "aileron" !important;
+}
+
+datalist {
+  max-height: 200px;
+  overflow: auto;
+}
+
+.is-pacifico {
   font-family: "Pacifico";
+}
+
+.is-aileron {
+  font-family: "aileron";
+}
+
+.is-aileron-bold {
+  font-family: "aileron-bold";
+}
+
+.is-aileron-black {
+  font-family: "aileron-black";
+}
+
+.text-yellow {
   color: #ffb606 !important;
 }
 
-.btn-yellow-dark {
+.btn-primary {
   background-color: #ffb606 !important;
   color: #2a2a2a !important;
   border: none !important;
 }
 
-.btn-yellow-dark:hover {
+.btn-primary:hover {
   background-color: #2a2a2a !important;
   color: #fff !important;
 }
