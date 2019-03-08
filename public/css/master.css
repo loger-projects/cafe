@@ -454,7 +454,7 @@ option {
 }
 
 .column {
-  padding: 0;
+  padding: 0 !important;
 }
 
 @font-face {
@@ -515,6 +515,10 @@ datalist {
 
 .text-yellow {
   color: #ffb606 !important;
+}
+
+.is-dancing-script {
+  font-family: "Dancing Script";
 }
 
 .btn-primary {

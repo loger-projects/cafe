@@ -16,9 +16,8 @@ class CreateMenuTypesTable extends Migration
         Schema::create('menu_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->unsignedInteger('cate_id');
+            $table->unsignedInteger('is_food');
             $table->timestamps();
-            $table->foreign('cate_id')->references('id')->on('menu_type_cates');
         });
     }
 

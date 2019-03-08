@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\MenuMeal;
+use App\Models\MenuIngredient;
 use Illuminate\Http\Request;
+use Route;
 
 class MenuController extends Controller
 {
@@ -81,5 +84,64 @@ class MenuController extends Controller
     public function destroy(Menu $menu)
     {
         //
+    }
+
+    public function getBreakfast()
+    {
+        // get all food of breakfast => get all food type => get all food from food type
+        $meal = MenuMeal::where('name', 'breakfast')->first();
+        $food = [];
+        $drink = [];
+        foreach ($meal->menus as $menu) {
+            if ($menu->type->is_food) {
+                if (isset($food[$menu->type->name])) {
+                    $food[$menu->type->name]['menu'][] = $menu;
+                } else {
+                    $food[$menu->type->name] = [];
+                    $food[$menu->type->name]['name'] = $menu->type->name;
+                    $food[$menu->type->name]['menu'] = [];
+                    $food[$menu->type->name]['menu'][] = $menu;
+                }
+            } else {
+                if (isset($drink[$menu->type->name])) {
+                    $drink[$menu->type->name]['menu'][] = $menu;
+                } else {
+                    $drink[$menu->type->name] = [];
+                    $drink[$menu->type->name]['name'] = $menu->type->name;
+                    $drink[$menu->type->name]['menu'] = [];
+                    $drink[$menu->type->name]['menu'][] = $menu;
+                }
+            }
+        }
+        return ['food' => $food, 'drink' => $drink];
+    }
+
+    public function getIngredients($id)
+    {
+        $ingredients = Menu::where('id', $id)->first()->ingredients;
+        $array = [];
+        foreach ($ingredients as $ingredient) {
+            $array[] = $ingredient;
+        }
+        return $array;
+    }
+
+    public static function routes()
+    {
+        Route::get('/menu', 'MenuController@index')->name('menu.index'); // view list menu
+        Route::get('/{id}/menu/create', 'MenuController@create')->name('menu.create'); // return create page view
+        Route::post('/{id}/menu/store', 'MenuController@store')->name('menu.store'); // create new menu
+        Route::get('/{name}/menu/show', 'MenuController@show')->name('menu.show'); // view specific menu
+        Route::get('/{id}/menu/edit', 'MenuController@edit')->name('menu.edit');
+        Route::put('/{id}/menu', 'MenuController@update')->name('menu.update');
+        Route::delete('/{id}/menu', 'MenuController@destroy')->name('menu.destroy');
+
+        Route::group([
+            'prefix' => 'menu',
+            'name' => 'menu'
+        ],function () {
+            Route::get('/get/breakfast', 'MenuController@getBreakfast')->name('.get.breakfast');
+        });
+        Route::get('/{id}/menu/get/ingredients', 'MenuController@getIngredients')->name('menu.get.ingredients');
     }
 }

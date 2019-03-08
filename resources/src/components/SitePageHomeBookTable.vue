@@ -2,11 +2,13 @@
     <section id="sitePageHomeBookTable">
         <div class="container">
             <div class="columns">
-                <div class="column title-wrap">
-                    <div class="title is-pacifico text-yellow">Book a</div>
-                    <div class="title is-1 is-aileron-black has-text-black-ter">TABLE</div>
-                    <span>Opening Hour <strong>8:00</strong> AM - <strong>10:00</strong> PM, every day on week</span>
-                </div>
+                <home-title class="column">
+                    <template slot="firstTitle">Book a</template>
+                    <template slot="secondTitle">TABLE</template>
+                    <template slot="footer">
+                        <span>Opening Hour <strong>8:00</strong> AM - <strong>10:00</strong> PM, every day on week</span>
+                    </template>
+                </home-title>
             </div>
             <div class="columns">
                 <div class="column">
@@ -20,25 +22,18 @@
 <style lang="scss" scoped>
     #sitePageHomeBookTable {
         padding-top: 50px;
-        div.title-wrap {
-            text-align: center;
-            div:first-child {
-                margin-bottom: 10px;
-            }
-            div:last-child {
-                font-size: 54px;
-            }
-        }
     }
 </style>
 
 <script>
 import SiteBaseBookTableForm from './SiteBaseBookTableForm.vue'
+import SitePageHomeTitle from './SitePageHomeTitle.vue'
 
 export default {
     name: 'SitePageHomeBookTable',
     components: {
-        'book-table-form': SiteBaseBookTableForm
+        'book-table-form': SiteBaseBookTableForm,
+        'home-title': SitePageHomeTitle
     }
 }
 </script>
