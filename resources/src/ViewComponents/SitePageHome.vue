@@ -1,55 +1,38 @@
 <template>
-    <div id="site-page-home">
-        <site-header>
-            <template slot="site-header-background">
-                <header-slider></header-slider>
-            </template>
-            <template slot="site-header-banner">
-                <header-banner></header-banner>
-            </template>
-        </site-header>
-        <book-table></book-table>
+    <div id="sitePageHome">
+        <site-home-header></site-home-header>
+        <site-home-book-table></site-home-book-table>
+        <site-home-menu></site-home-menu>
+        <site-home-news></site-home-news>
+        <site-home-product></site-home-product>
+        <site-home-about-us></site-home-about-us>
+        <site-footer></site-footer>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    div#site-page-home {
-        position: relative;
-        div#header-slider {
-            z-index: -1;
-        }
-        div#site-header-nav {
-            z-index: 3;
-        }
-        div#header-banner {
-            z-index: 1;
-        }
-    }
+    
 </style>
 
 <script>
-import SiteHeader from '../components/SiteHeader.vue'
-import SitePageHomeHeaderSlider from '../components/SitePageHomeHeaderSlider.vue'
-import SitePageHomeHeaderBanner from '../components/SitePageHomeHeaderBanner.vue'
+import SitePageHomeHeader from '../components/SitePageHomeHeader.vue'
 import SitePageHomeBookTable from '../components/SitePageHomeBookTable.vue'
+import SitePageHomeMenu from '../components/SitePageHomeMenu.vue'
+import SitePageHomeNews from '../components/SitePageHomeNews.vue'
+import SitePageHomeProduct from '../components/SitePageHomeProduct.vue'
+import SitePageHomeAboutUs from '../components/SitePageHomeAboutUs.vue'
+import SiteFooter from '../components/SiteFooter.vue'
 
 export default {
     name: 'SitePageHome',
-    data() {
-        return {
-            SiteHeaderNavHeight: 0
-        }
-    },
     components: {
-        'site-header': SiteHeader,
-        'header-slider': SitePageHomeHeaderSlider,
-        'header-banner': SitePageHomeHeaderBanner,
-        'book-table': SitePageHomeBookTable
+        'site-home-header': SitePageHomeHeader,
+        'site-home-book-table': SitePageHomeBookTable,
+        'site-home-menu': SitePageHomeMenu,
+        'site-home-news': SitePageHomeNews,
+        'site-home-product': SitePageHomeProduct,
+        'site-home-about-us': SitePageHomeAboutUs,
+        'site-footer': SiteFooter
     },
-    mounted() {
-        var siteHeaderNavHeight = this.$el.querySelector('#site-header-nav').offsetHeight;
-        var windowHeight = window.innerHeight;
-        this.$el.querySelector('#site-page-home-header-banner').style.height = windowHeight - siteHeaderNavHeight +'px';
-    }
 }
 </script>

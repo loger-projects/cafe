@@ -18,7 +18,7 @@ class Menu extends Model
 
     // belongsTo: MenuType
     // hasMany: MenuReview
-    // belongsToMany: Image / Meal
+    // belongsToMany: Image / Meal / Ingredient
 
     /**
      * Undocumented function
@@ -57,6 +57,16 @@ class Menu extends Model
      */
     public function images()
     {
-        $this->belongsToMany(Image::class, 'image_menu', 'menu_id', 'image_id');
+        return $this->belongsToMany(Image::class, 'image_menu', 'menu_id', 'image_id');
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class, 'menu_ingredient', 'menu_id', 'ingredient_id');
     }
 }

@@ -22,7 +22,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 html, body {
-    font-size: 100%;
+    font-size: 16px;
 }
 /* make sure to set some focus styles for accessibility */
 :focus {
@@ -337,11 +337,18 @@ textarea {
 }
 
 /**
+ * Reset Border
+ */
+button, input, select, option {
+    border: none;
+}
+
+/**
  * Bulma CSS Reset
  */
 .columns {
     margin: 0 !important;
 }
 .column {
-    padding: 0;
+    padding: 0 !important;
 }

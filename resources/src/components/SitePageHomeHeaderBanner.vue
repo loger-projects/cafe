@@ -1,57 +1,46 @@
 <template>
-    <div id="site-page-home-header-banner">
-        <!-- Banner -->
-        <div class="banner-wrapper">
-            <h1 class="title title-font-size">Hi ... Welcome to Dawat Restaurant</h1>
-            <p class="slogan">All of us are pleased to be served you</p>
-            <div class="navigate-button-box">
-                <button class="btn-slider-white">View Menu</button>
-                <button class="btn-slider-white">Buy a Gift</button>
-            </div>
-        </div>
+    <div id="sitePageHomeHeaderBanner">
+        <p class="title is-4 is-pacifico text-yellow">Dawat</p>
+        <p class="title is-1 has-text-white">Restaurant</p>
+        <div class="slogan-wrap"><span class="slogan">The Best Restaurant in The World</span></div>
+        <div><a href="#" class="button is-small btn-primary">Look Menu</a></div>
     </div>
 </template>
 <style lang="scss" scoped>
-    div#site-page-home-header-banner {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        div.banner-wrapper {
+    #sitePageHomeHeaderBanner {
+        text-align: center;
+        .title {
+            margin: 0;
+        }
+        .slogan-wrap {
+            margin: 20px 0;
+        }
+        .slogan {
+            color: white;
             position: relative;
-            h1.title {
-                margin-bottom: 23px;
-            }
-            p.slogan {
-                text-align: end;
-            }
-            div.navigate-button-box {
+            &::before {
+                content: '';
+                height: 0;
+                width: 50px;
+                border: 1px solid white;
                 position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translate(-50%, 130%);
-                display: flex;
-                button.btn-slider-white {
-                    border: 3px solid white;
-                    color: white;
-                    background: transparent;
-                    outline: none;
-                    padding: 30px 0px;
-                    width: 250px;
-                    font-size: 20px;
-                }
-                button.btn-slider-white:first-child {
-                    margin-right: 45px;
-                }
-                button.btn-slider-white:last-child {
-                    margin-left: 45px;
-                }
+                top: calc(70% - 2px);
+                left: 0;
+                transform: translateX(-110%);
+            }
+            &::after {
+                content: '';
+                height: 0;
+                width: 50px;
+                border: 1px solid white;
+                position: absolute;
+                top: calc(70% - 2px);
+                right: 0;
+                transform: translateX(110%);
             }
         }
     }
 </style>
-
 <script>
 export default {
     name: 'SitePageHomeHeaderBanner'
