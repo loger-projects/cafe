@@ -46,7 +46,7 @@ class MenusTableSeeder extends Seeder
                             'price' => rand(10,30),
                             'is_new' => false,
                             'rating' => rand(0,5),
-                            'thumbnail' => asset("/img/menu/drink-$i.jpg"),
+                            'thumbnail' => asset("/img/menu/drink-$j.jpg"),
                             'type_id' => $type->id,
                             'created_at' => Carbon::now(),
                             'updated_at' => Carbon::now()

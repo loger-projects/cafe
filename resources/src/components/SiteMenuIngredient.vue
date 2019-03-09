@@ -8,6 +8,27 @@
     </div>
 </template>
 
+<style lang="scss" scoped>
+    .siteMenuIngredient {
+        .columns {
+            .column {
+                position: relative;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 80%;
+                    left: 0;
+                    transform: translate(-130%, -50%);
+                    border: none;
+                    width: 10px;
+                    height: 2px;
+                    background-color: rgb(110, 110, 110);
+                }
+            }
+        }
+    }
+</style>
+
 <script>
 export default {
     name: 'SiteMenuIngredient',

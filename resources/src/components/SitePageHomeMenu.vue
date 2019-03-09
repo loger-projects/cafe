@@ -50,25 +50,22 @@
                 }
             }
         }
-        .menu-body {
-
-        }
     }
 </style>
 
 <script>
 import SitePageHomeTitle from './SitePageHomeTitle.vue'
-import SiteMenuBreakfast from './SiteMenuBreakfast.vue'
-import SiteMenuLunch from './SiteMenuLunch.vue'
-import SiteMenuDinner from './SiteMenuDinner.vue'
+import SiteMenuMealBreakfast from './SiteMenuMealBreakfast'
+import SiteMenuMealLunch from './SiteMenuMealLunch.vue'
+import SiteMenuMealDinner from './SiteMenuMealDinner.vue'
 
 export default {
     name: 'SitePageHomeMenu',
     components: {
         'home-title': SitePageHomeTitle,
-        'menu-breakfast': SiteMenuBreakfast,
-        'menu-lunch': SiteMenuLunch,
-        'menu-dinner': SiteMenuDinner
+        'menu-breakfast': SiteMenuMealBreakfast,
+        'menu-lunch': SiteMenuMealLunch,
+        'menu-dinner': SiteMenuMealDinner
     },
     data() {
         return {

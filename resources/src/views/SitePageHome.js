@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
+// import router from '../routes/SitePageHomeRouter.js'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import SitePageHome from '../ViewComponents/SitePageHome.vue'
@@ -10,6 +11,7 @@ Vue.use(buefy)
 
 new Vue({
     el: '#root',
+    // router,
     components: {
         'site-page-home': SitePageHome
     },
