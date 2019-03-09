@@ -15,11 +15,6 @@ class PageController extends Controller
         return view('pages.SitePageHome');
     }
 
-    public function adminPageHome()
-    {
-        return view('pages.AdminPageHome');
-    }
-
     /**
      * Undocumented function
      *
@@ -49,7 +44,6 @@ class PageController extends Controller
     public static function routes()
     {
         Route::get('/', 'PageController@sitePageHome')->name('site.page.home');
-        Route::get('/admin', 'PageController@adminPageHome')->name('admin.page.home');
         Route::get('/test', 'PageController@test')->name('test');
     }
 }
