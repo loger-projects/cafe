@@ -50,9 +50,6 @@
                 }
             }
         }
-        .menu-body {
-
-        }
     }
 </style>
 
