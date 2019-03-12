@@ -22,7 +22,7 @@ class PostsTableSeeder extends Seeder
                 $title = $faker->sentence();
                 $slug = str_slug($title);
                 $content = implode(' ', $faker->paragraphs);
-                $excerpt = substr($content, 1, 50);
+                $excerpt = substr($content, 1, 50).' ...';
                 DB::table('posts')->insert([
                     'cate_id' => $cate->id,
                     'user_id' => 1,

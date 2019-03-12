@@ -25,5 +25,7 @@
         "vue-router": "^3.0.2",
         "vue-template-compiler": "^2.6.7"
     },
-    "dependencies": {}
+    "dependencies": {
+        "vue-moment": "^4.0.0"
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Route;
 
 class PostController extends Controller
 {
@@ -81,5 +82,16 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function getLatestPosts($number)
+    {
+        $posts = Post::where('id', '>=', 1)->orderBy('created_at', 'desc')->skip(0)->take($number)->get()->toArray();
+        return $posts;
+    }
+
+    public static function routes()
+    {
+        Route::get('/post/get/{number}/latest/posts', 'PostController@getLatestPosts')->name('post.get.latestPosts');
     }
 }
