@@ -2582,6 +2582,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SitePageHomeAboutUs',
@@ -15723,7 +15728,7 @@ exports.push([module.i, "#SiteMenuMeal .menu-column .main-title[data-v-0bff6d22]
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#sitePageHomeAboutUs[data-v-b6ea1100] {\n  padding: 50px 0;\n}\n@media only screen and (min-width: 769px) {\n#sitePageHomeAboutUs div.columns.is-reverse[data-v-b6ea1100] {\n    flex-direction: row-reverse;\n}\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content[data-v-b6ea1100] {\n  padding: 30px 20px !important;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content .about-title .first-title[data-v-b6ea1100] {\n  margin-bottom: 0px;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content .about-title .second-title[data-v-b6ea1100] {\n  text-transform: uppercase;\n  font-weight: 300 !important;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content .about-slogan[data-v-b6ea1100] {\n  text-transform: uppercase;\n  padding: 1rem 0;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-image[data-v-b6ea1100] {\n  padding: 30px !important;\n}", ""]);
+exports.push([module.i, "#sitePageHomeAboutUs[data-v-b6ea1100] {\n  padding: 50px 0;\n}\n@media only screen and (min-width: 769px) {\n#sitePageHomeAboutUs div.columns.is-reverse[data-v-b6ea1100] {\n    flex-direction: row-reverse;\n}\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content[data-v-b6ea1100] {\n  padding: 30px 20px !important;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content .about-title .first-title[data-v-b6ea1100] {\n  margin-bottom: 0px;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content .about-title .second-title[data-v-b6ea1100] {\n  text-transform: uppercase;\n  font-weight: 300 !important;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content .about-slogan[data-v-b6ea1100] {\n  text-transform: uppercase;\n  padding: 1rem 0;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-content .about-signature[data-v-b6ea1100] {\n  font-size: 40px;\n  font-weight: bold;\n  padding: 20px 0 0 30px;\n}\n#sitePageHomeAboutUs .custom-card .custom-card-image[data-v-b6ea1100] {\n  padding: 30px !important;\n}", ""]);
 
 
 

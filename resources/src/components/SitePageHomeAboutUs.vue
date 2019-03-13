@@ -51,6 +51,11 @@
                     text-transform: uppercase;
                     padding: 1rem 0;
                 }
+                .about-signature {
+                    font-size: 40px;
+                    font-weight: bold;
+                    padding: 20px 0 0 30px;
+                }
             }
             .custom-card-image {
                 padding: 30px !important;
