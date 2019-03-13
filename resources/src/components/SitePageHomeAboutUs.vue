@@ -5,7 +5,7 @@
                 <div class="column custom-card-content">
                     <h2 class="about-title"><p class="first-title title is-4 is-pacifico text-yellow">our</p><p class="second-title title is-2 is-font-lato">philosophy</p></h2>
                     <p class="about-content">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut</p>
-                    <p class="about-signature is-font-kristi">Loger Nam</p>
+                    <p class="about-signature is-font-kristi">Loger Nam <a href="http://themes.themegoods.com/grandrestaurant/demo1/about-us/">About Us</a></p>
                 </div>
                 <div class="column custom-card-image">
                     <figure class="image">
