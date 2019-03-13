@@ -519,7 +519,7 @@ datalist {
 }
 
 .is-font-lato {
-  font-family: "Lato";
+  font-family: "Lato", Helvetica, Arial, sans-serif;
 }
 
 .is-aileron-black {

@@ -1,5 +1,6 @@
 <template>
     <section id="sitePageHomeNews">
+        <div class="background-wrap"></div>
         <div class="news-title">
             <home-title isTextWhite="true">
                 <template slot="firstTitle">What</template>
@@ -36,11 +37,26 @@
 <style lang="scss">
     #sitePageHomeNews {
         padding: 50px 0;
-        background-color: #000000;
+        background-image: url('/img/SitePageHome/news_bg.jpg');
+        background-size: cover;
+        background-position: 50% 50%;
+        background-attachment: fixed;
+        position: relative;
+        .background-wrap {
+            background-color: #000000ab;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
         .news-title {
             margin: 10px 0 30px 0;
             padding-bottom: 10px;
             border-bottom: 1px solid #91847f;
+            position: relative;
+            z-index: 1;
         }
         .VueCarousel {
             .VueCarousel-wrapper {
