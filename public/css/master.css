@@ -487,6 +487,11 @@ option {
   src: url(/fonts/Aileron-Black.otf?6d4e05823697958d8f798ee6f7cf3881);
 }
 
+@font-face {
+  font-family: "Kristi";
+  src: url(/fonts/Kristi-Regular.ttf?4213e646bb09a194582768bcccf5095a);
+}
+
 html,
 body {
   font-family: "aileron" !important;
@@ -507,6 +512,14 @@ datalist {
 
 .is-aileron-bold {
   font-family: "aileron-bold";
+}
+
+.is-font-kristi {
+  font-family: "Kristi";
+}
+
+.is-font-lato {
+  font-family: "Lato";
 }
 
 .is-aileron-black {

@@ -22,10 +22,9 @@
         "sass-loader": "^7.1.0",
         "vue": "^2.5.17",
         "vue-carousel": "^0.18.0-alpha",
+        "vue-moment": "^4.0.0",
         "vue-router": "^3.0.2",
         "vue-template-compiler": "^2.6.7"
     },
-    "dependencies": {
-        "vue-moment": "^4.0.0"
-    }
+    "dependencies": {}
 }

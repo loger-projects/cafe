@@ -1,43 +1,52 @@
 <template>
     <section id="sitePageHomeNews">
-        <carousel
-            :perPageCustom="[[480,2], [768,3], [1216, 4]]"
-            ease="ease-in-out"
-            :paginationEnabled="false"
-            :navigationEnabled="true"
-        >
-            <slide v-for="post in posts" :key="post.id">
-                <article class="article post-list-item">
-                    <div class="article-head">
-                        <figure class="post-thumbnail image is-1by1">
-                            <img :src="post.thumbnail" alt="No Thumbnail">
-                        </figure>
-                    </div>
-                    <div class="article-body">
-                        <div class="post-title title">{{ post.title }}</div>
-                        <div class="post-meta"><span class="icon is-small"><i class="far fa-calendar-alt"></i></span>{{ [post.created_at, "YYYY-MM-DD HH:mm:ss" ] | moment('from', 'now') }}</div>
-                        <!-- 03:43AM on 09 Dec 18 -->
-                        <div class="post-excerpt">{{ post.excerpt }}</div>
-                    </div>
-                </article>
-            </slide>
-        </carousel>
+        <div class="news-title">
+            <home-title isTextWhite="true">
+                <template slot="firstTitle">What</template>
+                <template slot="secondTitle">News</template>
+            </home-title>
+        </div>
+        <div class="container">
+            <carousel
+                :perPageCustom="[[300, 1],[480,2], [768,3], [1216, 4]]"
+                ease="ease-in-out"
+                :paginationEnabled="false"
+                :navigationEnabled="true"
+            >
+                <slide v-for="post in posts" :key="post.id">
+                    <article class="article post-list-item">
+                        <div class="article-head">
+                            <figure class="post-thumbnail image is-1by1">
+                                <img :src="post.thumbnail" alt="No Thumbnail">
+                            </figure>
+                        </div>
+                        <div class="article-body">
+                            <div class="post-title title is-5">{{ post.title }}</div>
+                            <div class="post-meta"><span class="icon is-small"><i class="far fa-calendar-alt"></i></span><span class="post-meta--value">{{ [post.created_at, "YYYY-MM-DD HH:mm:ss" ] | moment('from', 'now') }}</span></div>
+                            <!-- 03:43AM on 09 Dec 18 -->
+                            <div class="post-excerpt">{{ post.excerpt }}</div>
+                        </div>
+                    </article>
+                </slide>
+            </carousel>
+        </div>
     </section>
 </template>
 
 <style lang="scss">
     #sitePageHomeNews {
+        padding: 50px 0;
+        background-color: #000000;
+        .news-title {
+            margin: 10px 0 30px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #91847f;
+        }
         .VueCarousel {
             .VueCarousel-wrapper {
                 .VueCarousel-inner {
                     .VueCarousel-slide {
-                        position: relative;
-                        background: #42b983;
-                        color: #fff;
-                        font-family: Arial;
-                        font-size: 24px;
-                        text-align: center;
-                        min-height: 100px;
+                        padding: 0;
                     }
                 }
             }
@@ -53,17 +62,17 @@
                     transition: 300ms;
                 }
                 .VueCarousel-navigation-button:not(.VueCarousel-navigation--disable) {
-                    color: #1f1105;
+                    color: #fcfcfc;
                     &:hover {
                         color: #fff;
                         background-color: #000000b2;
                     }
                 }
                 .VueCarousel-navigation-button.VueCarousel-navigation--disable {
-                    color: #3d3d3d;
+                    color: #a0a0a0;
                     &:hover {
-                        color: #3d3d3d;
-                        background-color: #00000055;
+                        color: #a0a0a0 !important;
+                        background-color: #00000055 !important;
                     }
                 }
                 .VueCarousel-navigation-button.VueCarousel-navigation-prev {
@@ -85,15 +94,27 @@
                 }
             }
             .article-body {
+                padding-right: 20px;
                 .post-title {
-                    padding: 10px;
+                    padding: 20px 0;
+                    color: #ffffff;
+                    margin-bottom: 0;
+                    max-height: calc(2rem + 40px);
+                    overflow: hidden;
                 }
                 .post-meta {
-                    padding: 10px;
-                    color: #585858;
+                    padding: 10px 0;
+                    color: #c2c2c2;
+                    span.icon {
+                        margin-right: 10px;
+                    }
+                    span.post-meta--value {
+                        color: #7fd873;
+                    }
                 }
-                .post-except {
-                    padding: 10px;
+                .post-excerpt {
+                    padding: 10px 0;
+                    color: #e9ecbf;
                 }
             }
         }
@@ -101,9 +122,11 @@
 </style>
 
 <script>
+import SitePageHomeTitle from './SitePageHomeTitle.vue'
 export default {
     name: 'SitePageHomeNews',
     components: {
+        'home-title': SitePageHomeTitle
     },
     data() {
         return {
