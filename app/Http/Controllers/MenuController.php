@@ -128,15 +128,17 @@ class MenuController extends Controller
 
     public static function routes()
     {
-        Route::get('/menu', 'MenuController@index')->name('menu.index'); // view list menu
-        Route::get('/{id}/menu/create', 'MenuController@create')->name('menu.create'); // return create page view
-        Route::post('/{id}/menu/store', 'MenuController@store')->name('menu.store'); // create new menu
-        Route::get('/{name}/menu/show', 'MenuController@show')->name('menu.show'); // view specific menu
-        Route::get('/{id}/menu/edit', 'MenuController@edit')->name('menu.edit');
-        Route::put('/{id}/menu', 'MenuController@update')->name('menu.update');
-        Route::delete('/{id}/menu', 'MenuController@destroy')->name('menu.destroy');
-        
-        Route::get('/{id}/menu/get/ingredients', 'MenuController@getIngredients')->name('menu.get.ingredients');
-        Route::get('/menu/get/{meal}/meal', 'menuController@getMeal')->name('menu.get.meal');
+        Route::name('menu.')->group(function() {
+            Route::get('/menu', 'MenuController@index')->name('index'); // view list menu
+            Route::get('/{id}/menu/create', 'MenuController@create')->name('create'); // return create page view
+            Route::post('/{id}/menu/store', 'MenuController@store')->name('store'); // create new menu
+            Route::get('/{name}/menu/show', 'MenuController@show')->name('show'); // view specific menu
+            Route::get('/{id}/menu/edit', 'MenuController@edit')->name('edit');
+            Route::put('/{id}/menu', 'MenuController@update')->name('update');
+            Route::delete('/{id}/menu', 'MenuController@destroy')->name('destroy');
+            
+            Route::get('/menu/get/{meal}/meal', 'menuController@getMeal')->name('get.meal');
+            Route::get('/{id}/menu/get/ingredients', 'MenuController@getIngredients')->name('get.ingredients');
+        });
     }
 }

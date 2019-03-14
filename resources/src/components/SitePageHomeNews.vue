@@ -18,11 +18,11 @@
                     <article class="article post-list-item">
                         <div class="article-head">
                             <figure class="post-thumbnail image is-1by1">
-                                <img :src="post.thumbnail" alt="No Thumbnail">
+                                <img v-lazy="post.thumbnail" alt="No Thumbnail">
                             </figure>
                         </div>
                         <div class="article-body">
-                            <div class="post-title title is-5">{{ post.title }}</div>
+                            <div class="post-title title is-5"><a :href="$root.siteInfo.origin + '/' + post.slug">{{ post.title }}</a></div>
                             <div class="post-meta"><span class="icon is-small"><i class="far fa-calendar-alt"></i></span><span class="post-meta--value">{{ [post.created_at, "YYYY-MM-DD HH:mm:ss" ] | moment('from', 'now') }}</span></div>
                             <!-- 03:43AM on 09 Dec 18 -->
                             <div class="post-excerpt">{{ post.excerpt }}</div>

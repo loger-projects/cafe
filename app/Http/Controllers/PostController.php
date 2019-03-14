@@ -45,9 +45,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+        return view('post.show')->with('post', $post);
     }
 
     /**
@@ -92,6 +93,10 @@ class PostController extends Controller
 
     public static function routes()
     {
-        Route::get('/post/get/{number}/latest/posts', 'PostController@getLatestPosts')->name('post.get.latestPosts');
+        Route::name('post.')->group(function() {
+            Route::get('/posts', 'PostController@index')->name('index');
+            Route::get('/{slug}/post', 'PostController@show')->name('show');
+            Route::get('/post/get/{number}/latest/posts', 'PostController@getLatestPosts')->name('get.latestPosts');
+        });
     }
 }

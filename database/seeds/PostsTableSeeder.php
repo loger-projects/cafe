@@ -20,7 +20,7 @@ class PostsTableSeeder extends Seeder
             for($i = 1; $i<= 3; $i++) {
                 $faker = Faker::create();
                 $title = $faker->sentence();
-                $slug = str_slug($title);
+                $slug = str_slug($title) + '/post';
                 $content = implode(' ', $faker->paragraphs);
                 $excerpt = substr($content, 1, 50).' ...';
                 DB::table('posts')->insert([

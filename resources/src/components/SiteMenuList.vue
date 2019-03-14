@@ -7,7 +7,7 @@
                     <div class="media">
                         <figure class="media-left">
                             <div class="image is-128x128 is-1by1">
-                                <img :src="menu.thumbnail" alt="No Image">
+                                <img v-lazy="menu.thumbnail" alt="No Image">
                             </div>
                         </figure>
                         <div class="media-content">

@@ -55,7 +55,7 @@
 
 <script>
 import SitePageHomeTitle from './SitePageHomeTitle.vue'
-import SiteMenuMealBreakfast from './SiteMenuMealBreakfast'
+import SiteMenuMealBreakfast from './SiteMenuMealBreakfast.vue'
 import SiteMenuMealLunch from './SiteMenuMealLunch.vue'
 import SiteMenuMealDinner from './SiteMenuMealDinner.vue'
 

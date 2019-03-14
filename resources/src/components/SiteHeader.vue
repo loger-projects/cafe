@@ -3,7 +3,7 @@
         <div class="container">
             <nav class="navbar">
                 <div class="navbar-brand">
-                    <a class="navbar-item" :href="$root.siteInfo.origin">
+                    <a class="navbar-item" :href="origin">
                         <img :src="logo" width="112" height="28">
                     </a>
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="isActive = !isActive">
@@ -44,6 +44,9 @@
         z-index: 3;
         transition: 0.5s;
         transition-timing-function: ease-in-out;
+        &.header-border-bottom {
+            border-bottom: 1px solid #181818;
+        }
         .navbar {
             .navbar-brand {
                 .navbar-item {
@@ -175,7 +178,7 @@ export default {
             isSticky: false,
             isActive: false,
             navbar: [
-                {link: '#', text: 'Home', hasDropdown: false},
+                {link: this.origin, text: 'Home', hasDropdown: false},
                 {link: '#', text: 'Menu', hasDropdown: false},
                 {link: '#', text: 'Product', hasDropdown: false},
                 {link: '#', text: 'About', hasDropdown: false},
@@ -190,17 +193,28 @@ export default {
         }
     },
     computed: {
+        origin() {
+            return location.origin;
+        },
+        logoWhite() {
+            return location.origin + '/img/SiteHeaderLogoWhite.jpg';
+        },
+        logoBlack() {
+            return location.origin + '/img/SiteHeaderLogoBlack.jpg';
+        },
         logo() {
-            return this.isSticky ? this.$root.siteInfo.logoBlack : this.$root.siteInfo.logoWhite;
-        }
+            return this.isSticky ? this.logoBlack : this.logoWhite;
+        },
     },
     mounted() {
         window.addEventListener('scroll', event => {
             let headerHeight = document.getElementById('siteHeader').offsetHeight;
             if (window.scrollY >= headerHeight ) {
                 this.isSticky = true;
+                document.getElementById('siteHeader').classList.add('header-border-bottom');
             } else {
                 this.isSticky = false;
+                document.getElementById('siteHeader').classList.remove('header-border-bottom');
             }
         });
     }
