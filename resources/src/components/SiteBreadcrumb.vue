@@ -22,7 +22,7 @@ export default {
                     return [
                         {href: this.origin, name: 'Home'},
                         {href: this.origin + '/posts', name: 'Posts' },
-                        {href: this.origin + this.target.slug, name: this.target.title}
+                        {href: '', name: this.target.title}
                     ]
                 break;
                 default:

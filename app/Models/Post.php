@@ -11,6 +11,7 @@ class Post extends Model
         'user_id',
         'title',
         'slug',
+        'url',
         'content',
         'excerpt',
         'published',

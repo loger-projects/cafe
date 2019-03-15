@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueMoment from 'vue-moment'
-import VueLazyLoad from 'vue-lazyload'
+import VueLazyload from 'vue-lazyload'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import PostShow from '../ViewComponents/PostShow.vue'
@@ -21,10 +21,18 @@ new Vue({
         siteInfo: {
             name: 'Dawat Restaurant',
             origin: null
-        }
+        },
+        post: null
     },
-    props: ['post'],
     mounted() {
         this.siteInfo.origin = location.origin;
+        let str = location.href.replace('/post/', '/post/api/');
+        axios.get(str)
+             .then(response => {
+                 this.post = response.data;
+             })
+             .catch(error => {
+                 console.log(error)
+             });
     }
 })

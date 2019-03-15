@@ -3,7 +3,7 @@
         <div class="container">
             <div class="columns">
                 <div class="column site-logo">
-                    <figure class="image"><img :src="$root.siteInfo.logoWhite"></figure>
+                    <figure class="image"><img :src="logo"></figure>
                 </div>
                 <div class="column contact">
                     <span class="phone">+1  215  456  15  15</span>
@@ -65,6 +65,11 @@
 
 <script>
 export default {
-    name: 'SiteFooter'
+    name: 'SiteFooter',
+    computed: {
+        logo() {
+            return location.origin + '/img/SiteHeaderLogoWhite.jpg';
+        }
+    }
 }
 </script>

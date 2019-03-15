@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 use App\Models\MenuType;
 use Carbon\Carbon;
 
@@ -19,12 +20,18 @@ class MenusTableSeeder extends Seeder
         $Food = $i;
         $j = 1;
         $drink = $j;
+        $faker = Faker::create();
         foreach($types as $type) {
             if ($type->is_food) {
                 for ($i = $Food;$i <= $Food + 2; $i++) {
+                    $name = implode(' ',$faker->words(3));
+                    $slug = str_slug($name);
+                    $url = url("menu/show/".$slug);
                     DB::table('menus')->insert(
                         [
-                            'name' => 'Food Dist '.$i,
+                            'name' => $name,
+                            'slug' => $slug,
+                            'url' => $url,
                             'description' => 'Voluptatum iure eveniet. In aut quisquam necessitatibus recusandae labore expedita cupiditate et harum. Aliquam molestiae omnis mollitia illo.',
                             'price' => rand(20,80),
                             'is_new' => false,
@@ -39,9 +46,14 @@ class MenusTableSeeder extends Seeder
                 $Food = $i + 1;
             } else {
                 for ($j = $drink; $j <= $drink + 2; $j++) {
+                    $name = implode(' ',$faker->words(3));
+                    $slug = str_slug($name);
+                    $url = url("menu/show/".$slug);
                     DB::table('menus')->insert(
                         [
-                            'name' => 'Momo Drink '.$j,
+                            'name' => $name,
+                            'slug' => $slug,
+                            'url' => $url,
                             'description' => 'Ratione tempore nisi ipsa asperiores corporis quo ea voluptatibus dolores. Eaque quia non. Adipisci ut magnam voluptatem. Dolores pariatur qui eius. Quasi neque accusamus sed.',
                             'price' => rand(10,30),
                             'is_new' => false,

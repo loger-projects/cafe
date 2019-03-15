@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <post-show post="{{ $post }}"></post-show>
+    <post-show></post-show>
 @endsection
 
 @section('js')

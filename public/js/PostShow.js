@@ -1876,10 +1876,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostShowHeader',
+  components: {
+    SiteHeader: _SiteHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    SiteBreadcrumb: _SiteBreadcrumb_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   mounted: function mounted() {
     this.style.backgroundImage = "url(" + $root.post.thumbnail + ")";
   }
@@ -1923,7 +1928,7 @@ __webpack_require__.r(__webpack_exports__);
             href: this.origin + '/posts',
             name: 'Posts'
           }, {
-            href: this.origin + this.target.slug,
+            href: '',
             name: this.target.title
           }];
           break;
@@ -2013,7 +2018,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SiteFooter'
+  name: 'SiteFooter',
+  computed: {
+    logo: function logo() {
+      return location.origin + '/img/SiteHeaderLogoWhite.jpg';
+    }
+  }
 });
 
 /***/ }),
@@ -16057,11 +16067,7 @@ var render = function() {
     _c("div", { staticClass: "hero is-large post-header" }, [
       _c("div", { staticClass: "hero-head" }, [_c("site-header")], 1),
       _vm._v(" "),
-      _c("div", { staticClass: "hero-body" }, [
-        _c("h1", { staticClass: "title is-1" }, [
-          _vm._v(_vm._s(_vm.$root.post.name))
-        ])
-      ]),
+      _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
@@ -16076,7 +16082,16 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "hero-body" }, [
+      _c("h1", { staticClass: "title is-1" }, [_vm._v("Post Name")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -16145,7 +16160,7 @@ var render = function() {
       _c("div", { staticClass: "columns" }, [
         _c("div", { staticClass: "column site-logo" }, [
           _c("figure", { staticClass: "image" }, [
-            _c("img", { attrs: { src: _vm.$root.siteInfo.logoWhite } })
+            _c("img", { attrs: { src: _vm.logo } })
           ])
         ]),
         _vm._v(" "),
@@ -33623,7 +33638,7 @@ __webpack_require__.r(__webpack_exports__);
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
 window.axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_moment__WEBPACK_IMPORTED_MODULE_2___default.a);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(VueLazyload);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_3___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(buefy__WEBPACK_IMPORTED_MODULE_4___default.a);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#root',
@@ -33634,11 +33649,19 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     siteInfo: {
       name: 'Dawat Restaurant',
       origin: null
-    }
+    },
+    post: null
   },
-  props: ['post'],
   mounted: function mounted() {
+    var _this = this;
+
     this.siteInfo.origin = location.origin;
+    var str = location.href.replace('/post/', '/post/api/');
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(str).then(function (response) {
+      _this.post = response.data;
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 });
 

@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('cate_id');
             $table->string('name');
+            $table->string('slug');
+            $table->string('url');
             $table->text('description');
             $table->unsignedInteger('price');
             $table->boolean('in_stock');

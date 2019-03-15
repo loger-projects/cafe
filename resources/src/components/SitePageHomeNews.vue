@@ -22,7 +22,7 @@
                             </figure>
                         </div>
                         <div class="article-body">
-                            <div class="post-title title is-5"><a :href="$root.siteInfo.origin + '/' + post.slug">{{ post.title }}</a></div>
+                            <div class="post-title title is-5"><a :href="$post.url">{{ post.title }}</a></div>
                             <div class="post-meta"><span class="icon is-small"><i class="far fa-calendar-alt"></i></span><span class="post-meta--value">{{ [post.created_at, "YYYY-MM-DD HH:mm:ss" ] | moment('from', 'now') }}</span></div>
                             <!-- 03:43AM on 09 Dec 18 -->
                             <div class="post-excerpt">{{ post.excerpt }}</div>
@@ -152,7 +152,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('/post/get/10/latest/posts')
+        axios.get('/post/api/10/latest-posts')
              .then(response => {
                  this.posts = response.data
              })

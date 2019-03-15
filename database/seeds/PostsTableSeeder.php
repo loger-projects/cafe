@@ -16,11 +16,12 @@ class PostsTableSeeder extends Seeder
     public function run()
     {
         $cates = PostCate::all();
+        $faker = Faker::create();
         foreach($cates as $cate) {
             for($i = 1; $i<= 3; $i++) {
-                $faker = Faker::create();
                 $title = $faker->sentence();
-                $slug = str_slug($title) + '/post';
+                $slug = str_slug($title);
+                $url = url("/post/show/".$slug);
                 $content = implode(' ', $faker->paragraphs);
                 $excerpt = substr($content, 1, 50).' ...';
                 DB::table('posts')->insert([
@@ -28,6 +29,7 @@ class PostsTableSeeder extends Seeder
                     'user_id' => 1,
                     'title' => $title,
                     'slug' => $slug,
+                    'url' => $url,
                     'content' => $content,
                     'excerpt' => $excerpt,
                     'published' => true,

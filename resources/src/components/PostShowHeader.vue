@@ -4,7 +4,8 @@
         <div class="hero is-large post-header">
             <div class="hero-head"><site-header></site-header></div>
             <div class="hero-body">
-                <h1 class="title is-1">{{ $root.post.name }}</h1>
+                <h1 class="title is-1">Post Name</h1>
+                <!-- {{ $root.post.name }} -->
             </div>
             <div class="hero-foot"><site-breadcrumb type="post" :target="$root.post"></site-breadcrumb></div>
         </div>
@@ -49,6 +50,10 @@ import SiteBreadcrumb from './SiteBreadcrumb.vue'
 
 export default {
     name: 'PostShowHeader',
+    components: {
+        SiteHeader,
+        SiteBreadcrumb
+    },
     mounted() {
         this.style.backgroundImage = "url(" + $root.post.thumbnail + ")";
     }

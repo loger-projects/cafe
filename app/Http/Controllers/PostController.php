@@ -47,8 +47,7 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->first();
-        return view('post.show')->with('post', $post);
+        return view('post.show');
     }
 
     /**
@@ -85,18 +84,25 @@ class PostController extends Controller
         //
     }
 
-    public function getLatestPosts($number)
+    public function apiLatestPosts($number)
     {
-        $posts = Post::where('id', '>=', 1)->orderBy('created_at', 'desc')->skip(0)->take($number)->get()->toArray();
-        return $posts;
+        return Post::where('id', '>=', 1)->orderBy('created_at', 'desc')->skip(0)->take($number)->get()->toArray();
+    }
+
+    public function apiShow($slug)
+    {
+        return Post::where('slug', $slug)->first();
     }
 
     public static function routes()
     {
         Route::name('post.')->group(function() {
             Route::get('/posts', 'PostController@index')->name('index');
-            Route::get('/{slug}/post', 'PostController@show')->name('show');
-            Route::get('/post/get/{number}/latest/posts', 'PostController@getLatestPosts')->name('get.latestPosts');
+            Route::get('/post/show/{slug}', 'PostController@show')->name('show');
+        });
+        Route::name('post.api')->group(function() {
+            Route::get('/post/api/{number}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
+            Route::get('/post/api/show/{slug}', 'PostController@apiShow')->name('show');
         });
     }
 }

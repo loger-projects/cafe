@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('title')->unique();
             $table->string('slug')->unique();
+            $table->string('url')->unique();
             $table->text('content');
             $table->string('excerpt');
             $table->boolean('published');

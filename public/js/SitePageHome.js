@@ -1979,7 +1979,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SiteFooter'
+  name: 'SiteFooter',
+  computed: {
+    logo: function logo() {
+      return location.origin + '/img/SiteHeaderLogoWhite.jpg';
+    }
+  }
 });
 
 /***/ }),
@@ -3179,7 +3184,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/post/get/10/latest/posts').then(function (response) {
+    axios.get('/post/api/10/latest-posts').then(function (response) {
       _this.posts = response.data;
     }).catch(function (error) {
       console.log(error);
@@ -17667,7 +17672,7 @@ var render = function() {
       _c("div", { staticClass: "columns" }, [
         _c("div", { staticClass: "column site-logo" }, [
           _c("figure", { staticClass: "image" }, [
-            _c("img", { attrs: { src: _vm.$root.siteInfo.logoWhite } })
+            _c("img", { attrs: { src: _vm.logo } })
           ])
         ]),
         _vm._v(" "),
@@ -18636,15 +18641,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "article-body" }, [
                   _c("div", { staticClass: "post-title title is-5" }, [
-                    _c(
-                      "a",
-                      {
-                        attrs: {
-                          href: _vm.$root.siteInfo.origin + "/" + post.slug
-                        }
-                      },
-                      [_vm._v(_vm._s(post.title))]
-                    )
+                    _c("a", { attrs: { href: _vm.$post.url } }, [
+                      _vm._v(_vm._s(post.title))
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "post-meta" }, [
