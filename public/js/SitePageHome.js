@@ -3169,6 +3169,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SitePageHomeNews',
@@ -3184,7 +3186,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/post/api/10/latest-posts').then(function (response) {
+    axios.get('api/post/10/latest-posts').then(function (response) {
       _this.posts = response.data;
     }).catch(function (error) {
       console.log(error);
@@ -15854,7 +15856,7 @@ exports.push([module.i, "#sitePageHomeMenu[data-v-42e0c23a] {\n  padding-top: 10
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#sitePageHomeNews {\n  padding: 50px 0;\n  background-image: url(\"/img/SitePageHome/news_bg.jpg\");\n  background-size: cover;\n  background-position: 50% 50%;\n  background-attachment: fixed;\n  position: relative;\n}\n#sitePageHomeNews .background-wrap {\n  background-color: #000000ab;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 0;\n}\n#sitePageHomeNews .news-title {\n  margin: 10px 0 30px 0;\n  padding-bottom: 10px;\n  border-bottom: 1px solid #91847f;\n  position: relative;\n  z-index: 1;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-wrapper .VueCarousel-inner .VueCarousel-slide {\n  padding: 0;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button {\n  -webkit-transform: translate(0%, -50%) !important;\n          transform: translate(0%, -50%) !important;\n  padding: 0 10px 0 10px !important;\n  font-size: 25px;\n  z-index: 3;\n  margin: 0 !important;\n  height: 100%;\n  background-color: #00000055;\n  transition: 300ms;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button:not(.VueCarousel-navigation--disable) {\n  color: #fcfcfc;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button:not(.VueCarousel-navigation--disable):hover {\n  color: #fff;\n  background-color: #000000b2;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button.VueCarousel-navigation--disable {\n  color: #a0a0a0;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button.VueCarousel-navigation--disable:hover {\n  color: #a0a0a0 !important;\n  background-color: #00000055 !important;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button.VueCarousel-navigation-prev {\n  left: 0;\n  top: 50%;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button.VueCarousel-navigation-next {\n  right: 0;\n  top: 50%;\n}\n#sitePageHomeNews .article .article-head .post-thumbnail img {\n  width: 100%;\n}\n#sitePageHomeNews .article .article-body {\n  padding-right: 20px;\n}\n#sitePageHomeNews .article .article-body .post-title {\n  padding: 20px 0;\n  color: #ffffff;\n  margin-bottom: 0;\n  max-height: calc(2rem + 40px);\n  overflow: hidden;\n}\n#sitePageHomeNews .article .article-body .post-meta {\n  padding: 10px 0;\n  color: #c2c2c2;\n}\n#sitePageHomeNews .article .article-body .post-meta span.icon {\n  margin-right: 10px;\n}\n#sitePageHomeNews .article .article-body .post-meta span.post-meta--value {\n  color: #7fd873;\n}\n#sitePageHomeNews .article .article-body .post-excerpt {\n  padding: 10px 0;\n  color: #e9ecbf;\n}", ""]);
+exports.push([module.i, "#sitePageHomeNews {\n  padding: 50px 0;\n  background-image: url(\"/img/SitePageHome/news_bg.jpg\");\n  background-size: cover;\n  background-position: 50% 50%;\n  background-attachment: fixed;\n  position: relative;\n}\n#sitePageHomeNews .background-wrap {\n  background-color: #000000ab;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 0;\n}\n#sitePageHomeNews .news-title {\n  margin: 10px 0 30px 0;\n  padding-bottom: 10px;\n  border-bottom: 1px solid #91847f;\n  position: relative;\n  z-index: 1;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-wrapper .VueCarousel-inner .VueCarousel-slide {\n  padding: 0;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button {\n  -webkit-transform: translate(0%, -50%) !important;\n          transform: translate(0%, -50%) !important;\n  padding: 0 10px 0 10px !important;\n  font-size: 25px;\n  z-index: 3;\n  margin: 0 !important;\n  height: 100%;\n  background-color: #00000055;\n  transition: 300ms;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button:not(.VueCarousel-navigation--disable) {\n  color: #fcfcfc;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button:not(.VueCarousel-navigation--disable):hover {\n  color: #fff;\n  background-color: #000000b2;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button.VueCarousel-navigation--disable {\n  color: #a0a0a0;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button.VueCarousel-navigation--disable:hover {\n  color: #a0a0a0 !important;\n  background-color: #00000055 !important;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button.VueCarousel-navigation-prev {\n  left: 0;\n  top: 50%;\n}\n#sitePageHomeNews .VueCarousel .VueCarousel-navigation .VueCarousel-navigation-button.VueCarousel-navigation-next {\n  right: 0;\n  top: 50%;\n}\n#sitePageHomeNews .article .article-head .post-thumbnail img {\n  width: 100%;\n}\n#sitePageHomeNews .article .article-body {\n  padding-right: 20px;\n}\n#sitePageHomeNews .article .article-body .post-title {\n  padding: 20px 0;\n  margin-bottom: 0;\n  max-height: calc(2rem + 40px);\n  overflow: hidden;\n}\n#sitePageHomeNews .article .article-body .post-title a {\n  color: #ffffff;\n}\n#sitePageHomeNews .article .article-body .post-meta {\n  padding: 10px 0;\n  color: #c2c2c2;\n}\n#sitePageHomeNews .article .article-body .post-meta span.icon {\n  margin-right: 10px;\n}\n#sitePageHomeNews .article .article-body .post-meta span.post-meta--value {\n  color: #7fd873;\n}\n#sitePageHomeNews .article .article-body .post-excerpt {\n  padding: 10px 0;\n  color: #e9ecbf;\n}", ""]);
 
 
 
@@ -18641,7 +18643,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "article-body" }, [
                   _c("div", { staticClass: "post-title title is-5" }, [
-                    _c("a", { attrs: { href: _vm.$post.url } }, [
+                    _c("a", { attrs: { href: post.url } }, [
                       _vm._v(_vm._s(post.title))
                     ])
                   ]),
@@ -37138,17 +37140,16 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     'site-page-home': _ViewComponents_SitePageHome_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   data: {
-    siteInfo: {
-      name: 'Dawat Restaurant',
-      origin: null,
-      logoWhite: null,
-      logoBlack: null
-    }
+    siteInfo: {}
   },
   mounted: function mounted() {
-    this.siteInfo.origin = location.origin;
-    this.siteInfo.logoWhite = location.origin + '/img/SiteHeaderLogoWhite.jpg';
-    this.siteInfo.logoBlack = location.origin + '/img/SiteHeaderLogoBlack.jpg';
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(location.origin + '/api/option/site-info').then(function (response) {
+      _this.siteInfo = response.data;
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 });
 

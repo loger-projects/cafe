@@ -100,9 +100,9 @@ class PostController extends Controller
             Route::get('/posts', 'PostController@index')->name('index');
             Route::get('/post/show/{slug}', 'PostController@show')->name('show');
         });
-        Route::name('post.api')->group(function() {
-            Route::get('/post/api/{number}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
-            Route::get('/post/api/show/{slug}', 'PostController@apiShow')->name('show');
+        Route::name('api.post')->group(function() {
+            Route::get('/api/post/{number}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
+            Route::get('/api/post/show/{slug}', 'PostController@apiShow')->name('show');
         });
     }
 }

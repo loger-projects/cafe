@@ -22,16 +22,15 @@ new Vue({
         'site-page-home': SitePageHome
     },
     data: {
-        siteInfo: {
-            name: 'Dawat Restaurant',
-            origin: null,
-            logoWhite: null,
-            logoBlack: null
-        }
+        siteInfo: {}
     },
     mounted() {
-        this.siteInfo.origin = location.origin;
-        this.siteInfo.logoWhite = location.origin + '/img/SiteHeaderLogoWhite.jpg';
-        this.siteInfo.logoBlack = location.origin + '/img/SiteHeaderLogoBlack.jpg';
+        axios.get(location.origin + '/api/option/site-info')
+             .then(response => {
+                this.siteInfo = response.data
+             })
+             .catch(error => {
+                 console.log(error)
+             });
     }
 })

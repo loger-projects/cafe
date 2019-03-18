@@ -18,15 +18,20 @@ new Vue({
         'post-show': PostShow
     },
     data: {
-        siteInfo: {
-            name: 'Dawat Restaurant',
-            origin: null
-        },
-        post: null
+        siteInfo: {},
+        post: {}
     },
     mounted() {
-        this.siteInfo.origin = location.origin;
-        let str = location.href.replace('/post/', '/post/api/');
+        axios.get(location.origin + '/api/option/site-info')
+             .then(response => {
+                this.siteInfo = response.data
+             })
+             .catch(error => {
+                 console.log(error)
+             });
+
+        // get database of current post
+        let str = location.href.replace('/post/', '/api/post/');
         axios.get(str)
              .then(response => {
                  this.post = response.data;

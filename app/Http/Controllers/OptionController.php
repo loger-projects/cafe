@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Option;
 use Illuminate\Http\Request;
+use Route;
 
 class OptionController extends Controller
 {
@@ -81,5 +82,22 @@ class OptionController extends Controller
     public function destroy(Option $option)
     {
         //
+    }
+
+    public function siteInfo()
+    {
+        $options = Option::select('key', 'value')->where('type', 'siteInfo')->get();
+        $array = [];
+        foreach ($options as $option) {
+            $array[$option->key] = $option->value;
+        }
+        return $array;
+    }
+
+    public static function routes()
+    {
+        Route::name('api.option.')->group(function() {
+            Route::get('/api/option/site-info', 'OptionController@siteInfo')->name('.siteInfo');
+        });
     }
 }

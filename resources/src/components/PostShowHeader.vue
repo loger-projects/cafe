@@ -1,11 +1,10 @@
 <template>
-    <div id="postShowHeader">
+    <div id="postShowHeader" :style="background">
         <div class="post-header-background"></div>
         <div class="hero is-large post-header">
             <div class="hero-head"><site-header></site-header></div>
             <div class="hero-body">
-                <h1 class="title is-1">Post Name</h1>
-                <!-- {{ $root.post.name }} -->
+                <h1 class="title is-1">{{ $root.post.title }}</h1>
             </div>
             <div class="hero-foot"><site-breadcrumb type="post" :target="$root.post"></site-breadcrumb></div>
         </div>
@@ -34,7 +33,9 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: #fff;
+                h1.title {
+                    color: #fff;
+                }
             }
             .hero-foot{
                 display: flex; 
@@ -54,8 +55,10 @@ export default {
         SiteHeader,
         SiteBreadcrumb
     },
-    mounted() {
-        this.style.backgroundImage = "url(" + $root.post.thumbnail + ")";
+    computed: {
+        background() {
+            return "background-image: url('" + this.$root.$root.post.thumbnail + "')";
+        }
     }
 }
 </script>

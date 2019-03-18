@@ -8,6 +8,14 @@
     </div>
 </template>
 
+<style lang="scss" scoped>
+        #siteBreadcrumb {
+            ul li a {
+                color: #fff;
+            }
+        }
+</style>
+
 <script>
 export default {
     name: 'SiteBreadcrumb',

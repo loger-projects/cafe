@@ -22,7 +22,7 @@
                             </figure>
                         </div>
                         <div class="article-body">
-                            <div class="post-title title is-5"><a :href="$post.url">{{ post.title }}</a></div>
+                            <div class="post-title title is-5"><a :href="post.url">{{ post.title }}</a></div>
                             <div class="post-meta"><span class="icon is-small"><i class="far fa-calendar-alt"></i></span><span class="post-meta--value">{{ [post.created_at, "YYYY-MM-DD HH:mm:ss" ] | moment('from', 'now') }}</span></div>
                             <!-- 03:43AM on 09 Dec 18 -->
                             <div class="post-excerpt">{{ post.excerpt }}</div>
@@ -113,10 +113,12 @@
                 padding-right: 20px;
                 .post-title {
                     padding: 20px 0;
-                    color: #ffffff;
                     margin-bottom: 0;
                     max-height: calc(2rem + 40px);
                     overflow: hidden;
+                    a {
+                        color: #ffffff;
+                    }
                 }
                 .post-meta {
                     padding: 10px 0;
@@ -152,7 +154,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('/post/api/10/latest-posts')
+        axios.get('api/post/10/latest-posts')
              .then(response => {
                  this.posts = response.data
              })
