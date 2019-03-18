@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostComment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Route;
 
@@ -94,15 +96,37 @@ class PostController extends Controller
         return Post::where('slug', $slug)->first();
     }
 
+    public function apiComments($id)
+    {
+        $comments = PostComment::where('post_id', $id, 'and')->where('parent_id', null)->get();
+        foreach($comments as $comment) {
+            $user = User::where('id', $comment->user_id)->first();
+            $comment->user = $user;
+            $childComment = PostComment::where('parent_id', $comment->id)->get();
+            $comment->child_comment = $childComment;
+            foreach($comment->child_comment as $child) {
+                $user = User::where('id', $child->user_id)->first();
+                $child->user = $user;
+            }
+        }
+        return $comments;
+    }
+
     public static function routes()
     {
         Route::name('post.')->group(function() {
             Route::get('/posts', 'PostController@index')->name('index');
             Route::get('/post/show/{slug}', 'PostController@show')->name('show');
         });
-        Route::name('api.post')->group(function() {
-            Route::get('/api/post/{number}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
-            Route::get('/api/post/show/{slug}', 'PostController@apiShow')->name('show');
+
+        Route::group([
+            'prefix' => 'api/post'
+        ], function() {
+            Route::name('api.post.')->group(function() {
+                Route::get('/{number}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
+                Route::get('/show/{slug}', 'PostController@apiShow')->name('show');
+                Route::get('/{id}/comments', 'PostController@apiComments')->name('comments');
+            });
         });
     }
 }

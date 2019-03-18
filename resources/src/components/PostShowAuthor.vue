@@ -51,25 +51,8 @@
 <script>
 export default {
     name: 'PostShowAuthor',
-    data() {
-        return {
-            author: {}
-        }
-    },
     computed: {
-        authorID() {
-            return this.$root.post.user_id;
-        }
+        author() { return this.$root.author }
     },
-    mounted() {
-        const authorID = this.authorID;
-        axios.get(location.origin + '/api/user/show/1')
-             .then(response => {
-                 this.author = response.data
-             })
-             .catch(error => {
-                 console.log(error)
-             });
-    }
 }
 </script>

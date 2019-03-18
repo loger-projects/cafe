@@ -40,6 +40,8 @@
             .hero-foot{
                 display: flex; 
                 justify-content: center;
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 0.5rem 0;
             }
         }
     }

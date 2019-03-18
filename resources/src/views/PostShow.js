@@ -19,9 +19,31 @@ new Vue({
     },
     data: {
         siteInfo: {},
-        post: {}
+        post: {},
+        author: {},
+        comments: []
     },
-    mounted() {
+    methods: {
+        getAuthorInfo(post) {
+            axios.get(location.origin + '/api/user/show/' + post.user_id)
+                .then(response => {
+                    this.author = response.data
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        },
+        getComments(post) {
+            axios.get(location.origin + '/api/post/' + post.id + '/comments')
+                .then(response => {
+                    this.comments = response.data;
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        }
+    },
+    created() {
         axios.get(location.origin + '/api/option/site-info')
              .then(response => {
                 this.siteInfo = response.data
@@ -35,9 +57,14 @@ new Vue({
         axios.get(str)
              .then(response => {
                  this.post = response.data;
+                 this.getAuthorInfo(response.data);
+                 this.getComments(response.data);
              })
              .catch(error => {
                  console.log(error)
+             })
+             .then(data => {
+                 console.log(data)
              });
     }
 })
