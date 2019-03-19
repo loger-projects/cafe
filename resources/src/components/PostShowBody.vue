@@ -5,8 +5,10 @@
             <div class="columns">
                 <div class="column is-9">
                     <div id="main">
+                        <post-show-meta></post-show-meta>
                         <div id="post-content">{{ post.content }}</div>
                         <post-show-author :authorID="post.user_id"></post-show-author>
+                        <post-show-relate></post-show-relate>
                         <post-show-comment></post-show-comment>
                     </div>
                 </div>
@@ -34,14 +36,18 @@
 </style>
 
 <script>
+import PostShowMeta from './PostShowMeta.vue'
 import PostShowAuthor from './PostShowAuthor.vue'
+import PostShowRelate from './PostShowRelate.vue'
 import PostShowComment from './PostShowComment.vue'
 import PostShowSidebar from './PostShowSidebar.vue'
 
 export default {
     name: 'PostShowBody',
     components: {
+        PostShowMeta,
         PostShowAuthor,
+        PostShowRelate,
         PostShowComment,
         PostShowSidebar
     },

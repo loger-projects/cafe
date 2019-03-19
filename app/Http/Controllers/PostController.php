@@ -93,22 +93,28 @@ class PostController extends Controller
 
     public function apiShow($slug)
     {
-        return Post::where('slug', $slug)->first();
+        $post = Post::where('slug', $slug)->first();
+        $post->comment_count = PostComment::where('post_id', $post->id)->count();
+        return $post;
     }
 
     public function apiComments($id)
     {
         $comments = PostComment::where('post_id', $id, 'and')->where('parent_id', null)->get();
+
         foreach($comments as $comment) {
             $user = User::where('id', $comment->user_id)->first();
             $comment->user = $user;
+            
             $childComment = PostComment::where('parent_id', $comment->id)->get();
             $comment->child_comment = $childComment;
+
             foreach($comment->child_comment as $child) {
                 $user = User::where('id', $child->user_id)->first();
                 $child->user = $user;
             }
         }
+        
         return $comments;
     }
 
