@@ -18,7 +18,7 @@ class PostsTableSeeder extends Seeder
         $cates = PostCate::all();
         $faker = Faker::create();
         foreach($cates as $cate) {
-            for($i = 1; $i<= 3; $i++) {
+            for($i = 1; $i<= 6; $i++) {
                 $title = $faker->sentence();
                 $slug = str_slug($title);
                 $url = url("/post/show/".$slug);

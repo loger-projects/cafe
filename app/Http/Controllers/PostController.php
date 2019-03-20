@@ -118,6 +118,11 @@ class PostController extends Controller
         return $comments;
     }
 
+    public function apiRelated($id, $cateID, $amount)
+    {
+        return Post::where('cate_id', $cateID, 'and')->where('id', '!=', $id)->take($amount)->get();
+    }
+
     public static function routes()
     {
         Route::name('post.')->group(function() {
@@ -132,6 +137,7 @@ class PostController extends Controller
                 Route::get('/{number}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
                 Route::get('/show/{slug}', 'PostController@apiShow')->name('show');
                 Route::get('/{id}/comments', 'PostController@apiComments')->name('comments');
+                Route::get('/{id}/category/{cateID}/related/{amount}', 'PostController@apiRelated')->name('related');
             });
         });
     }

@@ -1,5 +1,8 @@
 <template>
-    <div id="postShowRelate"></div>
+    <div id="postShowRelate">
+        <div class="title is-4">Related Posts</div>
+
+    </div>
 </template>
 
 <style lang="scss" scoped>
@@ -12,8 +15,8 @@
 <script>
 export default {
     name: 'PostShowRelate',
-    created() {
-        
+    computed: {
+        posts() { return this.$root.relatedPosts }
     }
 }
 </script>

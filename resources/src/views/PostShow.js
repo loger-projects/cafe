@@ -21,7 +21,8 @@ new Vue({
         siteInfo: {},
         post: {},
         author: {},
-        comments: []
+        comments: [],
+        relatedPosts: []
     },
     methods: {
         getAuthorInfo(post) {
@@ -41,6 +42,15 @@ new Vue({
                 .catch(error => {
                     console.log(error)
                 });
+        },
+        getRelatedPosts(post, amount) {
+            axios.get(location.origin + '/api/post/' + post.id + '/category/' + post.cate_id + '/related/' + amount)
+                .then(response => {
+                    this.relatedposts = response.data
+                })
+                .catch(error => {
+                    console.log(error.message)
+                });
         }
     },
     created() {
@@ -59,6 +69,7 @@ new Vue({
                  this.post = response.data;
                  this.getAuthorInfo(response.data);
                  this.getComments(response.data);
+                 this.getRelatedPosts(response.data, 5);
              })
              .catch(error => {
                  console.log(error)
