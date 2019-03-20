@@ -8,7 +8,11 @@
         <div class="media-content">
             <form @submit.prevent="onSubmit">
                 <div class="content">
-                    <textarea name="content" class="textarea" placeholder="Post a comment" v-model="content"></textarea>
+                    <textarea 
+                        name="content" 
+                        class="textarea" 
+                        placeholder="Post a comment" 
+                        v-model="content"></textarea>
                 </div>
                 <div class="submit">
                     <button class="button is-primary" type="submit">Post Comment</button>
@@ -30,12 +34,15 @@ export default {
             content: ''
         }
     },
+    computed: {
+        csrf(){ return document.querySelector('meta[name="csrf-token"]').getAttribute('content') }
+    },
     methods: {
         closeForm() {
             this.$emit('closeForm')
         },
         onSubmit() {
-            this.$emit('submitForm')
+            this.$emit('onSubmit')
         }
     }
 }

@@ -27,16 +27,7 @@ new Vue({
         author: {}
     },
     computed: {
-        notes() {
-            axios.get(location.origin + '/api/user/show/' + post.user_id)
-                .then(response => {
-                    return response.data
-                })
-                .catch(error => {
-                    console.log(error.message)
-                    return error.message
-                })
-        }
+        csrf(){ return document.querySelector('meta[name="csrf-token"]').getAttribute('content') }
     },
     methods: {
         getAuthor(post) {

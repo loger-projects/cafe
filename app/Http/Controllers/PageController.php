@@ -22,18 +22,7 @@ class PageController extends Controller
      */
     public function test()
     {
-        $meal = MenuMeal::where('id', 1)->first();
-        $food = [];
-        $drink = [];
-        foreach ($meal->menus as $menu) {
-            if ($menu->type->is_food) {
-                $food[] = $menu->name;
-            } else {
-                $drink[] = $menu->name;
-            }
-        }
-        $array = ['food' => $food, 'drink' => $drink];
-        return $array;
+        return view('test');
     }
 
     /**

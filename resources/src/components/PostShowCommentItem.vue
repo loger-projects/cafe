@@ -30,8 +30,8 @@
                 :user="$root.author" 
                 :closeButton="true" 
                 @closeForm="closeForm"
-                @submitForm="onSubmit"
-                ref="content">
+                @onSubmit="onSubmit"
+                ref="commentReply">
             </comment-reply>
         </div>
     </article>
@@ -39,7 +39,6 @@
 
 <script>
 import PostShowCommentReply from './PostShowCommentReply.vue'
-import { async } from 'q';
 
 export default {
     name: 'PostShowCommentItem',
@@ -60,13 +59,15 @@ export default {
         closeForm() { this.replyForm = false },
         openForm() { this.replyForm = true },
         onSubmit() {
-            axios.post(location.origin + '/api/comment/store', {
+            axios.post('/api/comment/store', {
                 user_id: this.$root.author.id,
                 post_id: this.$root.post.id,
                 parent_id: this.comment.id,
-                content: this.$refs.content
+                content: this.$refs.commentReply.content
             }).then(response => {
                 this.comment.child_comment.push(response.data)
+                this.replyForm = false
+                console.log(response.data)
             }).catch(error => {
                 console.log(error.message)
             })
