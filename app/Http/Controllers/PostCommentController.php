@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostComment;
+use App\Models\User;
+use Route;
 use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
@@ -81,5 +83,33 @@ class PostCommentController extends Controller
     public function destroy(PostComment $postComment)
     {
         //
+    }
+
+    /**
+     * 
+     */
+    public function apiStore(Request $request)
+    {
+        $data = $request->all();
+        /**
+         * content
+         * user_id
+         * parent_id
+         * post_id
+         */
+        $comment = PostComment::create($data);
+        $comment->user = User::where('id', $request->user_id)->first();
+        return $comment;
+    }
+
+    public static function routes()
+    {
+        Route::group([
+            'prefix' => 'api/comment'
+        ],function () {
+            Route::name('api.comment.')->group(function () {
+                Route::post('/store', 'PostCommentController@apiStore')->name('store');
+            });
+        });
     }
 }

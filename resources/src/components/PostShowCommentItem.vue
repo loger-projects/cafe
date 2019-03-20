@@ -14,28 +14,32 @@
             <div class="comment-meta">
                 <span class="reply" @click="openForm">Reply</span>
                 <span class="delimiter">-</span>
-                <span class="time">{{ [comment.created_at, "YYYY-MM-DD HH:mm:ss"] | moment('from', 'now') }}</span>
+                <span class="time">{{ [comment.created_at] | moment("YYYY MMMM DD HH:mm:ss") }}</span>
             </div>
 
             <div v-if="comment.child_comment">
-                <post-show-comment-item :comment="childComment" v-for="childComment in comment.child_comment" :key="childComment.id"></post-show-comment-item>
+                <post-show-comment-item 
+                    v-for="childComment in comment.child_comment" 
+                    :key="childComment.id"
+                    :inputComment="childComment" >
+                    </post-show-comment-item>
             </div>
 
             <comment-reply 
                 v-if="replyForm" 
                 :user="$root.author" 
-                :parentID="comment.parent_id" 
-                :postID="$root.post.id" 
                 :closeButton="true" 
-                @closeForm="closeForm">
+                @closeForm="closeForm"
+                @submitForm="onSubmit"
+                ref="content">
             </comment-reply>
         </div>
-
     </article>
 </template>
 
 <script>
 import PostShowCommentReply from './PostShowCommentReply.vue'
+import { async } from 'q';
 
 export default {
     name: 'PostShowCommentItem',
@@ -47,11 +51,26 @@ export default {
             replyForm: false
         }
     },
-    props: ['comment'],
+    props: ['inputComment'],
+    computed: {
+        comment() { return this.inputComment }
+    },
     methods: {
-        linkToUserShow(comment) { return location.origin + '/user/show/' + comment.user.id},
+        linkToUserShow(comment) { return location.origin + '/user/show/' + comment.user_id},
         closeForm() { this.replyForm = false },
-        openForm() { this.replyForm = true }
+        openForm() { this.replyForm = true },
+        onSubmit() {
+            axios.post(location.origin + '/api/comment/store', {
+                user_id: this.$root.author.id,
+                post_id: this.$root.post.id,
+                parent_id: this.comment.id,
+                content: this.$refs.content
+            }).then(response => {
+                this.comment.child_comment.push(response.data)
+            }).catch(error => {
+                console.log(error.message)
+            })
+        }
     }
 }
 </script>

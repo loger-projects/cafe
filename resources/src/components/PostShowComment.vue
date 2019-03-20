@@ -3,13 +3,12 @@
         <comment-item 
             v-for="comment in comments" 
             :key="comment.id" 
-            :comment="comment">
+            :inputComment="comment">
         </comment-item>
         <comment-reply 
             :user="$root.author" 
-            :parentID="null" 
-            :postID="$root.post.id"
-            :closeButton="false">
+            :closeButton="false"
+            @submitForm="onSubmit">
         </comment-reply>
     </div>
 </template>
@@ -87,6 +86,11 @@ export default {
     },
     computed: {
         comments() { return this.$root.comments },
+    },
+    methods: {
+        onSubmit() {
+            alert('submit form');
+        }
     }
 }
 </script>

@@ -6,12 +6,9 @@
             </figure>
         </div>
         <div class="media-content">
-            <form>
+            <form @submit.prevent="onSubmit">
                 <div class="content">
-                    <input type="hidden" name="userID" :value="user.id">
-                    <input type="hidden" name="parentID" :value="parentID">
-                    <input type="hidden" name="postID" :value="postID">
-                    <textarea name="content" class="textarea" placeholder="Post a comment"></textarea>
+                    <textarea name="content" class="textarea" placeholder="Post a comment" v-model="content"></textarea>
                 </div>
                 <div class="submit">
                     <button class="button is-primary" type="submit">Post Comment</button>
@@ -27,10 +24,18 @@
 <script>
 export default {
     name: 'PostShowCommentReply',
-    props: ['user', 'parentID', 'closeButton', 'postID'],
+    props: ['user', 'closeButton'],
+    data() {
+        return {
+            content: ''
+        }
+    },
     methods: {
         closeForm() {
             this.$emit('closeForm')
+        },
+        onSubmit() {
+            this.$emit('submitForm')
         }
     }
 }

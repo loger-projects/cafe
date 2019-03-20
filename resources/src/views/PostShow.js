@@ -2,6 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueMoment from 'vue-moment'
 import VueLazyload from 'vue-lazyload'
+import VueCarousel from 'vue-carousel'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import PostShow from '../ViewComponents/PostShow.vue'
@@ -11,6 +12,7 @@ window.axios = axios
 Vue.use(VueMoment)
 Vue.use(VueLazyload)
 Vue.use(buefy)
+Vue.use(VueCarousel)
 
 new Vue({
     el: '#root',
@@ -20,19 +22,31 @@ new Vue({
     data: {
         siteInfo: {},
         post: {},
-        author: {},
         comments: [],
-        relatedPosts: []
+        relatedPosts: [],
+        author: {}
     },
-    methods: {
-        getAuthorInfo(post) {
+    computed: {
+        notes() {
             axios.get(location.origin + '/api/user/show/' + post.user_id)
                 .then(response => {
-                    this.author = response.data
+                    return response.data
                 })
                 .catch(error => {
-                    console.log(error)
-                });
+                    console.log(error.message)
+                    return error.message
+                })
+        }
+    },
+    methods: {
+        getAuthor(post) {
+            axios.get(location.origin + '/api/user/show/' + post.user_id)
+                .then(response => {
+                    this.author = response.data;
+                })
+                .catch(error => {
+                    console.log(error.message)
+                })
         },
         getComments(post) {
             axios.get(location.origin + '/api/post/' + post.id + '/comments')
@@ -46,7 +60,7 @@ new Vue({
         getRelatedPosts(post, amount) {
             axios.get(location.origin + '/api/post/' + post.id + '/category/' + post.cate_id + '/related/' + amount)
                 .then(response => {
-                    this.relatedposts = response.data
+                    this.relatedPosts = response.data
                 })
                 .catch(error => {
                     console.log(error.message)
@@ -67,15 +81,12 @@ new Vue({
         axios.get(str)
              .then(response => {
                  this.post = response.data;
-                 this.getAuthorInfo(response.data);
+                 this.getAuthor(response.data);
                  this.getComments(response.data);
                  this.getRelatedPosts(response.data, 5);
              })
              .catch(error => {
                  console.log(error)
              })
-             .then(data => {
-                 console.log(data)
-             });
     }
 })

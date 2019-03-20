@@ -86,26 +86,47 @@ class PostController extends Controller
         //
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $number
+     * @return void
+     */
     public function apiLatestPosts($number)
     {
         return Post::where('id', '>=', 1)->orderBy('created_at', 'desc')->skip(0)->take($number)->get()->toArray();
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $slug
+     * @return void
+     */
     public function apiShow($slug)
     {
         $post = Post::where('slug', $slug)->first();
         $post->comment_count = PostComment::where('post_id', $post->id)->count();
+        $post->author = User::where('id', $post->user_id)->first();
         return $post;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function apiComments($id)
     {
         $comments = PostComment::where('post_id', $id, 'and')->where('parent_id', null)->get();
 
         foreach($comments as $comment) {
+            // get the user who created this comment
             $user = User::where('id', $comment->user_id)->first();
             $comment->user = $user;
             
+            // get child comments of this comment
             $childComment = PostComment::where('parent_id', $comment->id)->get();
             $comment->child_comment = $childComment;
 
@@ -118,11 +139,29 @@ class PostController extends Controller
         return $comments;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @param [type] $cateID
+     * @param [type] $amount
+     * @return void
+     */
     public function apiRelated($id, $cateID, $amount)
     {
-        return Post::where('cate_id', $cateID, 'and')->where('id', '!=', $id)->take($amount)->get();
+        $posts = Post::where('cate_id', $cateID, 'and')->where('id', '!=', $id)->take($amount)->get();
+        foreach($posts as $post) {
+            $post->comment_count = PostComment::where('post_id', $post->id)->count();
+            $post->author = User::where('id', $post->user_id)->first();
+        }
+        return $posts;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public static function routes()
     {
         Route::name('post.')->group(function() {
