@@ -1,35 +1,35 @@
 <template>
     <div id="formVue">
         <div class="container">
-            <form @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
+            <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
 
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control has-icons-left">
-                        <input type="text" class="input" name="name" placeholder="Loger Nam" v-model="name">
+                        <input type="text" class="input" name="name" placeholder="Loger Nam" v-model="form.name">
                         <span class="icon is-small is-left">
                             <i class="fas fa-user"></i>
                         </span>
                     </div>
-                    <p class="help is-danger" v-if="errors.has('name')">{{ errors.get('name') }}</p>
+                    <p class="help is-danger" v-if="form.errors.has('name')">{{ form.errors.get('name') }}</p>
                 </div>
 
 
                 <div class="field">
                     <label class="label">Description</label>
                     <div class="control has-icons-left">
-                        <input class="input" type="text" name="description" placeholder="if the world is an eggm I will eat that egg" v-model="description">
+                        <input class="input" type="text" name="description" placeholder="if the world is an eggm I will eat that egg" v-model="form.description">
                         <span class="icon is-small is-left">
                             <i class="fas fa-check"></i>
                         </span>
                     </div>
-                    <p class="help is-danger" v-if="errors.has('description')">{{ errors.get('description') }}</p>
+                    <p class="help is-danger" v-if="form.errors.has('description')">{{ form.errors.get('description') }}</p>
                 </div>
 
 
                 <div class="field is-grouped">
                     <div class="control">
-                        <button type="submit" class="button is-success" :disabled="errors.any()">Submit</button>
+                        <button type="submit" class="button is-success" :disabled="form.errors.any()">Submit</button>
                     </div>
                     <div class="control">
                         <button type="reset" class="button is-info">Reset</button>
@@ -65,81 +65,26 @@
 </style>
 
 <script>
-class Errors {
-    constructor() {
-        this.errors = {}
-    }
-
-    record(errors) {
-        this.errors = errors
-    }
-
-    get(field) {
-        if(this.errors[field]) {
-            return this.errors[field][0]
-        }
-    }
-
-    has(field) {
-        return this.errors.hasOwnProperty(field)
-    }
-
-    any() {
-        return Object.keys(this.errors).length > 0
-    }
-
-    clear(field) {
-        if(this.errors[field]) {
-            delete this.errors[field]
-        }
-    }
-}
-
-class Form {
-    constructor(data) {
-        this.originalData = data
-        this.data = 'original Data'
-    }
-
-    get() {
-        return this.data
-    }
-}
-
-
-
 export default {
     name: "FormVue",
     data() {
         return {
-            name: '',
-            description: '',
-            errors: new Errors(),
-            form: new Form()
+            form: new Form({
+                name: '',
+                description: '',
+            })
         }
     },
     methods: {
         onSubmit() {
-            axios.post('/form-vue', this.$data)
+            this.form.post('/form-vue')
                 .then(response => {
-                    alert(response.data.message)
-                    this.name = ''
-                    this.description = ''
-                }).catch(error => this.errors.record(error.response.data.errors))
+                    console.log(response.message)
+                })
+                .catch(error => {
+                    console.log(error.message)
+                })
         }
-    },
-    created() {
-        var obj = {
-            data: 42,
-            get() {
-                return this.data
-            }
-        }
-        // inherit and not inherit
-        // childObj 
-        var childObj = obj // cái này thì là inherit rồi
-        childObj.data = 16
-        console.log(obj.data)
     }
 }
 // Note: event DOM - Oject DOM - String DOM

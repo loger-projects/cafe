@@ -1763,12 +1763,6 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
 //
 //
 //
@@ -1835,108 +1829,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //
 //
 //
-var Errors =
-/*#__PURE__*/
-function () {
-  function Errors() {
-    _classCallCheck(this, Errors);
-
-    this.errors = {};
-  }
-
-  _createClass(Errors, [{
-    key: "record",
-    value: function record(errors) {
-      this.errors = errors;
-    }
-  }, {
-    key: "get",
-    value: function get(field) {
-      if (this.errors[field]) {
-        return this.errors[field][0];
-      }
-    }
-  }, {
-    key: "has",
-    value: function has(field) {
-      return this.errors.hasOwnProperty(field);
-    }
-  }, {
-    key: "any",
-    value: function any() {
-      return Object.keys(this.errors).length > 0;
-    }
-  }, {
-    key: "clear",
-    value: function clear(field) {
-      if (this.errors[field]) {
-        delete this.errors[field];
-      }
-    }
-  }]);
-
-  return Errors;
-}();
-
-var Form =
-/*#__PURE__*/
-function () {
-  function Form(data) {
-    _classCallCheck(this, Form);
-
-    this.originalData = data;
-    this.data = 'original Data';
-  }
-
-  _createClass(Form, [{
-    key: "get",
-    value: function get() {
-      return this.data;
-    }
-  }]);
-
-  return Form;
-}();
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FormVue",
   data: function data() {
     return {
-      name: '',
-      description: '',
-      errors: new Errors(),
-      form: new Form()
+      form: new Form({
+        name: '',
+        description: ''
+      })
     };
   },
   methods: {
     onSubmit: function onSubmit() {
-      var _this = this;
-
-      axios.post('/form-vue', this.$data).then(function (response) {
-        alert(response.data.message);
-        _this.name = '';
-        _this.description = '';
+      this.form.post('/form-vue').then(function (response) {
+        console.log(response.message);
       }).catch(function (error) {
-        return _this.errors.record(error.response.data.errors);
+        console.log(error.message);
       });
     }
-  },
-  created: function created() {
-    var obj = {
-      data: 42,
-      get: function get() {
-        return this.data;
-      }
-    }; // inherit and not inherit
-    // childObj 
+  } // Note: event DOM - Oject DOM - String DOM
+  // Very Important: Review Javascript Class - Object base knowledge
 
-    var childObj = obj; // cái này thì là inherit rồi
-
-    childObj.data = 16;
-    console.log(obj.data);
-  }
-}); // Note: event DOM - Oject DOM - String DOM
-// Very Important: Review Javascript Class - Object base knowledge
+});
 
 /***/ }),
 
@@ -15565,7 +15479,7 @@ var render = function() {
               return _vm.onSubmit($event)
             },
             keydown: function($event) {
-              return _vm.errors.clear($event.target.name)
+              return _vm.form.errors.clear($event.target.name)
             }
           }
         },
@@ -15579,19 +15493,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.name,
-                    expression: "name"
+                    value: _vm.form.name,
+                    expression: "form.name"
                   }
                 ],
                 staticClass: "input",
                 attrs: { type: "text", name: "name", placeholder: "Loger Nam" },
-                domProps: { value: _vm.name },
+                domProps: { value: _vm.form.name },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.name = $event.target.value
+                    _vm.$set(_vm.form, "name", $event.target.value)
                   }
                 }
               }),
@@ -15599,9 +15513,9 @@ var render = function() {
               _vm._m(0)
             ]),
             _vm._v(" "),
-            _vm.errors.has("name")
+            _vm.form.errors.has("name")
               ? _c("p", { staticClass: "help is-danger" }, [
-                  _vm._v(_vm._s(_vm.errors.get("name")))
+                  _vm._v(_vm._s(_vm.form.errors.get("name")))
                 ])
               : _vm._e()
           ]),
@@ -15615,8 +15529,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.description,
-                    expression: "description"
+                    value: _vm.form.description,
+                    expression: "form.description"
                   }
                 ],
                 staticClass: "input",
@@ -15625,13 +15539,13 @@ var render = function() {
                   name: "description",
                   placeholder: "if the world is an eggm I will eat that egg"
                 },
-                domProps: { value: _vm.description },
+                domProps: { value: _vm.form.description },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.description = $event.target.value
+                    _vm.$set(_vm.form, "description", $event.target.value)
                   }
                 }
               }),
@@ -15639,9 +15553,9 @@ var render = function() {
               _vm._m(1)
             ]),
             _vm._v(" "),
-            _vm.errors.has("description")
+            _vm.form.errors.has("description")
               ? _c("p", { staticClass: "help is-danger" }, [
-                  _vm._v(_vm._s(_vm.errors.get("description")))
+                  _vm._v(_vm._s(_vm.form.errors.get("description")))
                 ])
               : _vm._e()
           ]),
@@ -15652,7 +15566,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "button is-success",
-                  attrs: { type: "submit", disabled: _vm.errors.any() }
+                  attrs: { type: "submit", disabled: _vm.form.errors.any() }
                 },
                 [_vm._v("Submit")]
               )
@@ -27854,6 +27768,264 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/src/js/Errors.js":
+/*!************************************!*\
+  !*** ./resources/src/js/Errors.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Errors =
+/*#__PURE__*/
+function () {
+  /**
+   * generate errors
+   */
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+  /**
+   * record the errors
+   * 
+   * @param {*} errors 
+   */
+
+
+  _createClass(Errors, [{
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors;
+    }
+    /**
+     * get specific error
+     * 
+     * @param {*} field 
+     */
+
+  }, {
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return this.errors[field][0];
+      }
+    }
+    /**
+     * check for existance of specific error
+     * 
+     * @param {*} field 
+     */
+
+  }, {
+    key: "has",
+    value: function has(field) {
+      return this.errors.hasOwnProperty(field);
+    }
+    /**
+     * check for any errors exist
+     */
+
+  }, {
+    key: "any",
+    value: function any() {
+      return Object.keys(this.errors).length > 0;
+    }
+    /**
+     * clear specific error
+     * 
+     * @param {*} field 
+     */
+
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      if (this.errors[field]) {
+        delete this.errors[field];
+      }
+    }
+  }]);
+
+  return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Errors);
+
+/***/ }),
+
+/***/ "./resources/src/js/Form.js":
+/*!**********************************!*\
+  !*** ./resources/src/js/Form.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Errors */ "./resources/src/js/Errors.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+window.Error = _Errors__WEBPACK_IMPORTED_MODULE_0__["default"];
+
+var Form =
+/*#__PURE__*/
+function () {
+  /**
+   * 
+   * @param {*} data 
+   */
+  function Form(data) {
+    _classCallCheck(this, Form);
+
+    this.originalData = data;
+    this.errors = new _Errors__WEBPACK_IMPORTED_MODULE_0__["default"]();
+
+    for (var field in this.originalData) {
+      this[field] = this.originalData[field];
+    }
+  }
+  /**
+   * 
+   */
+
+
+  _createClass(Form, [{
+    key: "data",
+    value: function data() {
+      var data = {};
+
+      for (var field in this.originalData) {
+        data[this.field] = this.originalData[field];
+      }
+
+      return data;
+    }
+    /**
+     * 
+     */
+
+  }, {
+    key: "reset",
+    value: function reset() {
+      for (var field in this.originalData) {
+        this[field] = '';
+      }
+    }
+    /**
+     * 
+     * @param {*} requestType 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "submit",
+    value: function submit(requestType, url) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        axios[requestType](url, _this.data()).then(function (response) {
+          _this.success(response.data);
+
+          resolve(response.data);
+        }).catch(function (error) {
+          _this.fail(error.response.data.errors);
+
+          reject(error.response.data);
+        });
+      });
+    }
+    /**
+     * 
+     * @param {*} data 
+     */
+
+  }, {
+    key: "success",
+    value: function success(data) {
+      this.reset();
+      alert(data.message);
+    }
+    /**
+     * 
+     */
+
+  }, {
+    key: "fail",
+    value: function fail(error) {
+      this.errors.record(error);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "post",
+    value: function post(url) {
+      return this.submit('post', url);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "get",
+    value: function get(url) {
+      return this.submit('get', url);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "delete",
+    value: function _delete(url) {
+      return this.submit('delete', url);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "put",
+    value: function put(url) {
+      return this.submit('put', url);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "patch",
+    value: function patch(url) {
+      return this.patch('patch', url);
+    }
+  }]);
+
+  return Form;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Form);
+
+/***/ }),
+
 /***/ "./resources/src/views/FormVue.js":
 /*!****************************************!*\
   !*** ./resources/src/views/FormVue.js ***!
@@ -27872,11 +28044,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var buefy_dist_buefy_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! buefy/dist/buefy.css */ "./node_modules/buefy/dist/buefy.css");
 /* harmony import */ var buefy_dist_buefy_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(buefy_dist_buefy_css__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _ViewComponents_FormVue_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ViewComponents/FormVue.vue */ "./resources/src/ViewComponents/FormVue.vue");
+/* harmony import */ var _js_Form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../js/Form */ "./resources/src/js/Form.js");
 
 
 
 
 
+
+window.Form = _js_Form__WEBPACK_IMPORTED_MODULE_5__["default"];
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
 window.axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(buefy__WEBPACK_IMPORTED_MODULE_2___default.a);
