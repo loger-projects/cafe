@@ -1763,6 +1763,12 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 //
 //
 //
@@ -1829,40 +1835,108 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
+var Errors =
+/*#__PURE__*/
+function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors;
+    }
+  }, {
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return this.errors[field][0];
+      }
+    }
+  }, {
+    key: "has",
+    value: function has(field) {
+      return this.errors.hasOwnProperty(field);
+    }
+  }, {
+    key: "any",
+    value: function any() {
+      return Object.keys(this.errors).length > 0;
+    }
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      if (this.errors[field]) {
+        delete this.errors[field];
+      }
+    }
+  }]);
+
+  return Errors;
+}();
+
+var Form =
+/*#__PURE__*/
+function () {
+  function Form(data) {
+    _classCallCheck(this, Form);
+
+    this.originalData = data;
+    this.data = 'original Data';
+  }
+
+  _createClass(Form, [{
+    key: "get",
+    value: function get() {
+      return this.data;
+    }
+  }]);
+
+  return Form;
+}();
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FormVue",
   data: function data() {
     return {
       name: '',
       description: '',
-      success: {},
-      errors: {}
+      errors: new Errors(),
+      form: new Form()
     };
   },
   methods: {
     onSubmit: function onSubmit() {
       var _this = this;
 
-      axios.post('/form-vue/store', {
-        name: this.name,
-        description: this.description
-      }).then(function (response) {
-        _this.success = response.data;
+      axios.post('/form-vue', this.$data).then(function (response) {
+        alert(response.data.message);
         _this.name = '';
         _this.description = '';
       }).catch(function (error) {
-        console.log(error.response.data);
-        _this.errors = error.response.data.errors;
+        return _this.errors.record(error.response.data.errors);
       });
     }
+  },
+  created: function created() {
+    var obj = {
+      data: 42,
+      get: function get() {
+        return this.data;
+      }
+    }; // inherit and not inherit
+    // childObj 
+
+    var childObj = obj; // cái này thì là inherit rồi
+
+    childObj.data = 16;
+    console.log(obj.data);
   }
-});
+}); // Note: event DOM - Oject DOM - String DOM
+// Very Important: Review Javascript Class - Object base knowledge
 
 /***/ }),
 
@@ -14309,7 +14383,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#formVue {\n  height: 100vh;\n  background-color: #333;\n  position: relative;\n}\n#formVue div.title {\n  color: #3a1e0a;\n}\n#formVue .container {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  padding: 50px;\n  background-color: #c2c2c2;\n}\n#formVue .container p.help {\n  font-size: 2rem;\n}\n#formVue .container p.help.is-success {\n  color: #3a1e0a;\n}", ""]);
+exports.push([module.i, "#formVue {\n  height: 100vh;\n  background-color: #333;\n  position: relative;\n}\n#formVue div.title {\n  color: #5bda57;\n}\n#formVue .container {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  padding: 50px;\n  background-color: #c2c2c2;\n}\n#formVue .container .help {\n  font-size: 1rem;\n}", ""]);
 
 
 
@@ -15482,12 +15556,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "formVue" } }, [
     _c("div", { staticClass: "container" }, [
-      _vm.success.message
-        ? _c("div", { staticClass: "title has-text-centered" }, [
-            _vm._v(_vm._s(_vm.success.message))
-          ])
-        : _vm._e(),
-      _vm._v(" "),
       _c(
         "form",
         {
@@ -15495,6 +15563,9 @@ var render = function() {
             submit: function($event) {
               $event.preventDefault()
               return _vm.onSubmit($event)
+            },
+            keydown: function($event) {
+              return _vm.errors.clear($event.target.name)
             }
           }
         },
@@ -15528,15 +15599,9 @@ var render = function() {
               _vm._m(0)
             ]),
             _vm._v(" "),
-            _vm.success.name
-              ? _c("p", { staticClass: "help is-success" }, [
-                  _vm._v(_vm._s(_vm.success.name))
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.errors.name
+            _vm.errors.has("name")
               ? _c("p", { staticClass: "help is-danger" }, [
-                  _vm._v(_vm._s(_vm.errors.name[0]))
+                  _vm._v(_vm._s(_vm.errors.get("name")))
                 ])
               : _vm._e()
           ]),
@@ -15574,20 +15639,27 @@ var render = function() {
               _vm._m(1)
             ]),
             _vm._v(" "),
-            _vm.success.description
-              ? _c("p", { staticClass: "help is-success" }, [
-                  _vm._v(_vm._s(_vm.success.description))
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.errors.description
+            _vm.errors.has("description")
               ? _c("p", { staticClass: "help is-danger" }, [
-                  _vm._v(_vm._s(_vm.errors.description[0]))
+                  _vm._v(_vm._s(_vm.errors.get("description")))
                 ])
               : _vm._e()
           ]),
           _vm._v(" "),
-          _vm._m(2)
+          _c("div", { staticClass: "field is-grouped" }, [
+            _c("div", { staticClass: "control" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "button is-success",
+                  attrs: { type: "submit", disabled: _vm.errors.any() }
+                },
+                [_vm._v("Submit")]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
         ]
       )
     ])
@@ -15614,22 +15686,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field is-grouped" }, [
-      _c("div", { staticClass: "control" }, [
-        _c(
-          "button",
-          { staticClass: "button is-success", attrs: { type: "submit" } },
-          [_vm._v("Submit")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "control" }, [
-        _c(
-          "button",
-          { staticClass: "button is-info", attrs: { type: "reset" } },
-          [_vm._v("Reset")]
-        )
-      ])
+    return _c("div", { staticClass: "control" }, [
+      _c(
+        "button",
+        { staticClass: "button is-info", attrs: { type: "reset" } },
+        [_vm._v("Reset")]
+      )
     ])
   }
 ]

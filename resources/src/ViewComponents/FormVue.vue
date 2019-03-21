@@ -1,8 +1,7 @@
 <template>
     <div id="formVue">
         <div class="container">
-            <div class="title has-text-centered" v-if="success.message">{{ success.message }}</div>
-            <form @submit.prevent="onSubmit">
+            <form @submit.prevent="onSubmit" @keydown="errors.clear($event.target.name)">
 
                 <div class="field">
                     <label class="label">Name</label>
@@ -12,7 +11,7 @@
                             <i class="fas fa-user"></i>
                         </span>
                     </div>
-                    <p class="help is-danger" v-if="errors.name">{{ errors.name[0] }}</p>
+                    <p class="help is-danger" v-if="errors.has('name')">{{ errors.get('name') }}</p>
                 </div>
 
 
@@ -24,13 +23,13 @@
                             <i class="fas fa-check"></i>
                         </span>
                     </div>
-                    <p class="help is-danger" v-if="errors.description">{{ errors.description[0] }}</p>
+                    <p class="help is-danger" v-if="errors.has('description')">{{ errors.get('description') }}</p>
                 </div>
 
 
                 <div class="field is-grouped">
                     <div class="control">
-                        <button type="submit" class="button is-success">Submit</button>
+                        <button type="submit" class="button is-success" :disabled="errors.any()">Submit</button>
                     </div>
                     <div class="control">
                         <button type="reset" class="button is-info">Reset</button>
@@ -58,26 +57,56 @@
             transform: translate(-50%, -50%);
             padding: 50px;
             background-color: #c2c2c2;
-            p.help {
-                font-size: 2rem;
-            }
-            p.help.is-success {
-                color: rgb(91, 218, 87);
+            .help {
+                font-size: 1rem;
             }
         }
     }
 </style>
 
 <script>
-class Error {
-    any() {
-
+class Errors {
+    constructor() {
+        this.errors = {}
     }
 
-    clear() {
+    record(errors) {
+        this.errors = errors
+    }
 
+    get(field) {
+        if(this.errors[field]) {
+            return this.errors[field][0]
+        }
+    }
+
+    has(field) {
+        return this.errors.hasOwnProperty(field)
+    }
+
+    any() {
+        return Object.keys(this.errors).length > 0
+    }
+
+    clear(field) {
+        if(this.errors[field]) {
+            delete this.errors[field]
+        }
     }
 }
+
+class Form {
+    constructor(data) {
+        this.originalData = data
+        this.data = 'original Data'
+    }
+
+    get() {
+        return this.data
+    }
+}
+
+
 
 export default {
     name: "FormVue",
@@ -85,22 +114,34 @@ export default {
         return {
             name: '',
             description: '',
-            success: {},
-            errors: new Error()
+            errors: new Errors(),
+            form: new Form()
         }
     },
     methods: {
         onSubmit() {
-            axios.post('/form-vue/store', {
-                name: this.name,
-                description: this.description
-            }).then(response => {
-                alert(response.data.message)
-                this.errors.clear()
-            }).catch(error => {
-                this.errors.get(error.response.data)
-            })
+            axios.post('/form-vue', this.$data)
+                .then(response => {
+                    alert(response.data.message)
+                    this.name = ''
+                    this.description = ''
+                }).catch(error => this.errors.record(error.response.data.errors))
         }
+    },
+    created() {
+        var obj = {
+            data: 42,
+            get() {
+                return this.data
+            }
+        }
+        // inherit and not inherit
+        // childObj 
+        var childObj = obj // cái này thì là inherit rồi
+        childObj.data = 16
+        console.log(obj.data)
     }
 }
+// Note: event DOM - Oject DOM - String DOM
+// Very Important: Review Javascript Class - Object base knowledge
 </script>

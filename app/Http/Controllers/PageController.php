@@ -38,9 +38,7 @@ class PageController extends Controller
         ]);
 
         return [
-            'message' => 'Success!',
-            'name' => 'Your name is valid. progress is done',
-            'description' => 'your description is valid. Progress is done'
+            'message' => 'Success!'
         ];
     }
 
@@ -54,6 +52,6 @@ class PageController extends Controller
         Route::get('/', 'PageController@sitePageHome')->name('site.page.home');
         Route::get('/test', 'PageController@test')->name('test');
         Route::get('/form-vue', 'PageController@formVue')->name('formVue');
-        Route::post('/form-vue/store', 'PageController@formVueStore')->name('formVue.store');
+        Route::post('/form-vue', 'PageController@formVueStore')->name('formVue.store');
     }
 }
