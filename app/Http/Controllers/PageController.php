@@ -25,6 +25,25 @@ class PageController extends Controller
         return view('test');
     }
 
+    public function formVue()
+    {
+        return view('FormVue');
+    }
+
+    public function formVueStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+
+        return [
+            'message' => 'Success!',
+            'name' => 'Your name is valid. progress is done',
+            'description' => 'your description is valid. Progress is done'
+        ];
+    }
+
     /**
      * Undocumented function
      *
@@ -34,5 +53,7 @@ class PageController extends Controller
     {
         Route::get('/', 'PageController@sitePageHome')->name('site.page.home');
         Route::get('/test', 'PageController@test')->name('test');
+        Route::get('/form-vue', 'PageController@formVue')->name('formVue');
+        Route::post('/form-vue/store', 'PageController@formVueStore')->name('formVue.store');
     }
 }
