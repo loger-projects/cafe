@@ -5,10 +5,12 @@ import VueLazyload from 'vue-lazyload'
 import VueCarousel from 'vue-carousel'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
+import Form from '../js/Form'
 import PostShow from '../ViewComponents/PostShow.vue'
 
 window.Vue = Vue
 window.axios = axios
+window.Form = Form
 Vue.use(VueMoment)
 Vue.use(VueLazyload)
 Vue.use(buefy)
