@@ -52,25 +52,29 @@ export default {
     },
     props: ['inputComment'],
     computed: {
-        comment() { return this.inputComment }
+        comment() { return this.inputComment },
+        form() {
+            return new Form({
+                user_id: this.$root.author.id,
+                post_id: this.$root.post.id,
+                parent_id: this.comment.id,
+                content: this.$refs.commentReply.content
+            })
+        }
     },
     methods: {
         linkToUserShow(comment) { return location.origin + '/user/show/' + comment.user_id},
         closeForm() { this.replyForm = false },
         openForm() { this.replyForm = true },
         onSubmit() {
-            axios.post('/api/comment/store', {
-                user_id: this.$root.author.id,
-                post_id: this.$root.post.id,
-                parent_id: this.comment.id,
-                content: this.$refs.commentReply.content
-            }).then(response => {
-                this.comment.child_comment.push(response.data)
-                this.replyForm = false
-                console.log(response.data)
-            }).catch(error => {
-                console.log(error.message)
-            })
+            this.form.post('/api/comment')
+                     .then(response => {
+                         this.comment.child_comment.push(response)
+                         this.replyForm = false
+                     })
+                     .catch(error => {
+                         console.log(error)
+                     })
         }
     }
 }

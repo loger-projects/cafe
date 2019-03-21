@@ -34,9 +34,6 @@ export default {
             content: ''
         }
     },
-    computed: {
-        csrf(){ return document.querySelector('meta[name="csrf-token"]').getAttribute('content') }
-    },
     methods: {
         closeForm() {
             this.$emit('closeForm')

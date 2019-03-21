@@ -28,12 +28,9 @@ new Vue({
         relatedPosts: [],
         author: {}
     },
-    computed: {
-        csrf(){ return document.querySelector('meta[name="csrf-token"]').getAttribute('content') }
-    },
     methods: {
         getAuthor(post) {
-            axios.get(location.origin + '/api/user/show/' + post.user_id)
+            axios.get('/api/user/show/' + post.user_id)
                 .then(response => {
                     this.author = response.data;
                 })
@@ -42,7 +39,7 @@ new Vue({
                 })
         },
         getComments(post) {
-            axios.get(location.origin + '/api/post/' + post.id + '/comments')
+            axios.get('/api/post/' + post.id + '/comments')
                 .then(response => {
                     this.comments = response.data;
                 })
@@ -51,7 +48,7 @@ new Vue({
                 });
         },
         getRelatedPosts(post, amount) {
-            axios.get(location.origin + '/api/post/' + post.id + '/category/' + post.cate_id + '/related/' + amount)
+            axios.get('/api/post/' + post.id + '/category/' + post.cate_id + '/related/' + amount)
                 .then(response => {
                     this.relatedPosts = response.data
                 })
@@ -61,7 +58,7 @@ new Vue({
         }
     },
     created() {
-        axios.get(location.origin + '/api/option/site-info')
+        axios.get('/api/option/site-info')
              .then(response => {
                 this.siteInfo = response.data
              })

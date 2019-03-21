@@ -62,7 +62,7 @@ class Form {
      */
     success(data) {
         this.reset()
-        alert(data.message)
+        console.log(data.message)
     }
 
     /**

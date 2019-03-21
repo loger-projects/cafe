@@ -108,7 +108,7 @@ class PostCommentController extends Controller
             'prefix' => 'api/comment'
         ],function () {
             Route::name('api.comment.')->group(function () {
-                Route::post('/store', 'PostCommentController@apiStore')->name('store');
+                Route::post('/', 'PostCommentController@apiStore')->name('store');
             });
         });
     }

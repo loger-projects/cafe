@@ -107,7 +107,6 @@ class PostController extends Controller
     {
         $post = Post::where('slug', $slug)->first();
         $post->comment_count = PostComment::where('post_id', $post->id)->count();
-        $post->author = User::where('id', $post->user_id)->first();
         return $post;
     }
 
