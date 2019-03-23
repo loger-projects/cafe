@@ -2026,6 +2026,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2034,14 +2042,14 @@ __webpack_require__.r(__webpack_exports__);
     'comment-item': _PostShowCommentItem_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     'comment-reply': _PostShowCommentReply_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  data: function data() {
+    return {
+      showReplyForm: false
+    };
+  },
   computed: {
     comments: function comments() {
       return this.$root.comments;
-    }
-  },
-  methods: {
-    onSubmit: function onSubmit() {
-      alert('submit form');
     }
   }
 });
@@ -2105,7 +2113,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      replyForm: false
+      showReplyForm: false
     };
   },
   props: ['inputComment'],
@@ -2119,27 +2127,10 @@ __webpack_require__.r(__webpack_exports__);
       return location.origin + '/user/show/' + comment.user_id;
     },
     closeForm: function closeForm() {
-      this.replyForm = false;
+      this.showReplyForm = false;
     },
     openForm: function openForm() {
-      this.replyForm = true;
-    },
-    onSubmit: function onSubmit() {
-      var _this = this;
-
-      axios.post('/api/comment/store', {
-        user_id: this.$root.author.id,
-        post_id: this.$root.post.id,
-        parent_id: this.comment.id,
-        content: this.$refs.commentReply.content
-      }).then(function (response) {
-        _this.comment.child_comment.push(response.data);
-
-        _this.replyForm = false;
-        console.log(response.data);
-      }).catch(function (error) {
-        console.log(error.message);
-      });
+      this.showReplyForm = true;
     }
   }
 });
@@ -2182,25 +2173,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostShowCommentReply',
-  props: ['user', 'closeButton'],
+  props: ['closeButton', 'isRootComment', 'parentID'],
   data: function data() {
     return {
-      content: ''
+      form: new Form({
+        user_id: this.$root.author.id,
+        post_id: this.$root.post.id,
+        parent_id: this.parentID,
+        content: ''
+      })
     };
-  },
-  computed: {
-    csrf: function csrf() {
-      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    }
   },
   methods: {
     closeForm: function closeForm() {
       this.$emit('closeForm');
     },
     onSubmit: function onSubmit() {
-      this.$emit('onSubmit');
+      var _this = this;
+
+      this.form.post('/api/comment').then(function (response) {
+        if (_this.isRootComment) {
+          _this.$parent.comments.push(response);
+
+          _this.form.content = '';
+        } else {
+          _this.$parent.comment.child_comment.push(response);
+        }
+
+        _this.$emit('closeForm');
+      }).catch(function (error) {
+        console.log(error.message);
+      });
     }
   }
 });
@@ -15368,7 +15381,7 @@ exports.push([module.i, "#postShowBody[data-v-32102b45] {\n  display: flex;\n  b
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#postShowComment {\n  padding: 10px 0;\n  margin-bottom: 2rem;\n  background-color: #fff;\n}\n#postShowComment .media.comment .media-left {\n  border-right: 1px solid saddlebrown;\n  padding-right: 20px;\n  margin-right: 0;\n  margin-left: 10px;\n}\n#postShowComment .media.comment .media-content {\n  padding: 10px 20px;\n}\n#postShowComment .media.comment .media-content .user-name {\n  font-weight: bold;\n  border-bottom: 1px solid #8b593cab;\n  padding-bottom: 10px;\n  color: #000;\n}\n#postShowComment .media.comment .media-content .comment-content {\n  padding-top: 10px;\n}\n#postShowComment .media.comment .media-content .comment-meta {\n  padding-top: 5px;\n  padding-bottom: 10px;\n  font-size: 13px;\n}\n#postShowComment .media.comment .media-content .comment-meta span.reply {\n  color: #285281;\n  cursor: pointer;\n}\n#postShowComment .media.comment .media-content .comment-meta span.delimiter {\n  margin: 0 5px;\n  color: #000;\n}\n#postShowComment .media.comment .media-content .comment-meta span.time {\n  color: #adadad;\n}\n#postShowComment .media.create-comment .media-left {\n  margin-left: 10px;\n  padding-right: 20px;\n  margin-right: 0;\n  border-right: 1px solid saddlebrown;\n}\n#postShowComment .media.create-comment .media-content {\n  padding: 0 20px;\n}\n#postShowComment .media.create-comment .media-content .submit {\n  margin-top: 20px;\n}\n#postShowComment .media.create-comment .media-right {\n  margin-left: 0;\n}", ""]);
+exports.push([module.i, "#postShowComment {\n  padding: 10px 0;\n  margin-bottom: 2rem;\n  background-color: #fff;\n}\n#postShowComment .media.comment .media-left {\n  border-right: 1px solid saddlebrown;\n  padding-right: 20px;\n  margin-right: 0;\n  margin-left: 10px;\n}\n#postShowComment .media.comment .media-content {\n  padding: 10px 20px;\n}\n#postShowComment .media.comment .media-content .user-name {\n  font-weight: bold;\n  border-bottom: 1px solid #8b593cab;\n  padding-bottom: 10px;\n  color: #000;\n}\n#postShowComment .media.comment .media-content .comment-content {\n  padding-top: 10px;\n}\n#postShowComment .media.comment .media-content .comment-meta {\n  padding-top: 5px;\n  padding-bottom: 10px;\n  font-size: 13px;\n}\n#postShowComment .media.comment .media-content .comment-meta span.reply {\n  color: #285281;\n  cursor: pointer;\n}\n#postShowComment .media.comment .media-content .comment-meta span.delimiter {\n  margin: 0 5px;\n  color: #000;\n}\n#postShowComment .media.comment .media-content .comment-meta span.time {\n  color: #adadad;\n}\n#postShowComment .media.create-comment .media-left {\n  margin-left: 10px;\n  padding-right: 20px;\n  margin-right: 0;\n  border-right: 1px solid saddlebrown;\n}\n#postShowComment .media.create-comment .media-content {\n  padding: 0 20px;\n}\n#postShowComment .media.create-comment .media-content .submit {\n  margin-top: 20px;\n}\n#postShowComment .media.create-comment .media-right {\n  margin-left: 0;\n}\n#postShowComment .show-reply-form {\n  padding: 10px 0 10px 90px;\n}", ""]);
 
 
 
@@ -17093,10 +17106,28 @@ var render = function() {
         })
       }),
       _vm._v(" "),
-      _c("comment-reply", {
-        attrs: { user: _vm.$root.author, closeButton: false },
-        on: { submitForm: _vm.onSubmit }
-      })
+      !_vm.showReplyForm
+        ? _c("div", { staticClass: "show-reply-form" }, [
+            _c(
+              "button",
+              {
+                staticClass: "button is-primary",
+                on: {
+                  click: function($event) {
+                    _vm.showReplyForm = true
+                  }
+                }
+              },
+              [_vm._v("Create a Comment")]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showReplyForm
+        ? _c("comment-reply", {
+            attrs: { closeButton: false, isRootComment: true, parentID: null }
+          })
+        : _vm._e()
     ],
     2
   )
@@ -17185,11 +17216,14 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _vm.replyForm
+        _vm.showReplyForm
           ? _c("comment-reply", {
-              ref: "commentReply",
-              attrs: { user: _vm.$root.author, closeButton: true },
-              on: { closeForm: _vm.closeForm, onSubmit: _vm.onSubmit }
+              attrs: {
+                closeButton: true,
+                isRootComment: false,
+                parentID: _vm.comment.id
+              },
+              on: { closeForm: _vm.closeForm }
             })
           : _vm._e()
       ],
@@ -17227,8 +17261,8 @@ var render = function() {
             {
               name: "lazy",
               rawName: "v-lazy",
-              value: _vm.user.avatar,
-              expression: "user.avatar"
+              value: _vm.$root.author.avatar,
+              expression: "$root.author.avatar"
             }
           ]
         })
@@ -17243,6 +17277,9 @@ var render = function() {
             submit: function($event) {
               $event.preventDefault()
               return _vm.onSubmit($event)
+            },
+            keydown: function($event) {
+              return _vm.form.errors.clear($event.target.name)
             }
           }
         },
@@ -17253,25 +17290,40 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.content,
-                  expression: "content"
+                  value: _vm.form.content,
+                  expression: "form.content"
                 }
               ],
               staticClass: "textarea",
               attrs: { name: "content", placeholder: "Post a comment" },
-              domProps: { value: _vm.content },
+              domProps: { value: _vm.form.content },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.content = $event.target.value
+                  _vm.$set(_vm.form, "content", $event.target.value)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.form.errors.has("content")
+              ? _c("p", { staticClass: "help is-danger" }, [
+                  _vm._v(_vm._s(_vm.form.errors.get("content")))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "submit" }, [
+            _c(
+              "button",
+              {
+                staticClass: "button is-primary",
+                attrs: { type: "submit", disable: _vm.form.errors.any() }
+              },
+              [_vm._v("Post Comment")]
+            )
+          ])
         ]
       )
     ]),
@@ -17283,20 +17335,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "submit" }, [
-      _c(
-        "button",
-        { staticClass: "button is-primary", attrs: { type: "submit" } },
-        [_vm._v("Post Comment")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -35817,6 +35856,265 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/src/js/Errors.js":
+/*!************************************!*\
+  !*** ./resources/src/js/Errors.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Errors =
+/*#__PURE__*/
+function () {
+  /**
+   * generate errors
+   */
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+  /**
+   * record the errors
+   * 
+   * @param {*} errors 
+   */
+
+
+  _createClass(Errors, [{
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors;
+    }
+    /**
+     * get specific error
+     * 
+     * @param {*} field 
+     */
+
+  }, {
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return this.errors[field][0];
+      }
+    }
+    /**
+     * check for existance of specific error
+     * 
+     * @param {*} field 
+     */
+
+  }, {
+    key: "has",
+    value: function has(field) {
+      return this.errors.hasOwnProperty(field);
+    }
+    /**
+     * check for any errors exist
+     */
+
+  }, {
+    key: "any",
+    value: function any() {
+      return Object.keys(this.errors).length > 0;
+    }
+    /**
+     * clear specific error
+     * 
+     * @param {*} field 
+     */
+
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      if (this.errors[field]) {
+        delete this.errors[field];
+      }
+    }
+  }]);
+
+  return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Errors);
+
+/***/ }),
+
+/***/ "./resources/src/js/Form.js":
+/*!**********************************!*\
+  !*** ./resources/src/js/Form.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Errors */ "./resources/src/js/Errors.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+window.Error = _Errors__WEBPACK_IMPORTED_MODULE_0__["default"];
+
+var Form =
+/*#__PURE__*/
+function () {
+  /**
+   * 
+   * @param {*} data 
+   */
+  function Form(data) {
+    _classCallCheck(this, Form);
+
+    this.originalData = data;
+    this.errors = new _Errors__WEBPACK_IMPORTED_MODULE_0__["default"]();
+
+    for (var field in this.originalData) {
+      this[field] = this.originalData[field];
+    }
+  }
+  /**
+   * name: 'name'
+   * description: 'description'
+   * errors: {}
+   * originalData: { name: 'name', description: 'description'}
+   * data = { name : 'name', description: 'description' }
+   */
+
+
+  _createClass(Form, [{
+    key: "data",
+    value: function data() {
+      var data = {};
+
+      for (var field in this.originalData) {
+        data[field] = this[field];
+      }
+
+      return data;
+    }
+    /**
+     * 
+     */
+
+  }, {
+    key: "reset",
+    value: function reset() {
+      for (var field in this.originalData) {
+        delete this[field];
+      }
+    }
+    /**
+     * 
+     * @param {*} requestType 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "submit",
+    value: function submit(requestType, url) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        axios[requestType](url, _this.data()).then(function (response) {
+          resolve(response.data);
+        }).catch(function (error) {
+          _this.fail(error.response.data.errors);
+
+          reject(error.response.data);
+        });
+      });
+    }
+    /**
+     * 
+     * @param {*} data 
+     */
+
+  }, {
+    key: "success",
+    value: function success() {
+      this.reset();
+    }
+    /**
+     * 
+     */
+
+  }, {
+    key: "fail",
+    value: function fail(error) {
+      this.errors.record(error);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "post",
+    value: function post(url) {
+      return this.submit('post', url);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "get",
+    value: function get(url) {
+      return this.submit('get', url);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "delete",
+    value: function _delete(url) {
+      return this.submit('delete', url);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "put",
+    value: function put(url) {
+      return this.submit('put', url);
+    }
+    /**
+     * 
+     * @param {*} url 
+     */
+
+  }, {
+    key: "patch",
+    value: function patch(url) {
+      return this.patch('patch', url);
+    }
+  }]);
+
+  return Form;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Form);
+
+/***/ }),
+
 /***/ "./resources/src/views/PostShow.js":
 /*!*****************************************!*\
   !*** ./resources/src/views/PostShow.js ***!
@@ -35840,7 +36138,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var buefy__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(buefy__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var buefy_dist_buefy_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! buefy/dist/buefy.css */ "./node_modules/buefy/dist/buefy.css");
 /* harmony import */ var buefy_dist_buefy_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(buefy_dist_buefy_css__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _ViewComponents_PostShow_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../ViewComponents/PostShow.vue */ "./resources/src/ViewComponents/PostShow.vue");
+/* harmony import */ var _js_Form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../js/Form */ "./resources/src/js/Form.js");
+/* harmony import */ var _ViewComponents_PostShow_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ViewComponents/PostShow.vue */ "./resources/src/ViewComponents/PostShow.vue");
+
 
 
 
@@ -35851,6 +36151,7 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0___default.a;
 window.axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a;
+window.Form = _js_Form__WEBPACK_IMPORTED_MODULE_7__["default"];
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_moment__WEBPACK_IMPORTED_MODULE_2___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_3___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(buefy__WEBPACK_IMPORTED_MODULE_5___default.a);
@@ -35858,7 +36159,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_carousel__WEBPACK_IMPORTED_MO
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#root',
   components: {
-    'post-show': _ViewComponents_PostShow_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    'post-show': _ViewComponents_PostShow_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
   data: {
     siteInfo: {},
@@ -35867,16 +36168,11 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     relatedPosts: [],
     author: {}
   },
-  computed: {
-    csrf: function csrf() {
-      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    }
-  },
   methods: {
     getAuthor: function getAuthor(post) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(location.origin + '/api/user/show/' + post.user_id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/user/show/' + post.user_id).then(function (response) {
         _this.author = response.data;
       }).catch(function (error) {
         console.log(error.message);
@@ -35885,7 +36181,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     getComments: function getComments(post) {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(location.origin + '/api/post/' + post.id + '/comments').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/post/' + post.id + '/comments').then(function (response) {
         _this2.comments = response.data;
       }).catch(function (error) {
         console.log(error);
@@ -35894,7 +36190,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     getRelatedPosts: function getRelatedPosts(post, amount) {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(location.origin + '/api/post/' + post.id + '/category/' + post.cate_id + '/related/' + amount).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/post/' + post.id + '/category/' + post.cate_id + '/related/' + amount).then(function (response) {
         _this3.relatedPosts = response.data;
       }).catch(function (error) {
         console.log(error.message);
@@ -35904,7 +36200,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   created: function created() {
     var _this4 = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(location.origin + '/api/option/site-info').then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/option/site-info').then(function (response) {
       _this4.siteInfo = response.data;
     }).catch(function (error) {
       console.log(error);

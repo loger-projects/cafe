@@ -5,10 +5,15 @@
             :key="comment.id" 
             :inputComment="comment">
         </comment-item>
+        <!-- button -->
+        <div class="show-reply-form" v-if="!showReplyForm">
+            <button class="button is-primary" @click="showReplyForm = true">Create a Comment</button>
+        </div>
         <comment-reply 
-            :user="$root.author" 
+            v-if="showReplyForm"
             :closeButton="false"
-            @submitForm="onSubmit">
+            :isRootComment="true"
+            :parentID="null">
         </comment-reply>
     </div>
 </template>
@@ -71,6 +76,9 @@
                 margin-left: 0;
             }
         }
+        .show-reply-form {
+            padding: 10px 0 10px 90px;
+        }
     }
 </style>
 
@@ -84,13 +92,13 @@ export default {
         'comment-item': PostShowCommentItem,
         'comment-reply': PostShowCommentReply
     },
+    data() {
+        return {
+            showReplyForm: false
+        }
+    },
     computed: {
         comments() { return this.$root.comments },
-    },
-    methods: {
-        onSubmit() {
-            alert('submit form');
-        }
     }
 }
 </script>

@@ -90,6 +90,11 @@ class PostCommentController extends Controller
      */
     public function apiStore(Request $request)
     {
+        $request->validate([
+            'user_id' => 'required',
+            'post_id' => 'required',
+            'content' => 'required'
+        ]);
         $data = $request->all();
         /**
          * content

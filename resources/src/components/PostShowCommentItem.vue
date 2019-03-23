@@ -26,12 +26,12 @@
             </div>
 
             <comment-reply 
-                v-if="replyForm" 
-                :user="$root.author" 
-                :closeButton="true" 
+                v-if="showReplyForm" 
                 @closeForm="closeForm"
-                @onSubmit="onSubmit"
-                ref="commentReply">
+                :closeButton="true" 
+                :isRootComment="false"
+                :parentID="comment.id"
+                >
             </comment-reply>
         </div>
     </article>
@@ -47,35 +47,17 @@ export default {
     },
     data() {
         return {
-            replyForm: false
+            showReplyForm: false
         }
     },
     props: ['inputComment'],
     computed: {
         comment() { return this.inputComment },
-        form() {
-            return new Form({
-                user_id: this.$root.author.id,
-                post_id: this.$root.post.id,
-                parent_id: this.comment.id,
-                content: this.$refs.commentReply.content
-            })
-        }
     },
     methods: {
         linkToUserShow(comment) { return location.origin + '/user/show/' + comment.user_id},
-        closeForm() { this.replyForm = false },
-        openForm() { this.replyForm = true },
-        onSubmit() {
-            this.form.post('/api/comment')
-                     .then(response => {
-                         this.comment.child_comment.push(response)
-                         this.replyForm = false
-                     })
-                     .catch(error => {
-                         console.log(error)
-                     })
-        }
+        closeForm() { this.showReplyForm = false },
+        openForm() { this.showReplyForm = true },
     }
 }
 </script>

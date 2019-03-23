@@ -18,12 +18,16 @@ class Form {
     }
 
     /**
-     * 
+     * name: 'name'
+     * description: 'description'
+     * errors: {}
+     * originalData: { name: 'name', description: 'description'}
+     * data = { name : 'name', description: 'description' }
      */
     data() {
         let data = {}
         for (let field in this.originalData) {
-            data[this.field] = this.originalData[field]
+            data[field] = this[field]
         }
         return data
     }
@@ -33,7 +37,7 @@ class Form {
      */
     reset() {
         for (let field in this.originalData) {
-            this[field] = ''
+            delete this[field]
         }
     }
 
@@ -46,7 +50,6 @@ class Form {
         return new Promise((resolve, reject) => {
             axios[requestType](url, this.data())
                 .then(response => {
-                    this.success(response.data)
                     resolve(response.data)
                 })
                 .catch(error => {
@@ -60,9 +63,8 @@ class Form {
      * 
      * @param {*} data 
      */
-    success(data) {
+    success() {
         this.reset()
-        console.log(data.message)
     }
 
     /**
