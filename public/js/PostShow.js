@@ -2066,6 +2066,15 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PostShowCommentReply_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostShowCommentReply.vue */ "./resources/src/components/PostShowCommentReply.vue");
+/* harmony import */ var _PostShowCommentItemNoReply_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostShowCommentItemNoReply.vue */ "./resources/src/components/PostShowCommentItemNoReply.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2106,10 +2115,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostShowCommentItem',
   components: {
-    'comment-reply': _PostShowCommentReply_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    'comment-reply': _PostShowCommentReply_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    'comment-no-reply': _PostShowCommentItemNoReply_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -2120,6 +2131,14 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     comment: function comment() {
       return this.inputComment;
+    },
+    form: function form() {
+      return new Form({
+        user_id: this.$root.author.id,
+        post_id: this.$root.post.id,
+        parent_id: this.comment.id,
+        content: this.$refs.commentReply.content
+      });
     }
   },
   methods: {
@@ -2130,9 +2149,48 @@ __webpack_require__.r(__webpack_exports__);
       this.showReplyForm = false;
     },
     openForm: function openForm() {
+<<<<<<< HEAD
       this.showReplyForm = true;
+=======
+      this.replyForm = true;
+    },
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      this.form.post('/api/comment').then(function (response) {
+        _this.comment.child_comment.push(response);
+
+        _this.replyForm = false;
+      }).catch(function (error) {
+        console.log(error);
+      });
+>>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'PostShowCommentItemNoReply',
+  props: ['inputComment']
 });
 
 /***/ }),
@@ -17207,12 +17265,26 @@ var render = function() {
           ? _c(
               "div",
               _vm._l(_vm.comment.child_comment, function(childComment) {
-                return _c("post-show-comment-item", {
-                  key: childComment.id,
-                  attrs: { inputComment: childComment }
-                })
+                return _c(
+                  "div",
+                  { key: childComment.id },
+                  [
+                    childComment.level == 1
+                      ? _c("post-show-comment-item", {
+                          attrs: { inputComment: childComment }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    childComment.level >= 2
+                      ? _c("comment-no-reply", {
+                          attrs: { inputComment: childComment }
+                        })
+                      : _vm._e()
+                  ],
+                  1
+                )
               }),
-              1
+              0
             )
           : _vm._e(),
         _vm._v(" "),
@@ -17229,6 +17301,34 @@ var render = function() {
       ],
       1
     )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=template&id=5ec0c1cc&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=template&id=5ec0c1cc& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("article", { staticClass: "media comment" }, [
+    _c("div", { staticClass: "media-content" }, [
+      _vm._v("\n        " + _vm._s(_vm.inputComment.content) + "\n    ")
+    ])
   ])
 }
 var staticRenderFns = []
@@ -35109,6 +35209,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/src/components/PostShowCommentItemNoReply.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/src/components/PostShowCommentItemNoReply.vue ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PostShowCommentItemNoReply_vue_vue_type_template_id_5ec0c1cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostShowCommentItemNoReply.vue?vue&type=template&id=5ec0c1cc& */ "./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=template&id=5ec0c1cc&");
+/* harmony import */ var _PostShowCommentItemNoReply_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostShowCommentItemNoReply.vue?vue&type=script&lang=js& */ "./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PostShowCommentItemNoReply_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PostShowCommentItemNoReply_vue_vue_type_template_id_5ec0c1cc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PostShowCommentItemNoReply_vue_vue_type_template_id_5ec0c1cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/src/components/PostShowCommentItemNoReply.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostShowCommentItemNoReply_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PostShowCommentItemNoReply.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostShowCommentItemNoReply_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=template&id=5ec0c1cc&":
+/*!************************************************************************************************!*\
+  !*** ./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=template&id=5ec0c1cc& ***!
+  \************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostShowCommentItemNoReply_vue_vue_type_template_id_5ec0c1cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PostShowCommentItemNoReply.vue?vue&type=template&id=5ec0c1cc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/src/components/PostShowCommentItemNoReply.vue?vue&type=template&id=5ec0c1cc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostShowCommentItemNoReply_vue_vue_type_template_id_5ec0c1cc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostShowCommentItemNoReply_vue_vue_type_template_id_5ec0c1cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/src/components/PostShowCommentReply.vue":
 /*!***********************************************************!*\
   !*** ./resources/src/components/PostShowCommentReply.vue ***!
@@ -35986,11 +36155,15 @@ function () {
     }
   }
   /**
+<<<<<<< HEAD
    * name: 'name'
    * description: 'description'
    * errors: {}
    * originalData: { name: 'name', description: 'description'}
    * data = { name : 'name', description: 'description' }
+=======
+   * 
+>>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
    */
 
 
@@ -36000,7 +36173,11 @@ function () {
       var data = {};
 
       for (var field in this.originalData) {
+<<<<<<< HEAD
         data[field] = this[field];
+=======
+        data[this.field] = this.originalData[field];
+>>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
       }
 
       return data;
@@ -36013,7 +36190,11 @@ function () {
     key: "reset",
     value: function reset() {
       for (var field in this.originalData) {
+<<<<<<< HEAD
         delete this[field];
+=======
+        this[field] = '';
+>>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
       }
     }
     /**
@@ -36029,6 +36210,11 @@ function () {
 
       return new Promise(function (resolve, reject) {
         axios[requestType](url, _this.data()).then(function (response) {
+<<<<<<< HEAD
+=======
+          _this.success(response.data);
+
+>>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
           resolve(response.data);
         }).catch(function (error) {
           _this.fail(error.response.data.errors);
@@ -36044,8 +36230,14 @@ function () {
 
   }, {
     key: "success",
+<<<<<<< HEAD
     value: function success() {
       this.reset();
+=======
+    value: function success(data) {
+      this.reset();
+      console.log(data.message);
+>>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
     }
     /**
      * 

@@ -18,11 +18,19 @@
             </div>
 
             <div v-if="comment.child_comment">
-                <post-show-comment-item 
+                <div
                     v-for="childComment in comment.child_comment" 
                     :key="childComment.id"
-                    :inputComment="childComment" >
+                >
+                    <post-show-comment-item 
+                        :inputComment="childComment" 
+                        v-if="childComment.level == 1">
                     </post-show-comment-item>
+                    <comment-no-reply
+                        :inputComment="childComment"
+                        v-if="childComment.level >= 2"
+                    ></comment-no-reply>
+                </div>
             </div>
 
             <comment-reply 
@@ -39,11 +47,13 @@
 
 <script>
 import PostShowCommentReply from './PostShowCommentReply.vue'
+import PostShowCommentItemNoReply from './PostShowCommentItemNoReply.vue'
 
 export default {
     name: 'PostShowCommentItem',
     components: {
-        'comment-reply': PostShowCommentReply
+        'comment-reply': PostShowCommentReply,
+        'comment-no-reply': PostShowCommentItemNoReply
     },
     data() {
         return {

@@ -18,6 +18,7 @@ class CreatePostCommentsTable extends Migration
             $table->unsignedInteger('post_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('parent_id')->nullable();
+            $table->unsignedInteger('level'); // 0 -> 2 : level of comments
             $table->text('content');
             $table->timestamps();
             $table->foreign('post_id')->references('id')->on('posts');

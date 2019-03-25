@@ -24,6 +24,7 @@ class PostCommentsTableSeeder extends Seeder
                     'post_id' => $post->id,
                     'user_id' => 1,
                     'parent_id' => null,
+                    'level' => 0,
                     'content' => $faker->paragraph(),
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
@@ -36,7 +37,22 @@ class PostCommentsTableSeeder extends Seeder
                         'post_id'=> $post->id,
                         'user_id' => 1,
                         'parent_id' => $comment->id,
+                        'level' => 1,
                         'content'=> $faker->paragraph(),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+            }
+            $level_1_comments = PostComment::where('post_id', $post->id, 'and')->where('level', 1)->get();
+            foreach($level_1_comments as $comment) {
+                for($i = 1; $i<= 3; $i++) {
+                    DB::table('post_comments')->insert([
+                        'post_id' => $post->id,
+                        'user_id' => 1,
+                        'parent_id' => $comment->id,
+                        'level' => 2,
+                        'content' => $faker->paragraph(),
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
