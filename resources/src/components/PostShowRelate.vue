@@ -36,6 +36,9 @@
                 .article-body {
                     .post-title.title {
                         font-size: 1.25rem;
+                        a {
+                            color: black;
+                        }
                     }
                     .post-meta {
                         font-size: 13px;

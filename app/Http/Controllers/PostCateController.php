@@ -4,82 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\PostCate;
 use Illuminate\Http\Request;
+use Route;
 
 class PostCateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function apiRandom($amount)
     {
-        //
+        return PostCate::inRandomOrder()->skip(0)->take($amount)->get();
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public static function routes()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\PostCate  $postCate
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PostCate $postCate)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\PostCate  $postCate
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PostCate $postCate)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PostCate  $postCate
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PostCate $postCate)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\PostCate  $postCate
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PostCate $postCate)
-    {
-        //
+        Route::group([
+            'prefix' => 'api/post/category'
+        ], function() {
+            Route::name('api.post.category.')->group(function() {
+                Route::get('/random/{amount}', 'PostCateController@apiRandom')->name('random');
+            });
+        });
     }
 }

@@ -39,6 +39,7 @@
                 :closeButton="true" 
                 :isRootComment="false"
                 :parentID="comment.id"
+                :level="level"
                 >
             </comment-reply>
         </div>
@@ -63,6 +64,7 @@ export default {
     props: ['inputComment'],
     computed: {
         comment() { return this.inputComment },
+        level() { return this.comment.level > 0 ? 2 : 1 }
     },
     methods: {
         linkToUserShow(comment) { return location.origin + '/user/show/' + comment.user_id},

@@ -40,6 +40,7 @@ export default {
         'closeButton', 
         'isRootComment', 
         'parentID',
+        'level'
     ],
     data() {
         return {
@@ -47,6 +48,7 @@ export default {
                 user_id: this.$root.author.id,
                 post_id: this.$root.post.id,
                 parent_id: this.parentID,
+                level: this.level,
                 content: '' 
             })
         }
@@ -61,6 +63,7 @@ export default {
                          if(this.isRootComment) {
                              this.$parent.comments.push(response)
                              this.form.content = ''
+                             this.$emit('closeform')
                          } else {
                              this.$parent.comment.child_comment.push(response)
                          }

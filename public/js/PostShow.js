@@ -2034,6 +2034,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2051,6 +2053,11 @@ __webpack_require__.r(__webpack_exports__);
     comments: function comments() {
       return this.$root.comments;
     }
+  },
+  methods: {
+    closeForm: function closeForm() {
+      this.showReplyForm = false;
+    }
   }
 });
 
@@ -2067,6 +2074,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PostShowCommentReply_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostShowCommentReply.vue */ "./resources/src/components/PostShowCommentReply.vue");
 /* harmony import */ var _PostShowCommentItemNoReply_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostShowCommentItemNoReply.vue */ "./resources/src/components/PostShowCommentItemNoReply.vue");
+//
 //
 //
 //
@@ -2132,13 +2140,8 @@ __webpack_require__.r(__webpack_exports__);
     comment: function comment() {
       return this.inputComment;
     },
-    form: function form() {
-      return new Form({
-        user_id: this.$root.author.id,
-        post_id: this.$root.post.id,
-        parent_id: this.comment.id,
-        content: this.$refs.commentReply.content
-      });
+    level: function level() {
+      return this.comment.level > 0 ? 2 : 1;
     }
   },
   methods: {
@@ -2149,22 +2152,7 @@ __webpack_require__.r(__webpack_exports__);
       this.showReplyForm = false;
     },
     openForm: function openForm() {
-<<<<<<< HEAD
       this.showReplyForm = true;
-=======
-      this.replyForm = true;
-    },
-    onSubmit: function onSubmit() {
-      var _this = this;
-
-      this.form.post('/api/comment').then(function (response) {
-        _this.comment.child_comment.push(response);
-
-        _this.replyForm = false;
-      }).catch(function (error) {
-        console.log(error);
-      });
->>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
     }
   }
 });
@@ -2241,13 +2229,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostShowCommentReply',
-  props: ['closeButton', 'isRootComment', 'parentID'],
+  props: ['closeButton', 'isRootComment', 'parentID', 'level'],
   data: function data() {
     return {
       form: new Form({
         user_id: this.$root.author.id,
         post_id: this.$root.post.id,
         parent_id: this.parentID,
+        level: this.level,
         content: ''
       })
     };
@@ -2264,6 +2253,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.$parent.comments.push(response);
 
           _this.form.content = '';
+
+          _this.$emit('closeform');
         } else {
           _this.$parent.comment.child_comment.push(response);
         }
@@ -2522,6 +2513,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostShowRelate',
@@ -2546,6 +2540,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -15484,7 +15480,7 @@ exports.push([module.i, "#postShowMeta[data-v-9c8bc3b0] {\n  background-color: #
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#postShowRelate {\n  background-color: #fff;\n  margin-bottom: 2rem;\n}\n#postShowRelate .title {\n  color: #000;\n  margin: 0;\n  padding: 10px;\n  border-bottom: 1px solid #aa7c5c;\n}\n#postShowRelate .content .post-show-item {\n  padding: 20px 10px;\n}\n#postShowRelate .content .post-show-item .article-head figure.image {\n  margin: 0 !important;\n}\n#postShowRelate .content .post-show-item .article-body .post-title.title {\n  font-size: 1.25rem;\n}\n#postShowRelate .content .post-show-item .article-body .post-meta {\n  font-size: 13px;\n  padding: 10px 0;\n  border-bottom: 1px solid #aa7c5c;\n}", ""]);
+exports.push([module.i, "#postShowRelate {\n  background-color: #fff;\n  margin-bottom: 2rem;\n}\n#postShowRelate .title {\n  color: #000;\n  margin: 0;\n  padding: 10px;\n  border-bottom: 1px solid #aa7c5c;\n}\n#postShowRelate .content .post-show-item {\n  padding: 20px 10px;\n}\n#postShowRelate .content .post-show-item .article-head figure.image {\n  margin: 0 !important;\n}\n#postShowRelate .content .post-show-item .article-body .post-title.title {\n  font-size: 1.25rem;\n}\n#postShowRelate .content .post-show-item .article-body .post-title.title a {\n  color: black;\n}\n#postShowRelate .content .post-show-item .article-body .post-meta {\n  font-size: 13px;\n  padding: 10px 0;\n  border-bottom: 1px solid #aa7c5c;\n}", ""]);
 
 
 
@@ -17183,7 +17179,13 @@ var render = function() {
       _vm._v(" "),
       _vm.showReplyForm
         ? _c("comment-reply", {
-            attrs: { closeButton: false, isRootComment: true, parentID: null }
+            attrs: {
+              closeButton: false,
+              isRootComment: true,
+              parentID: null,
+              level: 0
+            },
+            on: { closeForm: _vm.closeForm }
           })
         : _vm._e()
     ],
@@ -17293,7 +17295,8 @@ var render = function() {
               attrs: {
                 closeButton: true,
                 isRootComment: false,
-                parentID: _vm.comment.id
+                parentID: _vm.comment.id,
+                level: _vm.level
               },
               on: { closeForm: _vm.closeForm }
             })
@@ -17522,7 +17525,9 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "article-body" }, [
       _c("div", { staticClass: "post-title title" }, [
-        _vm._v(_vm._s(_vm.post.title))
+        _c("a", { attrs: { href: _vm.post.url } }, [
+          _vm._v(_vm._s(_vm.post.title))
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "post-meta" }, [
@@ -17755,11 +17760,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "postShowSidebar" } }, [
+    return _c("aside", { attrs: { id: "postShowSidebar" } }, [
       _c("div", { attrs: { id: "sidebar" } }, [
-        _c("h1", { staticClass: "title is-2 has-text-centered" }, [
-          _vm._v("Sidebar")
-        ])
+        _c("div", { staticClass: "categories" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "posts" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "gollery" })
       ])
     ])
   }
@@ -36155,15 +36162,11 @@ function () {
     }
   }
   /**
-<<<<<<< HEAD
    * name: 'name'
    * description: 'description'
    * errors: {}
    * originalData: { name: 'name', description: 'description'}
    * data = { name : 'name', description: 'description' }
-=======
-   * 
->>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
    */
 
 
@@ -36173,11 +36176,7 @@ function () {
       var data = {};
 
       for (var field in this.originalData) {
-<<<<<<< HEAD
         data[field] = this[field];
-=======
-        data[this.field] = this.originalData[field];
->>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
       }
 
       return data;
@@ -36190,11 +36189,7 @@ function () {
     key: "reset",
     value: function reset() {
       for (var field in this.originalData) {
-<<<<<<< HEAD
         delete this[field];
-=======
-        this[field] = '';
->>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
       }
     }
     /**
@@ -36210,11 +36205,6 @@ function () {
 
       return new Promise(function (resolve, reject) {
         axios[requestType](url, _this.data()).then(function (response) {
-<<<<<<< HEAD
-=======
-          _this.success(response.data);
-
->>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
           resolve(response.data);
         }).catch(function (error) {
           _this.fail(error.response.data.errors);
@@ -36230,14 +36220,8 @@ function () {
 
   }, {
     key: "success",
-<<<<<<< HEAD
     value: function success() {
       this.reset();
-=======
-    value: function success(data) {
-      this.reset();
-      console.log(data.message);
->>>>>>> a797b681d183a587b962185baeb67b33bd6a3ff8
     }
     /**
      * 
@@ -36358,6 +36342,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     post: {},
     comments: [],
     relatedPosts: [],
+    latestPosts: [],
     author: {}
   },
   methods: {
@@ -36367,7 +36352,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/user/show/' + post.user_id).then(function (response) {
         _this.author = response.data;
       }).catch(function (error) {
-        console.log(error.message);
+        console.log(error.response.data.message);
       });
     },
     getComments: function getComments(post) {
@@ -36376,7 +36361,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/post/' + post.id + '/comments').then(function (response) {
         _this2.comments = response.data;
       }).catch(function (error) {
-        console.log(error);
+        console.log(error.response.data.message);
       });
     },
     getRelatedPosts: function getRelatedPosts(post, amount) {
@@ -36385,28 +36370,39 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/post/' + post.id + '/category/' + post.cate_id + '/related/' + amount).then(function (response) {
         _this3.relatedPosts = response.data;
       }).catch(function (error) {
-        console.log(error.message);
+        console.log(error.response.data.message);
+      });
+    },
+    getLatestPosts: function getLatestPosts($amount) {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/post/' + $amount + '/latest-posts').then(function (response) {
+        _this4.latestPosts = response.data;
+      }).catch(function (error) {
+        console.log(error.response.data.message);
       });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/option/site-info').then(function (response) {
-      _this4.siteInfo = response.data;
+      _this5.siteInfo = response.data;
     }).catch(function (error) {
-      console.log(error);
+      console.log(error.response.data.message);
     }); // get database of current post
 
     var str = location.href.replace('/post/', '/api/post/');
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(str).then(function (response) {
-      _this4.post = response.data;
+      _this5.post = response.data;
 
-      _this4.getAuthor(response.data);
+      _this5.getAuthor(response.data);
 
-      _this4.getComments(response.data);
+      _this5.getComments(response.data);
 
-      _this4.getRelatedPosts(response.data, 5);
+      _this5.getRelatedPosts(response.data, 5);
+
+      _this5.getLatestPosts(5);
     }).catch(function (error) {
       console.log(error);
     });

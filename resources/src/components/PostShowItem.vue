@@ -6,7 +6,7 @@
             </figure>
         </div>
         <div class="article-body">
-            <div class="post-title title">{{ post.title }}</div>
+            <div class="post-title title"><a :href="post.url">{{ post.title }}</a></div>
             <div class="post-meta">
                 <span class="item">
                     <span class="post-meta--item icon is-small"><i class="fas fa-user"></i></span>

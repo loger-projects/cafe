@@ -1,9 +1,11 @@
 <template>
-    <div id="postShowSidebar">
+    <aside id="postShowSidebar">
         <div id="sidebar">
-            <h1 class="title is-2 has-text-centered">Sidebar</h1>
+            <div class="categories"></div>
+            <div class="posts"></div>
+            <div class="gollery"></div>
         </div>
-    </div>
+    </aside>
 </template>
 
 <style lang="scss" scoped>

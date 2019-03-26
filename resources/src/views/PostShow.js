@@ -26,6 +26,7 @@ new Vue({
         post: {},
         comments: [],
         relatedPosts: [],
+        latestPosts: [],
         author: {}
     },
     methods: {
@@ -35,7 +36,7 @@ new Vue({
                     this.author = response.data;
                 })
                 .catch(error => {
-                    console.log(error.message)
+                    console.log(error.response.data.message)
                 })
         },
         getComments(post) {
@@ -44,7 +45,7 @@ new Vue({
                     this.comments = response.data;
                 })
                 .catch(error => {
-                    console.log(error)
+                    console.log(error.response.data.message)
                 });
         },
         getRelatedPosts(post, amount) {
@@ -53,8 +54,17 @@ new Vue({
                     this.relatedPosts = response.data
                 })
                 .catch(error => {
-                    console.log(error.message)
+                    console.log(error.response.data.message)
                 });
+        },
+        getLatestPosts($amount) {
+            axios.get('/api/post/' + $amount + '/latest-posts')
+                 .then(response => {
+                     this.latestPosts = response.data
+                 })
+                 .catch(error => {
+                     console.log(error.response.data.message)
+                 })
         }
     },
     created() {
@@ -63,7 +73,7 @@ new Vue({
                 this.siteInfo = response.data
              })
              .catch(error => {
-                 console.log(error)
+                 console.log(error.response.data.message)
              });
 
         // get database of current post
@@ -74,6 +84,7 @@ new Vue({
                  this.getAuthor(response.data);
                  this.getComments(response.data);
                  this.getRelatedPosts(response.data, 5);
+                 this.getLatestPosts(5);
              })
              .catch(error => {
                  console.log(error)

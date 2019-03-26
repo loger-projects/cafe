@@ -11,9 +11,11 @@
         </div>
         <comment-reply 
             v-if="showReplyForm"
+            @closeForm="closeForm"
             :closeButton="false"
             :isRootComment="true"
-            :parentID="null">
+            :parentID="null"
+            :level="0">
         </comment-reply>
     </div>
 </template>
@@ -99,6 +101,11 @@ export default {
     },
     computed: {
         comments() { return this.$root.comments },
+    },
+    methods: {
+        closeForm() {
+            this.showReplyForm = false
+        }
     }
 }
 </script>

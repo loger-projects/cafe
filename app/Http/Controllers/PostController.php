@@ -121,17 +121,20 @@ class PostController extends Controller
         $comments = PostComment::where('post_id', $id, 'and')->where('parent_id', null)->get();
 
         foreach($comments as $comment) {
-            // get the user who created this comment
+            // get the user info
             $user = User::where('id', $comment->user_id)->first();
             $comment->user = $user;
             
-            // get child comments of this comment
-            $childComment = PostComment::where('parent_id', $comment->id)->get();
-            $comment->child_comment = $childComment;
+            // get child comments
+            $comment->child_comment = PostComment::where('parent_id', $comment->id)->get();
 
             foreach($comment->child_comment as $child) {
+                // get user info of child
                 $user = User::where('id', $child->user_id)->first();
                 $child->user = $user;
+                
+                // get level 2 child comment
+                $child->child_comment = PostComment::where('parent_id', $child->id)->get();
             }
         }
         
