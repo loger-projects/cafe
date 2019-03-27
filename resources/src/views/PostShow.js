@@ -27,7 +27,8 @@ new Vue({
         comments: [],
         relatedPosts: [],
         latestPosts: [],
-        author: {}
+        author: {},
+        galleries: []
     },
     methods: {
         getAuthor(post) {
@@ -65,6 +66,15 @@ new Vue({
                  .catch(error => {
                      console.log(error.response.data.message)
                  })
+        },
+        getGalleries($amount) {
+            axios.get('/api/galleries/' + $amount)
+                .then(response => {
+                    this.galleries = response.data
+                })
+                .catch(error => {
+                    console.log(error.response.data.message)
+                })
         }
     },
     created() {
@@ -85,9 +95,10 @@ new Vue({
                  this.getComments(response.data);
                  this.getRelatedPosts(response.data, 5);
                  this.getLatestPosts(5);
+                 this.getGalleries(9);
              })
              .catch(error => {
-                 console.log(error)
+                 console.log(error.response.data.message)
              })
     }
 })
