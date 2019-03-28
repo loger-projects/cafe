@@ -1904,12 +1904,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     pageChange: function pageChange(page) {
-      if (page == 1) {
-        this.posts = this.$root.posts;
-        this.pagination = this.$root.pagination;
-      } else {
-        axios.get('/api/posts?page=' + page).then(function (response) {});
-      }
+      var _this = this;
+
+      axios.get('/api/posts?page=' + page).then(function (response) {
+        _this.$root.posts = response.data.data;
+        delete response.data.data;
+        _this.$root.pagination = response.data;
+      }).catch(function (error) {
+        console.log(error.response.data.message);
+      });
     }
   }
 });

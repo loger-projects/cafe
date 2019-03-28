@@ -45,15 +45,15 @@ export default {
     },
     methods: {
         pageChange(page) {
-            if (page == 1) {
-                this.posts = this.$root.posts;
-                this.pagination = this.$root.pagination;
-            } else {
-                axios.get('/api/posts?page='+page)
-                     .then(response => {
-                         
-                     })
-            }
+            axios.get('/api/posts?page='+page)
+                .then(response => {
+                    this.$root.posts = response.data.data
+                    delete response.data.data
+                    this.$root.pagination = response.data
+                })
+                .catch(error => {
+                    console.log(error.response.data.message)
+                })
         }
     }
 }
