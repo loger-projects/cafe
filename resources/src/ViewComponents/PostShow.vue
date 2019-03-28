@@ -9,10 +9,6 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
-    
-</style>
-
 <script>
 import PostShowHeader from '../components/PostShowHeader.vue'
 import PostShowBody from '../components/PostShowBody.vue'

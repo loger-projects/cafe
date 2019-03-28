@@ -62,6 +62,10 @@ export default {
         }
         .VueCarousel {
             position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             .VueCarousel-slide {
                 display: flex;
                 justify-content: center;

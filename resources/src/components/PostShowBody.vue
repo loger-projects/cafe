@@ -1,5 +1,5 @@
 <template>
-    <div id="postShowBody">
+    <section id="postShowBody">
         <!-- content - sidebar - comment -->
         <div class="container is-fluid">
             <div class="columns">
@@ -13,11 +13,11 @@
                     </div>
                 </div>
                 <div class="column is-3">
-                    <post-show-sidebar></post-show-sidebar>
+                    <post-sidebar></post-sidebar>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <style lang="scss" scoped>
@@ -40,7 +40,7 @@ import PostShowMeta from './PostShowMeta.vue'
 import PostShowAuthor from './PostShowAuthor.vue'
 import PostShowRelate from './PostShowRelate.vue'
 import PostShowComment from './PostShowComment.vue'
-import PostShowSidebar from './PostShowSidebar.vue'
+import PostSidebar from './PostSidebar.vue'
 
 export default {
     name: 'PostShowBody',
@@ -49,7 +49,7 @@ export default {
         PostShowAuthor,
         PostShowRelate,
         PostShowComment,
-        PostShowSidebar
+        PostSidebar
     },
     computed: {
         post() {

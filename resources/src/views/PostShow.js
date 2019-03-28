@@ -24,6 +24,7 @@ new Vue({
     data: {
         siteInfo: {},
         post: {},
+        headerBackgroundURL: '',
         comments: [],
         relatedPosts: [],
         latestPosts: [],
@@ -32,6 +33,15 @@ new Vue({
         galleries: []
     },
     methods: {
+        getSiteInfo() {
+            axios.get('/api/option/site-info')
+                .then(response => {
+                    this.siteInfo = response.data
+                })
+                .catch(error => {
+                    console.log(error.response.data.message)
+                });
+        },
         getAuthor(post) {
             axios.get('/api/user/show/' + post.user_id)
                 .then(response => {
@@ -85,33 +95,27 @@ new Vue({
                  .catch(error => {
                     console.log(error.response.data.message)
                  })
+        },
+        getPost() {
+            let str = location.href.replace('/post/', '/api/post/');
+            axios.get(str)
+                .then(response => {
+                    this.post = response.data;
+                    this.headerBackgroundURL = response.data.thumbnail;
+                    this.getAuthor(response.data);
+                    this.getComments(response.data);
+                    this.getRelatedPosts(response.data, 5);
+                    })
+                .catch(error => {
+                    console.log(error)
+                })
         }
     },
     created() {
-        axios.get('/api/option/site-info')
-             .then(response => {
-                this.siteInfo = response.data
-             })
-             .catch(error => {
-                 console.log(error.response.data.message)
-             });
-
-        // get database of current post
-        let str = location.href.replace('/post/', '/api/post/');
-        axios.get(str)
-             .then(response => {
-                 this.post = response.data;
-                 this.getAuthor(response.data);
-                 this.getComments(response.data);
-                 this.getRelatedPosts(response.data, 5);
-                 this.getLatestPosts(5);
-             })
-             .catch(error => {
-                 console.log(error)
-             })
-
-        // sidebar info
-        this.getCategories(5);
-        this.getGalleries(6);
+        this.getSiteInfo()
+        this.getPost()
+        this.getLatestPosts(5)
+        this.getCategories(5)
+        this.getGalleries(6)
     }
 })

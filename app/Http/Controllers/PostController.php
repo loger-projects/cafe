@@ -11,6 +11,16 @@ use Route;
 class PostController extends Controller
 {
     /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function index()
+    {
+        return view('post.index');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Post  $post
@@ -20,6 +30,22 @@ class PostController extends Controller
     {
         return view('post.show');
     }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function apiIndex()
+    {
+        $posts = Post::latest()->paginate(5);
+        foreach($posts as $post) {
+            $post->comment_count = PostComment::where('post_id', $post->id)->count();
+            $post->author = User::where('id', $post->user_id)->first();
+        }
+        return $posts;
+    }
+
     /**
      * Undocumented function
      *
@@ -28,7 +54,7 @@ class PostController extends Controller
      */
     public function apiLatestPosts($number)
     {
-        return Post::orderBy('created_at', 'desc')->skip(0)->take($number)->get()->toArray();
+        return Post::latest()->skip(0)->take($number)->get()->toArray();
     }
 
     /**
@@ -109,11 +135,13 @@ class PostController extends Controller
             'prefix' => 'api/post'
         ], function() {
             Route::name('api.post.')->group(function() {
-                Route::get('/{number}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
+                Route::get('/{amount}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
                 Route::get('/{slug}', 'PostController@apiShow')->name('show');
                 Route::get('/{id}/comments', 'PostController@apiComments')->name('comments');
                 Route::get('/{id}/category/{cateID}/related/{amount}', 'PostController@apiRelated')->name('related');
             });
         });
+
+        Route::get('api/posts', 'PostController@apiIndex')->name('api.post.index');
     }
 }

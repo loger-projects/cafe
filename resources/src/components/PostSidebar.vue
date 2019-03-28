@@ -1,5 +1,5 @@
 <template>
-    <aside id="postShowSidebar">
+    <aside id="postSidebar">
         <div id="sidebar">
             <sidebar-categories :categories="categories"></sidebar-categories>
             <sidebar-posts :posts="posts"></sidebar-posts>
@@ -14,7 +14,7 @@ import SidebarPosts from './SidebarPosts.vue'
 import SidebarGalleries from './SidebarGalleries.vue'
 
 export default {
-    name: 'PostShowSidebar',
+    name: 'PostSidebar',
     components: {
         SidebarCategories,
         SidebarPosts,

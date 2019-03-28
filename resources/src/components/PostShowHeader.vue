@@ -1,5 +1,5 @@
 <template>
-    <div id="postShowHeader" :style="background">
+    <section id="postShowHeader" :style="background">
         <div class="post-header-background"></div>
         <div class="hero is-large post-header">
             <div class="hero-head"><site-header></site-header></div>
@@ -8,8 +8,26 @@
             </div>
             <div class="hero-foot"><site-breadcrumb type="post" :target="$root.post"></site-breadcrumb></div>
         </div>
-    </div>
+    </section>
 </template>
+
+<script>
+import SiteHeader from './SiteHeader.vue'
+import SiteBreadcrumb from './SiteBreadcrumb.vue'
+
+export default {
+    name: 'PostShowHeader',
+    components: {
+        SiteHeader,
+        SiteBreadcrumb
+    },
+    computed: {
+        background() {
+            return "background-image: url('" + this.$root.headerBackgroundURL + "')";
+        }
+    }
+}
+</script>
 
 <style lang="scss" scoped>
     #postShowHeader {
@@ -46,21 +64,3 @@
         }
     }
 </style>
-
-<script>
-import SiteHeader from './SiteHeader.vue'
-import SiteBreadcrumb from './SiteBreadcrumb.vue'
-
-export default {
-    name: 'PostShowHeader',
-    components: {
-        SiteHeader,
-        SiteBreadcrumb
-    },
-    computed: {
-        background() {
-            return "background-image: url('" + this.$root.$root.post.thumbnail + "')";
-        }
-    }
-}
-</script>
