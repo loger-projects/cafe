@@ -21,7 +21,7 @@ class PostsTableSeeder extends Seeder
             for($i = 1; $i<= 6; $i++) {
                 $title = $faker->sentence();
                 $slug = str_slug($title);
-                $url = url("/post/show/".$slug);
+                $url = url('post/'.$slug);
                 $content = implode(' ', $faker->paragraphs);
                 $excerpt = substr($content, 1, 50).' ...';
                 DB::table('posts')->insert([

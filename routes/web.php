@@ -7,6 +7,8 @@ use App\Http\Controllers\PostCateController as PostCate;
 use App\Http\Controllers\PostCommentController as PostComment;
 use App\Http\Controllers\MenuController as Menu;
 use App\Http\Controllers\UserController as User;
+use App\Http\Controllers\GalleryController as Gallery;
+
 
 Option::routes();
 Page::routes();
@@ -15,3 +17,4 @@ PostCate::routes();
 PostComment::routes();
 Menu::routes();
 User::routes();
+Gallery::routes();

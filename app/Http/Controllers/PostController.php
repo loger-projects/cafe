@@ -11,37 +11,6 @@ use Route;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Post  $post
@@ -51,41 +20,6 @@ class PostController extends Controller
     {
         return view('post.show');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-        //
-    }
-
     /**
      * Undocumented function
      *
@@ -94,7 +28,7 @@ class PostController extends Controller
      */
     public function apiLatestPosts($number)
     {
-        return Post::where('id', '>=', 1)->orderBy('created_at', 'desc')->skip(0)->take($number)->get()->toArray();
+        return Post::orderBy('created_at', 'desc')->skip(0)->take($number)->get()->toArray();
     }
 
     /**
@@ -168,7 +102,7 @@ class PostController extends Controller
     {
         Route::name('post.')->group(function() {
             Route::get('/posts', 'PostController@index')->name('index');
-            Route::get('/post/show/{slug}', 'PostController@show')->name('show');
+            Route::get('/post/{slug}', 'PostController@show')->name('show');
         });
 
         Route::group([
@@ -176,7 +110,7 @@ class PostController extends Controller
         ], function() {
             Route::name('api.post.')->group(function() {
                 Route::get('/{number}/latest-posts', 'PostController@apiLatestPosts')->name('latestPosts');
-                Route::get('/show/{slug}', 'PostController@apiShow')->name('show');
+                Route::get('/{slug}', 'PostController@apiShow')->name('show');
                 Route::get('/{id}/comments', 'PostController@apiComments')->name('comments');
                 Route::get('/{id}/category/{cateID}/related/{amount}', 'PostController@apiRelated')->name('related');
             });

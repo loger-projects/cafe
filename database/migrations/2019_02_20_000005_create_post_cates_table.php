@@ -17,6 +17,8 @@ class CreatePostCatesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('description')->nullable();
+            $table->string('slug');
+            $table->string('url');
             $table->timestamps();
         });
     }

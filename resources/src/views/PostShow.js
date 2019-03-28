@@ -28,6 +28,7 @@ new Vue({
         relatedPosts: [],
         latestPosts: [],
         author: {},
+        categories: [],
         galleries: []
     },
     methods: {
@@ -47,7 +48,7 @@ new Vue({
                 })
                 .catch(error => {
                     console.log(error.response.data.message)
-                });
+                })
         },
         getRelatedPosts(post, amount) {
             axios.get('/api/post/' + post.id + '/category/' + post.cate_id + '/related/' + amount)
@@ -56,7 +57,7 @@ new Vue({
                 })
                 .catch(error => {
                     console.log(error.response.data.message)
-                });
+                })
         },
         getLatestPosts($amount) {
             axios.get('/api/post/' + $amount + '/latest-posts')
@@ -67,14 +68,23 @@ new Vue({
                      console.log(error.response.data.message)
                  })
         },
+        getCategories($amount) {
+            axios.get('/api/post/categories/' + $amount)
+                 .then(response => {
+                     this.categories = response.data
+                 })
+                 .catch(error => {
+                     console.log(error.response.data.message)
+                 })
+        },
         getGalleries($amount) {
-            axios.get('/api/galleries/' + $amount)
-                .then(response => {
+            axios.get('/api/galleries/'+$amount)
+                 .then(response => {
                     this.galleries = response.data
-                })
-                .catch(error => {
+                 })
+                 .catch(error => {
                     console.log(error.response.data.message)
-                })
+                 })
         }
     },
     created() {
@@ -95,10 +105,13 @@ new Vue({
                  this.getComments(response.data);
                  this.getRelatedPosts(response.data, 5);
                  this.getLatestPosts(5);
-                 this.getGalleries(9);
              })
              .catch(error => {
-                 console.log(error.response.data.message)
+                 console.log(error)
              })
+
+        // sidebar info
+        this.getCategories(5);
+        this.getGalleries(6);
     }
 })

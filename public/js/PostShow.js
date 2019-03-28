@@ -2620,15 +2620,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostShowSidebar',
   components: {
-    GallerySlider: _GallerySlider_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    'gallery-slider': _GallerySlider_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      activeGallerySlider: false
+      activeSlider: false,
+      activedID: ''
     };
   },
   methods: {
@@ -2639,13 +2728,18 @@ __webpack_require__.r(__webpack_exports__);
       this.activeGallerySlider = false;
     }
   },
-  mounted: function mounted() {
-    var GalleryClass = Vue.extend(_GallerySlider_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
-    var instance = new GalleryClass();
-    instance.$mount();
-    instance.sliders = 'Value';
-    document.getElementById('fullscreen').appendChild(instance.$el);
-  }
+  computed: {
+    posts: function posts() {
+      return this.$root.latestPosts;
+    },
+    categories: function categories() {
+      return this.$root.categories;
+    },
+    galleries: function galleries() {
+      return this.$root.galleries;
+    }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -15580,7 +15674,7 @@ exports.push([module.i, "#postShowRelate {\n  background-color: #fff;\n  margin-
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#postShowSidebar[data-v-e3b05fee] {\n  padding: 0px 20px;\n}\n#postShowSidebar #sidebar[data-v-e3b05fee] {\n  background-color: #fff;\n}\n#postShowSidebar #sidebar #gallery-slider[data-v-e3b05fee] {\n  background-color: rgba(7, 7, 7, 0.9);\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  z-index: 5;\n  padding-top: 50px;\n}\n#postShowSidebar #sidebar #gallery-slider button.delete[data-v-e3b05fee] {\n  position: absolute;\n  color: #fff;\n  right: 50px;\n  top: 50px;\n  width: 50px;\n  height: 50px;\n  border-color: #fff;\n}\n#postShowSidebar #sidebar #gallery-slider .image img[data-v-e3b05fee] {\n  width: 100%;\n}", ""]);
+exports.push([module.i, "#postShowSidebar[data-v-e3b05fee] {\n  padding: 0px 20px;\n}\n#postShowSidebar #sidebar[data-v-e3b05fee] {\n  background-color: #fff;\n  padding: 20px 10px;\n}\n#postShowSidebar #sidebar .widget[data-v-e3b05fee] {\n  margin-bottom: 30px;\n}\n#postShowSidebar #sidebar .widget .widget-title[data-v-e3b05fee] {\n  position: relative;\n  text-align: center;\n  margin-bottom: 20px;\n  font-weight: bold;\n}\n#postShowSidebar #sidebar .widget .widget-title[data-v-e3b05fee]::before {\n  content: \"\";\n  display: block;\n  position: absolute;\n  top: 50%;\n  left: 0;\n  width: 100%;\n  height: 1px;\n  background: #ddd;\n  z-index: 0;\n}\n#postShowSidebar #sidebar .widget .widget-title span[data-v-e3b05fee] {\n  text-transform: uppercase;\n  background: #fff;\n  position: relative;\n  z-index: 1;\n  padding: 0 5px;\n}\n#postShowSidebar #sidebar .widget.recent-posts .widget-content .item[data-v-e3b05fee] {\n  margin-bottom: 10px;\n}\n#postShowSidebar #sidebar .widget.recent-posts .widget-content .item .item-title[data-v-e3b05fee] {\n  color: #2a2a2a;\n}\n#postShowSidebar #sidebar .widget.recent-posts .widget-content .item .item-footer[data-v-e3b05fee] {\n  padding-left: 15px;\n}\n#postShowSidebar #sidebar .widget.recent-posts .widget-content .item .item-footer span[data-v-e3b05fee] {\n  color: #666;\n  font-style: italic;\n  font-size: 0.75rem;\n}\n#postShowSidebar #sidebar .widget.categories .widget-content .item[data-v-e3b05fee] {\n  padding: 8px 0;\n  border-bottom: 1px solid #ddd;\n}\n#postShowSidebar #sidebar .widget.categories .widget-content .item .item-title[data-v-e3b05fee] {\n  color: #666;\n}\n#postShowSidebar #sidebar .widget.categories .widget-content .item .item-title span[data-v-e3b05fee] {\n  color: #000;\n}\n#postShowSidebar #sidebar .widget.galleries .widget-content .item[data-v-e3b05fee] {\n  padding: 5px !important;\n}\n#postShowSidebar #sidebar .gallery-slider-wrapper[data-v-e3b05fee] {\n  background-color: rgba(0, 0, 0, 0.9);\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n  z-index: 5;\n  padding-top: 50px;\n}\n#postShowSidebar #sidebar .gallery-slider-wrapper button.delete[data-v-e3b05fee] {\n  position: absolute;\n  color: #fff;\n  right: 50px;\n  top: 50px;\n  width: 50px;\n  height: 50px;\n  border-color: #fff;\n}", ""]);
 
 
 
@@ -17868,29 +17962,107 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("aside", { attrs: { id: "postShowSidebar" } }, [
     _c("div", { attrs: { id: "sidebar" } }, [
-      _c("div", { staticClass: "categories" }, [
+      _c("div", { staticClass: "categories widget" }, [
+        _vm._m(0),
+        _vm._v(" "),
         _c(
-          "button",
-          { staticClass: "butttun is-primary", on: { click: _vm.showSlider } },
-          [_vm._v("Show Slider")]
+          "div",
+          { staticClass: "widget-content" },
+          _vm._l(_vm.categories, function(category) {
+            return _c("div", { key: category.id, staticClass: "item" }, [
+              _c(
+                "a",
+                { staticClass: "item-title", attrs: { href: category.url } },
+                [
+                  _vm._v(
+                    "\n                        " + _vm._s(category.name) + "("
+                  ),
+                  _c("span", [_vm._v(_vm._s(category.count))]),
+                  _vm._v(")\n                    ")
+                ]
+              )
+            ])
+          }),
+          0
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "posts" }),
+      _c("div", { staticClass: "recent-posts widget" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "widget-content" },
+          _vm._l(_vm.posts, function(post) {
+            return _c("div", { key: post.id, staticClass: "item" }, [
+              _c(
+                "a",
+                { staticClass: "item-title", attrs: { href: post.url } },
+                [_vm._v(_vm._s(post.title))]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "item-footer" }, [
+                _c("span", [
+                  _vm._v(
+                    _vm._s(_vm._f("moment")([post.created_at], "MMMM D, YYYY"))
+                  )
+                ])
+              ])
+            ])
+          }),
+          0
+        )
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "gollery" }),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "fullscreen" } }),
-      _vm._v(" "),
-      _vm.activeGallerySlider
-        ? _c("div", { attrs: { id: "gallery-slider" } }, [
-            _c("button", {
-              staticClass: "delete is-large",
-              on: { click: _vm.closeSlider }
+      _c("div", { staticClass: "galleries widget" }, [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "widget-content" }, [
+          _c(
+            "div",
+            { staticClass: "columns is-multiline" },
+            _vm._l(_vm.galleries, function(gallery) {
+              return _c(
+                "div",
+                { key: gallery.id, staticClass: "column is-4 item" },
+                [
+                  _c("figure", { staticClass: "image is-1by1" }, [
+                    _c("img", {
+                      directives: [
+                        {
+                          name: "lazy",
+                          rawName: "v-lazy",
+                          value: gallery.src,
+                          expression: "gallery.src"
+                        }
+                      ],
+                      attrs: { alt: gallery.alt, title: gallery.title }
+                    })
+                  ])
+                ]
+              )
             }),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
+            0
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm.activeSlider
+        ? _c(
+            "div",
+            { staticClass: "gallery-slider-wrapper" },
+            [
+              _c("button", {
+                staticClass: "delete is-large",
+                on: { click: _vm.closeSlider }
+              }),
+              _vm._v(" "),
+              _c("gallery-slider", {
+                attrs: { sliders: _vm.galleries, activedID: _vm.activedID }
+              })
+            ],
+            1
+          )
         : _vm._e()
     ])
   ])
@@ -17900,12 +18072,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("figure", { staticClass: "image" }, [
-        _c("img", {
-          attrs: { src: "http://cafe.div/img/MenuHeadBackground.jpg" }
-        })
-      ])
+    return _c("div", { staticClass: "widget-title" }, [
+      _c("span", [_vm._v("Categories")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "widget-title" }, [
+      _c("span", [_vm._v("Recent Posts")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "widget-title" }, [
+      _c("span", [_vm._v("Galleries")])
     ])
   }
 ]
@@ -36550,7 +36734,9 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     comments: [],
     relatedPosts: [],
     latestPosts: [],
-    author: {}
+    author: {},
+    categories: [],
+    galleries: []
   },
   methods: {
     getAuthor: function getAuthor(post) {
@@ -36588,31 +36774,52 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       }).catch(function (error) {
         console.log(error.response.data.message);
       });
+    },
+    getCategories: function getCategories($amount) {
+      var _this5 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/post/categories/' + $amount).then(function (response) {
+        _this5.categories = response.data;
+      }).catch(function (error) {
+        console.log(error.response.data.message);
+      });
+    },
+    getGalleries: function getGalleries($amount) {
+      var _this6 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/galleries/' + $amount).then(function (response) {
+        _this6.galleries = response.data;
+      }).catch(function (error) {
+        console.log(error.response.data.message);
+      });
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this7 = this;
 
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/option/site-info').then(function (response) {
-      _this5.siteInfo = response.data;
+      _this7.siteInfo = response.data;
     }).catch(function (error) {
       console.log(error.response.data.message);
     }); // get database of current post
 
     var str = location.href.replace('/post/', '/api/post/');
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(str).then(function (response) {
-      _this5.post = response.data;
+      _this7.post = response.data;
 
-      _this5.getAuthor(response.data);
+      _this7.getAuthor(response.data);
 
-      _this5.getComments(response.data);
+      _this7.getComments(response.data);
 
-      _this5.getRelatedPosts(response.data, 5);
+      _this7.getRelatedPosts(response.data, 5);
 
-      _this5.getLatestPosts(5);
+      _this7.getLatestPosts(5);
     }).catch(function (error) {
       console.log(error);
-    });
+    }); // sidebar info
+
+    this.getCategories(5);
+    this.getGalleries(6);
   }
 });
 
