@@ -28,19 +28,64 @@
                     <div class="columns is-multiline">
                         <div class="column is-4 item" v-for="gallery in galleries" :key="gallery.id">
                             <figure class="image is-1by1">
-                                <img v-lazy="gallery.src" :alt="gallery.alt" :title="gallery.title">
+                                <img 
+                                    v-lazy="gallery.src" 
+                                    :alt="gallery.alt" 
+                                    :title="gallery.title"
+                                    @click="openSlider(galleries.indexOf(gallery))">
                             </figure>
                         </div>
                     </div>
+                    <div class="load-more">
+                        <button class="button load-more-button" @click="loadMoreGalleries">Load More</button>
+                    </div>
                 </div>
             </div>
-            <div class="gallery-slider-wrapper" v-if="activeSlider">
-                <button class="delete is-large" @click="closeSlider"></button>
-                <gallery-slider :sliders="galleries" :activedID="activedID"></gallery-slider>
-            </div>
+            <gallery-slider :sliders="galleries" :index="index" v-if="activeSlider" @closeSlider="closeSlider"></gallery-slider>
         </div>
     </aside>
 </template>
+
+<script>
+import GallerySlider from './GallerySlider.vue'
+
+export default {
+    name: 'PostShowSidebar',
+    components: {
+        'gallery-slider' :GallerySlider
+    },
+    data() {
+        return {
+            activeSlider: false,
+            index: 0
+        }
+    },
+    computed: {
+        posts() { return this.$root.latestPosts },
+        categories() { return this.$root.categories },
+        galleries() { return this.$root.galleries },
+            
+    },
+    methods: {
+        closeSlider() { this.activeSlider = false },
+        openSlider(index) {
+            this.index = index;
+            this.activeSlider = true;
+        },
+        loadMoreGalleries() {
+            axios.get('/api/galleries/skip/'+ this.galleries.length +'/take/6')
+                .then(response => {
+                    for (let key in response.data) {
+                        this.galleries.push(response.data[key])
+                    }
+                })
+                .catch(error => {
+                    console.log(error.response.data.message)
+                })
+        }
+    }
+}
+</script>
 
 <style lang="scss" scoped>
     #postShowSidebar {
@@ -111,58 +156,22 @@
                     .widget-content {
                         .item {
                             padding: 5px !important;
+                            img {
+                                cursor: pointer;
+                            }
+                        }
+                        .load-more {
+                            text-align: center;
+                            margin-top: 15px;
+                            .load-more-button {
+                                color: #fff;
+                                background-color: #000;
+                            }
                         }
                     }
                 }
             }
-            .gallery-slider-wrapper {
-                background-color: rgba(0, 0, 0, 0.9);
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: 5;
-                padding-top: 50px;
-                button.delete {
-                    position: absolute;
-                    color: #fff;
-                    right: 50px;
-                    top: 50px;
-                    width: 50px;
-                    height: 50px;
-                    border-color: #fff;
-                }
-            }
+            
         }
     }
 </style>
-
-<script>
-import GallerySlider from './GallerySlider.vue'
-
-export default {
-    name: 'PostShowSidebar',
-    components: {
-        'gallery-slider' :GallerySlider
-    },
-    data() {
-        return {
-            activeSlider: false,
-            activedID: ''
-        }
-    },
-    methods: {
-        showSlider() { this.activeGallerySlider = true },
-        closeSlider() { this.activeGallerySlider = false }
-    },
-    computed: {
-        posts() { return this.$root.latestPosts },
-        categories() { return this.$root.categories },
-        galleries() { return this.$root.galleries}
-    },
-    mounted() {
-
-    }
-}
-</script>

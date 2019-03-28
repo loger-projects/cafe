@@ -19,7 +19,7 @@ class PostsTableSeeder extends Seeder
         $faker = Faker::create();
         foreach($cates as $cate) {
             for($i = 1; $i<= 6; $i++) {
-                $title = $faker->sentence();
+                $title = $faker->sentence(4);
                 $slug = str_slug($title);
                 $url = url('post/'.$slug);
                 $content = implode(' ', $faker->paragraphs);
