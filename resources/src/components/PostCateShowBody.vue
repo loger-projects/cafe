@@ -1,5 +1,5 @@
 <template>
-    <section id="postIndexBody">
+    <section id="postCateShowBody">
         <div class="container">
             <div class="columns">
                 <div class="column is-9 main">
@@ -29,10 +29,10 @@ import PostIndexItem from './PostIndexItem.vue'
 import PostSidebar from './PostSidebar.vue'
 
 export default {
-    name: 'PostIndexBody',
+    name: 'PostCateShowBody',
     components: {
-        PostSidebar,
         PostIndexItem,
+        PostSidebar
     },
     computed: {
         posts() { return this.$root.posts },
@@ -40,22 +40,27 @@ export default {
     },
     methods: {
         pageChange(page) {
-            axios.get('/api/posts?page='+page)
+            let str = location.href.replace('/post/', '/api/post/');
+            axios.get(str + '?page=' + page)
                 .then(response => {
-                    this.$root.posts = response.data.data
-                    delete response.data.data
-                    this.$root.pagination = response.data
+
+                     this.$root.posts = response.data.posts.data
+
+                     delete response.data.posts.data
+
+                     this.$root.pagination = response.data.posts
                 })
                 .catch(error => {
                     console.log(error.response.data.message)
                 })
         }
     }
+
 }
 </script>
 
 <style lang="scss">
-    #postIndexBody {
+    #postCateShowBody {
         padding: 90px 0 50px 0;
         .main {
             padding: 0 20px !important;

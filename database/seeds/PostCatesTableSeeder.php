@@ -19,10 +19,11 @@ class PostCatesTableSeeder extends Seeder
         for ($i = 1; $i <= 7; $i++) {
             $name = implode(' ', $faker->words(2));
             $slug = str_slug($name);
+            $description = $faker->sentence(4);
             $url = url('/post/category/'.$slug);
             DB::table('post_cates')->insert([
                 'name' => $name,
-                'description' => 'Post Category '.$i.' description',
+                'description' => $description,
                 'slug' => $slug,
                 'url' => $url,
                 'created_at' => Carbon::now(),

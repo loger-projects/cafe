@@ -25,7 +25,7 @@
 import GallerySlider from './GallerySlider.vue'
 
 export default {
-    name: 'SidebarGalleries',
+    name: 'PostSidebarGalleries',
     props: ['galleries'],
     components: {
         'gallery-slider' : GallerySlider
@@ -58,47 +58,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .widget {
-        margin-bottom: 30px;
-        .widget-title {
-            position: relative;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
-            &::before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 0;
-                width: 100%;
-                height: 1px;
-                background: #ddd;
-                z-index: 0;
-            }
-            span {
-                text-transform: uppercase;
-                background: #fff;
-                position: relative;
-                z-index: 1;
-                padding: 0 5px;
-            }
-        }
-        &.galleries {
-            .widget-content {
-                .item {
-                    padding: 5px !important;
-                    img {
-                        cursor: pointer;
-                    }
+    .widget.galleries {
+        .widget-content {
+            .item {
+                padding: 5px !important;
+                img {
+                    cursor: pointer;
                 }
-                .load-more {
-                    text-align: center;
-                    margin-top: 15px;
-                    .load-more-button {
-                        color: #fff;
-                        background-color: #000;
-                    }
+            }
+            .load-more {
+                text-align: center;
+                margin-top: 15px;
+                .load-more-button {
+                    color: #fff;
+                    background-color: #000;
                 }
             }
         }

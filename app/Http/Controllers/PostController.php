@@ -39,10 +39,12 @@ class PostController extends Controller
     public function apiIndex()
     {
         $posts = Post::latest()->paginate(5);
+
         foreach($posts as $post) {
             $post->comment_count = PostComment::where('post_id', $post->id)->count();
             $post->author = User::where('id', $post->user_id)->first();
         }
+        
         return $posts;
     }
 
@@ -126,9 +128,36 @@ class PostController extends Controller
      */
     public static function routes()
     {
-        Route::name('post.')->group(function() {
-            Route::get('/posts', 'PostController@index')->name('index');
-            Route::get('/post/{slug}', 'PostController@show')->name('show');
+        /**
+         * Normal Routes
+         */
+
+        Route::group([
+            'prefix' => '/posts'
+        ], function() {
+            Route::name('post.')->group(function() {
+                Route::get('/', 'PostController@index')->name('index');
+            });
+        });
+
+        Route::group([
+            'prefix' => '/post'
+        ], function() {
+            Route::name('post.')->group(function() {
+                Route::get('/{slug}', 'PostController@show')->name('show');
+            });
+        });
+
+        /**
+         * API Routes
+         */
+        
+        Route::group([
+            'prefix' => 'api/posts'
+        ], function() {
+            Route::name('api.post.')->group(function() {
+                Route::get('/', 'PostController@apiIndex')->name('.index');
+            });
         });
 
         Route::group([
@@ -141,7 +170,5 @@ class PostController extends Controller
                 Route::get('/{id}/category/{cateID}/related/{amount}', 'PostController@apiRelated')->name('related');
             });
         });
-
-        Route::get('api/posts', 'PostController@apiIndex')->name('api.post.index');
     }
 }
