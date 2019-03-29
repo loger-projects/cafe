@@ -14,7 +14,7 @@
 import SiteHeaderStyleLarge from './SiteHeaderStyleLarge.vue'
 
 export default {
-    name: 'SiteHeaderStyleLarge',
+    name: 'PostCateShowHeader',
     components: {
         SiteHeaderStyleLarge
     },
