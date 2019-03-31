@@ -18,3 +18,4 @@ PostComment::routes();
 Menu::routes();
 User::routes();
 Gallery::routes();
+Auth::routes();

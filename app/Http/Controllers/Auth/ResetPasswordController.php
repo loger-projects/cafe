@@ -36,4 +36,9 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function showResetForm()
+    {
+        return view('user.password.reset');
+    }
 }

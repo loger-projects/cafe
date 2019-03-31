@@ -14,8 +14,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Loger',
             'email' => 'logernam@gmail.com',
+            'name' => 'Loger',
+            'username' => 'admin',
             'password' => 'loger',
             'avatar' => url('/img/users/user_thumbnail_1.jpg'),
             'slogan' => 'Excepturi iure consequatur ipsum at delectus.',
