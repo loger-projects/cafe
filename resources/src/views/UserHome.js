@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import UserRegister from '../ViewComponents/UserRegister.vue'
+import UserHome from '../ViewComponents/UserHome.vue'
 import Form from '../js/Form'
 
 window.Vue = Vue
@@ -13,7 +13,7 @@ Vue.use(buefy)
 new Vue({
     el: '#root',
     components: {
-        UserRegister
+        UserHome
     },
     data: {
         siteInfo: {}

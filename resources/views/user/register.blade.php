@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Show Register Form</h1>
+    <user-register></user-register>
 @endsection
 
 @section('js')
-    <script src="{{ asset('/js/userRegister.js') }}"></script>
+    <script src="{{ asset('/js/UserRegister.js') }}"></script>
 @endsection

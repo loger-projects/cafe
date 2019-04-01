@@ -48,6 +48,7 @@
             border-bottom: 1px solid #181818;
         }
         .navbar {
+            background-color: transparent;
             .navbar-brand {
                 .navbar-item {
                     &:hover {

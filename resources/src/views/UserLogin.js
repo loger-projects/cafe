@@ -14,5 +14,17 @@ new Vue({
     el: '#root',
     components: {
         UserLogin
+    },
+    data: {
+        siteInfo: {}
+    },
+    created() {
+        axios.get('/api/option/site-info')
+            .then(response => {
+                this.siteInfo = response.data
+            })
+            .catch(error => {
+                console.log(error.response.data.message)
+            });
     }
 });

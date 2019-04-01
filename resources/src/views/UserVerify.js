@@ -2,18 +2,16 @@ import Vue from 'vue'
 import axios from 'axios'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import UserRegister from '../ViewComponents/UserRegister.vue'
-import Form from '../js/Form'
+import UserVerify from '../ViewComponents/UserVerify.vue'
 
 window.Vue = Vue
 window.axios = axios
-window.Form = Form
 Vue.use(buefy)
 
 new Vue({
     el: '#root',
     components: {
-        UserRegister
+        UserVerify
     },
     data: {
         siteInfo: {}
