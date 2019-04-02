@@ -7,30 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'user_id',
         'cate_id',
         'name',
+        'slug',
+        'url',
         'description',
         'price',
         'in_stock',
         'is_new',
         'rating',
+        'quantity',
+        'available_quantity',
+        'sold_quantity',
         'thumbnail',
     ];
 
-    // belongsTo: User / ProductCate
+    // belongsTo: ProductCate
     // hasMany: ProductReview
-    // belongsToMany: Image
-    
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    // belongsToMany: User / Image
     
     /**
      * Undocumented function
@@ -50,6 +44,11 @@ class Product extends Model
     public function reviews()
     {
         return $this->hasMany(ProductReview::class, 'product_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'product_user', 'product_id', 'user_id');
     }
 
     /**

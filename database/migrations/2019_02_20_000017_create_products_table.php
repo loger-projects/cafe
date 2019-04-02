@@ -15,7 +15,6 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
             $table->unsignedInteger('cate_id');
             $table->string('name');
             $table->string('slug');
@@ -23,11 +22,13 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->unsignedInteger('price');
             $table->boolean('in_stock');
-            $table->boolean('is_new');
+            $table->boolean('is_new')->default(false);
             $table->unsignedInteger('rating');
+            $table->unsignedInteger('quantity')->default(0);
+            $table->unsignedInteger('available_quantity')->default(0);
+            $table->unsignedInteger('sold_quantity')->default(0);
             $table->string('thumbnail');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cate_id')->references('id')->on('product_cates');
         });
     }

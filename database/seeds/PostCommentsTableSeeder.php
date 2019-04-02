@@ -22,7 +22,7 @@ class PostCommentsTableSeeder extends Seeder
             for($i = 1; $i <= 2; $i++) {
                 DB::table('post_comments')->insert([
                     'post_id' => $post->id,
-                    'user_id' => 1,
+                    'user_id' => rand(2, 30),
                     'parent_id' => null,
                     'level' => 0,
                     'content' => $faker->paragraph(),
@@ -35,7 +35,7 @@ class PostCommentsTableSeeder extends Seeder
                 for($j = 1; $j <= 2; $j++) {
                     DB::table('post_comments')->insert([
                         'post_id'=> $post->id,
-                        'user_id' => 1,
+                        'user_id' => rand(2, 30),
                         'parent_id' => $comment->id,
                         'level' => 1,
                         'content'=> $faker->paragraph(),
@@ -49,7 +49,7 @@ class PostCommentsTableSeeder extends Seeder
                 for($i = 1; $i<= 3; $i++) {
                     DB::table('post_comments')->insert([
                         'post_id' => $post->id,
-                        'user_id' => 1,
+                        'user_id' => rand(2, 30),
                         'parent_id' => $comment->id,
                         'level' => 2,
                         'content' => $faker->paragraph(),

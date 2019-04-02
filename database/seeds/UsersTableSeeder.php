@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
 
 class UsersTableSeeder extends Seeder
 {
@@ -31,5 +32,26 @@ class UsersTableSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
+
+        for($i = 2; $i <= 30; $i++) {
+            $faker = Faker::create();
+            DB::table('users')->insert([
+                'email' => $faker->email,
+                'name' => $faker->name,
+                'username' => $faker->userName,
+                'password' => Hash::make($faker->password),
+                'avatar' => url('/img/users/user_thumbnail_'.$i.'.jpg'),
+                'slogan' => $faker->sentence(),
+                'description' => implode(' ', $faker->sentences(3)),
+                'phone' => $faker->phoneNumber,
+                'address' => $faker->address,
+                'distric' => $faker->state,
+                'city' => $faker->city,
+                'role_id' => 2,
+                'email_verified_at' => carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
     }
 }
