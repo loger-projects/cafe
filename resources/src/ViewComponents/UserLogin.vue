@@ -34,7 +34,7 @@
                             <button type="submit" class="button is-success" :disabled="form.errors.any()">Login</button>
                         </div>
                         <div class="control">
-                            <a href="#" class="button is-text" role="button">Forgot your password</a>
+                            <a :href="href" class="button is-text" role="button">Forgot your password</a>
                         </div>
                     </div>
                 </form>
@@ -64,6 +64,9 @@ export default {
                 checkbox: false
             })
         }
+    },
+    computed: {
+        href() { return location.origin + '/password/reset' }
     },
     methods: {
         onSubmit() {

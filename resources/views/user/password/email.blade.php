@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Send an Email</h1>
+    <user-password-email></user-password-email>
 @endsection
 
 @section('js')
-    <script src="{{ asset('/js/UserEmail.js') }}"></script>
+    <script src="{{ asset('/js/UserPasswordEmail.js') }}"></script>
 @endsection

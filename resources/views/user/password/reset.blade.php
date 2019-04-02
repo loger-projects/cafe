@@ -1,9 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Reset Password</h1>
+    <user-password-reset></user-password-reset>
 @endsection
 
 @section('js')
-    <script src="{{ asset('UserReset.js') }}"></script>
+    <script>
+        var token = "{!! $token !!}"
+    </script>
+    <script src="{{ asset('/js/UserPasswordReset.js') }}"></script>
 @endsection
