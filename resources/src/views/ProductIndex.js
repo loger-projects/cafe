@@ -20,7 +20,10 @@ new Vue({
         ProductIndex
     },
     data: {
-        siteInfo: {}
+        siteInfo: {},
+        products: [],
+        categories: [],
+        galleries: []
     },
     methods: {
         getSiteInfo() {

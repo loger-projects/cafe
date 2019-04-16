@@ -1,5 +1,5 @@
 <template>
-    <section id="siteHeader" :class="{'is-sticky': isSticky}">
+    <section id="siteHeader" :class="{'is-sticky': isSticky }">
         <div class="container">
             <nav class="navbar">
                 <div class="navbar-brand">

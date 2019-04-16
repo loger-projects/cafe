@@ -33,6 +33,12 @@ export default {
                         {href: '', name: this.target.title}
                     ]
                 break;
+                case 'ProductIndex': 
+                    return [
+                        {href: this.origin, name: 'Home'},
+                        {href: this.prigin + '/products', name: 'Products'}
+                    ]
+                break;
                 default:
                     return;
                 break;
