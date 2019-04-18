@@ -23,7 +23,8 @@ new Vue({
         siteInfo: {},
         products: [],
         categories: [],
-        galleries: []
+        galleries: [],
+        carts: []
     },
     methods: {
         getSiteInfo() {
@@ -33,7 +34,44 @@ new Vue({
                 })
                 .catch(error => {
                     console.log(error.response.data.message)
-                });
+                })
         },
+        getProducts() {
+            axios.get('/api/products')
+                .then(response => {
+                    this.products = response.data
+                })
+                .catch(error => {
+                    console.log(error.response.data.message)
+                })
+        },
+        getCategories(amount) {
+            axios.get('/api/product/categories/'+amount)
+                .then(response => {
+                    this.categories = response.data
+                })
+                .catch(error => {
+                    console.log(error.response.data.message)
+                })
+        },
+        getGalleries(amount) {
+            axios.get('/api/galleries/'+amount)
+                 .then(response => {
+                    this.galleries = response.data
+                 })
+                 .catch(error => {
+                    console.log(error.response.data.message)
+                 })
+        },
+        getCarts() {
+            return ''
+        }
+    },
+    created() {
+        this.getSiteInfo()
+        this.getProducts()
+        this.getCategories(6)
+        this.getGalleries(6)
+        this.getCarts()
     }
 })

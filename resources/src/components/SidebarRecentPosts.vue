@@ -15,7 +15,9 @@
 <script>
 export default {
     name: 'PostSidebarRecentPosts',
-    props: ['posts']
+    computed: {
+        posts() { return this.$root.posts }
+    }
 }
 </script>
 

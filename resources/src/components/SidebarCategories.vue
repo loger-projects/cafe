@@ -14,7 +14,9 @@
 <script>
 export default {
     name: 'PostSidebarCategories',
-    props: ['categories']
+    computed: {
+        categories() { return this.$root.categories}
+    }
 }
 </script>
 

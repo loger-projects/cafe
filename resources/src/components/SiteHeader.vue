@@ -1,5 +1,5 @@
 <template>
-    <section id="siteHeader" :class="{'is-sticky': isSticky }">
+    <section id="siteHeader" :class="{'is-sticky': isSticky, 'is-bg-white': isBgWhite }">
         <div class="container">
             <nav class="navbar">
                 <div class="navbar-brand">
@@ -133,7 +133,7 @@
                 }
             }
         }
-        &.is-sticky {
+        &.is-sticky, &.is-bg-white {
             background-color: #fff;
             .navbar {
                 .navbar-menu {
@@ -174,6 +174,12 @@
 <script>
 export default {
     name: 'SiteHeader',
+    props: {
+        isBgWhite: {
+            default: false,
+            type: Boolean
+        }
+    },
     data() {
         return {
             isSticky: false,

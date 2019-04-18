@@ -25,10 +25,12 @@
 import GallerySlider from './GallerySlider.vue'
 
 export default {
-    name: 'PostSidebarGalleries',
-    props: ['galleries'],
+    name: 'SidebarGalleries',
     components: {
         'gallery-slider' : GallerySlider
+    },
+    computed: {
+        galleries() { return this.$root.galleries }
     },
     data() {
         return {

@@ -1,29 +1,24 @@
 <template>
     <aside id="postSidebar">
         <div id="sidebar">
-            <post-sidebar-categories :categories="categories"></post-sidebar-categories>
-            <post-sidebar-recent-posts :posts="posts"></post-sidebar-recent-posts>
-            <post-sidebar-galleries :galleries="galleries"></post-sidebar-galleries>
+            <sidebar-categories></sidebar-categories>
+            <sidebar-recent-posts></sidebar-recent-posts>
+            <sidebar-galleries></sidebar-galleries>
         </div>
     </aside>
 </template>
 
 <script>
-import PostSidebarCategories from './PostSidebarCategories.vue'
-import PostSidebarRecentPosts from './PostSidebarRecentPosts.vue'
-import PostSidebarGalleries from './PostSidebarGalleries.vue'
+import SidebarCategories from './SidebarCategories.vue'
+import SidebarRecentPosts from './SidebarRecentPosts.vue'
+import SidebarGalleries from './SidebarGalleries.vue'
 
 export default {
     name: 'PostSidebar',
     components: {
-        PostSidebarCategories,
-        PostSidebarRecentPosts,
-        PostSidebarGalleries
-    },
-    computed: {
-        categories() { return this.$root.categories },
-        posts() { return this.$root.latestPosts },
-        galleries() { return this.$root.galleries }
+        SidebarCategories,
+        SidebarRecentPosts,
+        SidebarGalleries
     }
 }
 </script>

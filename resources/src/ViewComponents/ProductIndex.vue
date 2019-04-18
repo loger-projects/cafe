@@ -1,8 +1,8 @@
 <template>
     <div id="productIndex">
-         <product-index-header></product-index-header>
-         <product-index-body></product-index-body>
-         <site-footer></site-footer>
+        <product-index-header></product-index-header>
+        <product-index-body></product-index-body>
+        <site-footer></site-footer>
     </div>
 </template>
 

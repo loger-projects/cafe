@@ -7,6 +7,7 @@ use App\Http\Controllers\PostCateController as PostCate;
 use App\Http\Controllers\PostCommentController as PostComment;
 use App\Http\Controllers\MenuController as Menu;
 use App\Http\Controllers\ProductController as Product;
+use App\Http\Controllers\ProductCateController as ProductCate;
 use App\Http\Controllers\UserController as User;
 use App\Http\Controllers\GalleryController as Gallery;
 
@@ -18,6 +19,7 @@ PostCate::routes();
 PostComment::routes();
 Menu::routes();
 Product::routes();
+ProductCate::routes();
 User::routes();
 Gallery::routes();
 Auth::routes(['verify' => true]);

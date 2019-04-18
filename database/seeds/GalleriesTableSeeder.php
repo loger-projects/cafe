@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Carbon\Carbon;
 
 class GalleriesTableSeeder extends Seeder
 {
@@ -19,7 +20,9 @@ class GalleriesTableSeeder extends Seeder
                 'title' => $faker->sentence(),
                 'description' => implode(' ', $faker->sentences(3)),
                 'src' => url('/img/galleries/gallery_'.$i.'.jpg'),
-                'alt' => 'Gallery_'.$i.' is not found'
+                'alt' => 'Gallery_'.$i.' is not found',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now
             ]);
         }
     }

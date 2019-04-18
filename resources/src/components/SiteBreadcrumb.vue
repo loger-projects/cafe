@@ -36,7 +36,7 @@ export default {
                 case 'ProductIndex': 
                     return [
                         {href: this.origin, name: 'Home'},
-                        {href: this.prigin + '/products', name: 'Products'}
+                        {href: this.origin + '/products', name: 'Products'}
                     ]
                 break;
                 default:

@@ -2,13 +2,15 @@
     <section id="productIndexHeader">
         <div class="hero">
             <div class="hero-head">
-                <site-header></site-header>
+                <site-header
+                    :isBgWhite="true"
+                ></site-header>
             </div>
             <div class="hero-body">
-                <h1 class="title is-2">Products</h1>
-            </div>
-            <div class="hero-foot">
-                <site-breadcrumb type="ProductIndex"></site-breadcrumb>
+                <div class="container">
+                    <h1 class="title is-2">Products</h1>
+                    <site-breadcrumb type="ProductIndex"></site-breadcrumb>
+                </div>
             </div>
         </div>
     </section>
@@ -16,10 +18,13 @@
 
 <script>
 import SiteHeader from './SiteHeader.vue'
+import SiteBreadcrumb from './SiteBreadcrumb.vue'
+
 export default {
     name: 'ProductIndexHeader',
     components: {
-        SiteHeader
+        SiteHeader,
+        SiteBreadcrumb
     }
 }
 </script>
@@ -29,18 +34,16 @@ export default {
         .hero {
             .hero-head {
                 height: 60px;
-                background-color: #000;
+                background-color: #fff;
             }
             .hero-body {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .hero-foot {
-                background: #000;
-                display: flex;
-                justify-content: center;
-                padding: 10px 0;
+                background-color: #000;
+                .container {
+                    color: #fff;
+                    .title {
+                        color: #fff;
+                    }
+                }
             }
         }
     }
