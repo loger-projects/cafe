@@ -5,7 +5,7 @@ import VueLazyload from 'vue-lazyload'
 import VueCarousel from 'vue-carousel'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import PostCateShow from '../ViewComponents/PostCateShow.vue'
+import PostCateShow from '../templates/PostCateShow.vue'
 
 window.Vue = Vue
 window.axios = axios

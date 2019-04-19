@@ -22,7 +22,7 @@ class GalleriesTableSeeder extends Seeder
                 'src' => url('/img/galleries/gallery_'.$i.'.jpg'),
                 'alt' => 'Gallery_'.$i.' is not found',
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now
+                'updated_at' => Carbon::now()
             ]);
         }
     }

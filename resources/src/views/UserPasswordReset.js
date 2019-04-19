@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import UserPasswordReset from '../ViewComponents/UserPasswordReset.vue'
+import UserPasswordReset from '../templates/UserPasswordReset.vue'
 import Form from '../js/Form'
 
 window.Vue = Vue

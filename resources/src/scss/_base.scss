@@ -26,6 +26,9 @@ datalist {
 .text-yellow {
     color: #ffb606 !important;
 }
+.text-brown {
+    color: #795f4b;
+}
 .is-dancing-script {
     font-family: 'Dancing Script';
 }
@@ -37,4 +40,39 @@ datalist {
         background-color: #2a2a2a !important;
         color: #fff !important;
     }
+}
+/**
+ * button
+ */
+.btn-brown {
+    background-color: #795f4b !important;
+    color: #fff !important;
+    font-weight: bold;
+}
+.btn-brown-outline {
+    border: 2px solid #795f4b;
+    color: #795f4b !important;
+    background-color: #fff !important;
+}
+.btn-black {
+    background-color: #000 !important;
+    color: #fff !important;
+    font-weight: bold;
+}
+.btn-black-outline {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+}
+.btn-100 {
+    width: 100%;
+    height: 50px;
+}
+.btn-large {
+    width: 180px;
+    height: 50px;
+}
+.btn-medium {
+    width: 140px;
+    height: 44px;
 }

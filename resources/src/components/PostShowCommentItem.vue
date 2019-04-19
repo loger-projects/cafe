@@ -2,9 +2,7 @@
     <article class="media comment">
         <div class="media-left">
             <figure class="image is-64x64 is-1by1">
-                <a :href="linkToUserShow(comment)">
-                    <img v-lazy="comment.user.avatar">
-                </a>
+                <img v-lazy="comment.user.avatar">
             </figure>
         </div>
 
@@ -67,7 +65,6 @@ export default {
         level() { return this.comment.level > 0 ? 2 : 1 }
     },
     methods: {
-        linkToUserShow(comment) { return location.origin + '/user/show/' + comment.user_id},
         closeForm() { this.showReplyForm = false },
         openForm() { this.showReplyForm = true },
     }

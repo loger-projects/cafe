@@ -19,7 +19,7 @@ class ProductsTableSeeder extends Seeder
         $id = 1;
         foreach($cates as $cate) {
             for($i = 1; $i <= 6; $i++) {
-                $name = $faker->sentence(4);
+                $name = implode(' ', $faker->words(3));
                 $slug = str_slug($name);
                 $url = url('product/'.$slug);
                 $description = implode(' ', $faker->sentences(3));
@@ -30,7 +30,7 @@ class ProductsTableSeeder extends Seeder
                 $quantity = rand(100, 200);
                 $availableQuantity = $quantity - rand(10, 50);
                 $soldQuantity = $quantity - $availableQuantity;
-                $thumbnail = url('img/products/product_thumbnail_'.$id);
+                $thumbnail = url('img/products/product_thumbnail_'.$id.'.jpg');
                 $id++;
                 DB::table('products')->insert([
                     'cate_id' => $cate->id,

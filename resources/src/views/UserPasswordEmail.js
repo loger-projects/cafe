@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import UserPasswordEmail from '../ViewComponents/UserPasswordEmail.vue'
+import UserPasswordEmail from '../templates/UserPasswordEmail.vue'
 import Form from '../js/Form'
 
 window.Vue = Vue

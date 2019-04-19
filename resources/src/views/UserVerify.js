@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import UserVerify from '../ViewComponents/UserVerify.vue'
+import UserVerify from '../templates/UserVerify.vue'
 
 window.Vue = Vue
 window.axios = axios

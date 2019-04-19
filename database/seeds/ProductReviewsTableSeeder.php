@@ -18,14 +18,16 @@ class ProductReviewsTableSeeder extends Seeder
         $products = Product::all();
         $faker = Faker::create();
         foreach($products as $product) {
-            DB::table('product_reviews')->insert([
-                'product_id' => $product->id,
-                'user_id' => rand(2, 30),
-                'rating' => rand(0, 5),
-                'content' => implode(' ', $faker->sentences(3)),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
+            for ($i = 1; $i <= 3; $i++) {
+                DB::table('product_reviews')->insert([
+                    'product_id' => $product->id,
+                    'user_id' => rand(2, 30),
+                    'rating' => rand(0, 5),
+                    'content' => implode(' ', $faker->sentences(3)),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
         }
     }
 }

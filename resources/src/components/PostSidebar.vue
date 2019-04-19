@@ -53,6 +53,8 @@ export default {
                         position: relative;
                         z-index: 1;
                         padding: 0 5px;
+                        color: #000;
+                        font-size: 1.5rem;
                     }
                 }
             }

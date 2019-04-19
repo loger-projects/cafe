@@ -5,7 +5,7 @@ import VueLazyload from 'vue-lazyload'
 import VueCarousel from 'vue-carousel'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import ProductIndex from '../ViewComponents/ProductIndex.vue'
+import ProductIndex from '../templates/ProductIndex.vue'
 
 window.Vue = Vue
 window.axios = axios
@@ -24,7 +24,8 @@ new Vue({
         products: [],
         categories: [],
         galleries: [],
-        carts: []
+        cart: [],
+        pagination: {}
     },
     methods: {
         getSiteInfo() {
@@ -39,7 +40,9 @@ new Vue({
         getProducts() {
             axios.get('/api/products')
                 .then(response => {
-                    this.products = response.data
+                    this.products = response.data.data
+                    delete response.data.data
+                    this.pagination = response.data
                 })
                 .catch(error => {
                     console.log(error.response.data.message)
@@ -63,8 +66,14 @@ new Vue({
                     console.log(error.response.data.message)
                  })
         },
-        getCarts() {
-            return ''
+        getCart() {
+            axios.get('/api/cart')
+                .then(response => {
+                    this.cart = Object.values(response.data);
+                })
+                .catch(error => {
+                    console.log(error.response.data.message)
+                })
         }
     },
     created() {
@@ -72,6 +81,6 @@ new Vue({
         this.getProducts()
         this.getCategories(6)
         this.getGalleries(6)
-        this.getCarts()
+        this.getCart()
     }
 })

@@ -8,14 +8,6 @@
     </div>
 </template>
 
-<style lang="scss" scoped>
-        #siteBreadcrumb {
-            ul li a {
-                color: #fff;
-            }
-        }
-</style>
-
 <script>
 export default {
     name: 'SiteBreadcrumb',
@@ -39,6 +31,13 @@ export default {
                         {href: this.origin + '/products', name: 'Products'}
                     ]
                 break;
+                case 'ProductShow':
+                    return [
+                        {href: this.origin, name: 'Home'},
+                        {href: this.origin + '/products', name: 'Products'},
+                        {href: '', name: this.target.name}
+                    ]
+                break;
                 default:
                     return;
                 break;
@@ -47,3 +46,23 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    nav.breadcrumb {
+        ul {
+            li {
+                a {
+                    color: #795f4b;
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+                &:last-child {
+                    a {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+</style>

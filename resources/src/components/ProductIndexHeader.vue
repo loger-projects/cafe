@@ -2,11 +2,9 @@
     <section id="productIndexHeader">
         <div class="hero">
             <div class="hero-head">
-                <site-header
-                    :isBgWhite="true"
-                ></site-header>
+                <site-header :isBgWhite="true"></site-header>
             </div>
-            <div class="hero-body">
+            <div class="hero-body" :style="style">
                 <div class="container">
                     <h1 class="title is-2">Products</h1>
                     <site-breadcrumb type="ProductIndex"></site-breadcrumb>
@@ -25,6 +23,14 @@ export default {
     components: {
         SiteHeader,
         SiteBreadcrumb
+    },
+    computed: {
+        backgroundImage() {
+            return location.origin + '/img/products/ProductIndexHeaderBackground.jpg'
+        },
+        style() {
+            return "background-image: url('"+this.backgroundImage+"')"
+        }
     }
 }
 </script>
@@ -37,7 +43,9 @@ export default {
                 background-color: #fff;
             }
             .hero-body {
-                background-color: #000;
+                background-position: 50% 50%;
+                background-attachment: fixed;
+                background-size: cover;
                 .container {
                     color: #fff;
                     .title {

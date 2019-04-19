@@ -5,7 +5,7 @@ import 'buefy/dist/buefy.css'
 import VueCarousel from 'vue-carousel'
 import VueMoment from 'vue-moment'
 import VueLazyload from 'vue-lazyload'
-import SitePageHome from '../ViewComponents/SitePageHome.vue'
+import SitePageHome from '../templates/SitePageHome.vue'
 // import router from '../routes/SitePageHomeRouter.js'
 
 window.Vue = Vue;

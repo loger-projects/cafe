@@ -6,7 +6,7 @@ import VueCarousel from 'vue-carousel'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import Form from '../js/Form'
-import PostShow from '../ViewComponents/PostShow.vue'
+import PostShow from '../templates/PostShow.vue'
 
 window.Vue = Vue
 window.axios = axios
@@ -97,14 +97,14 @@ new Vue({
                  })
         },
         getPost() {
-            let str = location.href.replace('/post/', '/api/post/');
-            axios.get(str)
+            let url = location.href.replace('/post/', '/api/post/')
+            axios.get(url)
                 .then(response => {
-                    this.post = response.data;
-                    this.headerBackgroundURL = response.data.thumbnail;
-                    this.getAuthor(response.data);
-                    this.getComments(response.data);
-                    this.getRelatedPosts(response.data, 5);
+                    this.post = response.data
+                    this.headerBackgroundURL = response.data.thumbnail
+                    this.getAuthor(response.data)
+                    this.getComments(response.data)
+                    this.getRelatedPosts(response.data, 5)
                     })
                 .catch(error => {
                     console.log(error)

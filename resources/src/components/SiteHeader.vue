@@ -210,7 +210,7 @@ export default {
             return location.origin + '/img/SiteHeaderLogoBlack.jpg';
         },
         logo() {
-            return this.isSticky ? this.logoBlack : this.logoWhite;
+            return this.isSticky || this.isBgWhite ? this.logoBlack : this.logoWhite;
         },
     },
     mounted() {

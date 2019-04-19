@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import UserRegister from '../ViewComponents/UserRegister.vue'
+import UserRegister from '../templates/UserRegister.vue'
 import Form from '../js/Form'
 
 window.Vue = Vue

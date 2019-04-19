@@ -5,7 +5,7 @@ import VueLazyload from 'vue-lazyload'
 import VueCarousel from 'vue-carousel'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import PostIndex from '../ViewComponents/PostIndex.vue'
+import PostIndex from '../templates/PostIndex.vue'
 
 window.Vue = Vue
 window.axios = axios

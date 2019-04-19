@@ -88,16 +88,79 @@ class ProductController extends Controller
      * API Methods
      */
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function apiIndex()
     {
-        return Product::latest()->get();
+        return Product::paginate(9);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $filter
+     * @return void
+     */
+    public function apiIndexFilter($filter)
+    {
+        switch($filter) {
+            case 'popularity':
+                return Product::orderBy('sold_quantity', 'desc')->paginate(9);
+            break;
+            case 'rating':
+                return Product::orderBy('rating', 'desc')->paginate(9);
+            break;
+            case 'latest':
+                return Product::latest()->paginate(9);
+            break;
+            case 'price-low-to-high':
+                return Product::orderBy('price', 'asc')->paginate(9);
+            break;
+            case 'price-high-to-low':
+                return Product::orderBy('price', 'desc')->paginate(9);
+            break;
+            default:
+                return Product::paginate(9);
+            break;
+        }
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $slug
+     * @return void
+     */
     public function apiShow($slug)
     {
-        return Product::where('slug', $slug)->first();
+        $product = Product::where('slug', $slug)->first();
+        $category = $product->category;
+        return $product;
     }
 
+    public function apiRelated($id)
+    {
+        $product = Product::where('id', $id)->first();
+        return Product::where('cate_id', $product->cate_id, 'and')->where('id', '!=', $id)->inRandomOrder()->take(3)->get();
+    }
+
+    public function apiReviews($id)
+    {
+        $reviews = Product::find($id)->reviews;
+        foreach($reviews as $review) {
+            $user = $review->user;
+        }
+        return $reviews;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public static function routes()
     {
         Route::group([
@@ -121,6 +184,7 @@ class ProductController extends Controller
         ],function() {
             Route::name('api.product.')->group(function() {
                 Route::get('/', 'ProductController@apiIndex')->name('index');
+                Route::get('/filter/{filter}', 'ProductController@apiIndexFilter')->name('index.filter');
             });
         });
 
@@ -129,6 +193,8 @@ class ProductController extends Controller
         ],function() {
             Route::name('api.product')->group(function() {
                 Route::get('/{slug}', 'ProductController@apiShow')->name('show');
+                Route::get('/{id}/related', 'ProductController@apiRelated')->name('related');
+                Route::get('/{id}/reviews', 'ProductController@apiReviews')->name('reviews');
             });
         });
     }
