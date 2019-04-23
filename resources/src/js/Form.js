@@ -17,6 +17,11 @@ class Form {
         }
     }
 
+    add(attribute, value) {
+        this.originalData[attribute] = value
+        this[attribute ] = value
+    }
+
     /**
      * name: 'name'
      * description: 'description'

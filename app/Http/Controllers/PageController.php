@@ -32,7 +32,11 @@ class PageController extends Controller
      */
     public static function routes()
     {
-        Route::get('/', 'PageController@sitePageHome')->name('site.page.home');
         Route::get('/test', 'PageController@test')->name('test');
+        Route::name('site.page.')->group(function() {
+            Route::get('/', 'PageController@sitePageHome')->name('home');
+            Route::get('/cart', 'PageController@cart')->name('cart');
+            Route::get('/checkout', 'PageController@checkout')->name('checkout')->middleware('auth');
+        });
     }
 }

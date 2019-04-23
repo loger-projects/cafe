@@ -1,13 +1,19 @@
 <template>
     <div id="productReviewForm">
         <div class="border-top"></div>
-        <div class="review-title has-text-centered">Make your review</div>
+        <div class="review-title has-text-centered">Write a review</div>
         <div class="review-form">
             <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
                 <div class="field">
                     <label class="label">Rating</label>
                     <div class="control">
-                        <star-rating v-model="form.rating" :star-size="20" active-color="#000" border-color="#000"></star-rating>
+                        <star-rating 
+                            v-model="form.rating" 
+                            :star-size="20" 
+                            active-color="#000" 
+                            border-color="#000"
+                            :increment="0.5">
+                        </star-rating>
                     </div>
                 </div>
                 <div class="field">
@@ -27,6 +33,7 @@
                 </div>
             </form>
         </div>
+        
     </div>
 </template>
 
@@ -37,24 +44,32 @@ export default {
         return {
             form: new Form({
                 rating: 0,
-                content: ''
-            })
-        }
-    },
-    computed: {
-        form() {
-            return new Form ({
-                rating: 0,
+                content: '',
             })
         }
     },
     methods: {
         onSubmit() {
-            alert('oke')
-            // check for login
-            // submit
-            // response => push to $root.reviews
+            if(! this.$root.isLogin) {
+                alert('You Have To Login!')
+            }else {
+                this.form.post('/api/product/review/store')
+                        .then(response => {
+                            this.form.content = ''
+                            this.form.rating = 0
+                            this.$root.reviews.push(response.review)
+                            this.$root.product.rating = response.product.rating
+                            this.$root.product.rating_count = response.product.rating_count
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+            }
         }
+    },
+    created() {
+        this.form.add('user_id', this.$root.user.id)
+        this.form.add('product_id', this.$root.product.id)
     }
 }
 </script>

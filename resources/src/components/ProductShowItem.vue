@@ -5,8 +5,7 @@
                 <span class="icon is-medium"><i class="fas fa-check circle"></i></span><strong class="product-name">“{{ product.name }}”</strong> has been added to your cart.
             </div>
             <div class="button-wrap">
-                <button class="button btn-brown btn-large">View Cart</button>
-                <a :href="location.origin + '/cart'" class="button btn-brown btn-large"></a>
+                <a :href="routes.cart" class="button btn-brown btn-large">View Cart</a>
             </div>
             <div class="delete" @click="isSuccess = false"></div>
         </div>
@@ -18,8 +17,18 @@
             </div>
             <div class="column is-6-tablet is-5-desktop product-content">
                 <h2 class="title is-3 product-title">{{ product.name }}</h2>
+                <div class="product-rating">
+                    <star-rating 
+                        :rating="product.rating" 
+                        :read-only="true" 
+                        active-color="#000" 
+                        border-color="#000"
+                        :star-size="20">
+                    </star-rating>
+                    <div class="rating_count">({{ product.rating_count }})</div>
+                </div>
                 <div class="product-price">${{ product.price }}</div>
-                <div class="product-description">{{ product.description.substr(0, 100) }}</div>
+                <div class="product-description">{{ product.excerpt }}</div>
                 <div class="add-to-cart-wrapper">
                     <div class="quantity field">
                         <div class="control">
@@ -27,11 +36,12 @@
                         </div>
                     </div>
                     <div class="add-to-cart-button">
-                        <button class="button btn-brow btn-medium" @click="addToCart">Add To Cart</button>
+                        <button class="button btn-brown btn-medium" @click="addToCart">Add To Cart</button>
                     </div>
                 </div>
                 <div class="product-category">
-                    <strong>Category:</strong><span>{{ product.category.name }}</span>
+                    <strong>Category:</strong>
+                    <a :href="category.url"><span>{{ category.name }}</span></a>
                 </div>
             </div>
         </div>
@@ -49,6 +59,12 @@ export default {
     },
     computed: {
         product() { return this.$root.product },
+        category() { return this.$root.product_category },
+        routes() {
+            return {
+                cart: location.origin + '/cart'
+            }
+        }
     },
     methods: {
         addToCart() {
@@ -94,6 +110,13 @@ export default {
             .product-title {
                 margin-bottom: 1rem;
             }
+            .product-rating {
+                display: flex;
+                align-items: center;
+                .rating_count {
+                    padding-left: 10px;
+                }
+            }
             .product-price {
                 color: #795f4b;
                 font-weight: bold;
@@ -112,6 +135,7 @@ export default {
                 }
                 .add-to-cart-button {
                     padding-left: 20px;
+                    font-weight: bold;
                 }
             }
             .product-category {

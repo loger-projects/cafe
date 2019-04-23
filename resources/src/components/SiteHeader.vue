@@ -184,19 +184,6 @@ export default {
         return {
             isSticky: false,
             isActive: false,
-            navbar: [
-                {link: this.origin, text: 'Home', hasDropdown: false},
-                {link: '#', text: 'Menu', hasDropdown: false},
-                {link: '#', text: 'Product', hasDropdown: false},
-                {link: '#', text: 'About', hasDropdown: false},
-                {link: '#', text: 'Post Type', hasDropdown: true, 
-                    dropdown: [
-                        {link: '#', text: 'Full width'},
-                        {link: '#', text: 'Right Sidebar'},
-                        {link: '#', text: '3 Columns'}
-                    ]
-                },
-            ]
         }
     },
     computed: {
@@ -212,6 +199,21 @@ export default {
         logo() {
             return this.isSticky || this.isBgWhite ? this.logoBlack : this.logoWhite;
         },
+        navbar() {
+            return [
+                {link: this.origin, text: 'Home', hasDropdown: false},
+                {link: this.origin + '/posts', text: 'Posts', hasDropdown: false},
+                {link: this.origin + '/products', text: 'Products', hasDropdown: false},
+                {link: this.origin + '/login', text: 'Login', hasDropdown: false},
+                {link: this.origin + '/register', text: 'Register', hasDropdown: true, 
+                    dropdown: [
+                        {link: '#', text: 'Full width'},
+                        {link: '#', text: 'Right Sidebar'},
+                        {link: '#', text: '3 Columns'}
+                    ]
+                },
+            ]
+        }
     },
     mounted() {
         window.addEventListener('scroll', event => {

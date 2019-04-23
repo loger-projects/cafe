@@ -23,10 +23,12 @@ class ProductsTableSeeder extends Seeder
                 $slug = str_slug($name);
                 $url = url('product/'.$slug);
                 $description = implode(' ', $faker->sentences(3));
+                $excerpt = substr($description, 0, 100);
                 $price = rand(5, 100);
                 $inStock = true;
                 $isNew = false;
                 $rating = rand(0, 5);
+                $rating_count = 3;
                 $quantity = rand(100, 200);
                 $availableQuantity = $quantity - rand(10, 50);
                 $soldQuantity = $quantity - $availableQuantity;
@@ -38,10 +40,12 @@ class ProductsTableSeeder extends Seeder
                     'slug' => $slug,
                     'url' => $url,
                     'description' => $description,
+                    'excerpt' => $excerpt,
                     'price' => $price,
                     'in_stock' => $inStock,
                     'is_new' => $isNew,
                     'rating' => $rating,
+                    'rating_count' => $rating_count,
                     'quantity' => $quantity,
                     'available_quantity' => $availableQuantity,
                     'sold_quantity' => $soldQuantity,

@@ -38,6 +38,14 @@ export default {
                         {href: '', name: this.target.name}
                     ]
                 break;
+                case 'ProductCateShow':
+                    return [
+                        {href: this.origin, name: 'Home'},
+                        {href: this.origin + '/products', name: 'Products'},
+                        {href: '#', name: 'Category'},
+                        {href: '', name: this.target.name}
+                    ]
+                break;
                 default:
                     return;
                 break;

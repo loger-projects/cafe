@@ -3,7 +3,10 @@
         <div class="widget-title">
             <span>Cart</span>
         </div>
-        <div class="widget-content">
+        <div class="widget-content" v-if="cart.length == 0">
+            <div class="cart-empty">There are no products in Cart</div>
+        </div>
+        <div class="widget-content" v-else>
             <div class="item" v-for="item in cart" :key="item.id">
                 <div class="thumbnail">
                     <figure class="image is-1by1">
@@ -19,10 +22,10 @@
                 </div>
             </div>
             <div class="view-cart-button">
-                <a href="" class="button btn-brown" role="button">View Cart</a>
+                <a :href="routes.cart" class="button btn-brown" role="button">View Cart</a>
             </div>
             <div class="checkout-button">
-                <a href="" class="button btn-black">Checkout</a>
+                <a :href="routes.checkout" class="button btn-black">Checkout</a>
             </div>
         </div>
     </div>
@@ -39,6 +42,12 @@ export default {
                 subtotal += element.subtotal
             });
             return subtotal;
+        },
+        routes() {
+            return {
+                cart: location.origin + '/cart',
+                checkout: location.origin + '/checkout'
+            }
         }
     },
     methods: {
@@ -59,6 +68,11 @@ export default {
 <style lang="scss" scoped>
     #productSidebarCart {
         .widget-content {
+            .cart-empty {
+                text-align: center;
+                color: #000;
+                padding: 20px 0;
+            }
             .item {
                 display: flex;
                 border-bottom: 1px solid rgb(102, 101, 101);

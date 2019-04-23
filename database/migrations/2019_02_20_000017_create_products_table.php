@@ -20,10 +20,12 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->string('url');
             $table->text('description');
+            $table->string('excerpt');
             $table->unsignedInteger('price');
             $table->boolean('in_stock');
             $table->boolean('is_new')->default(false);
             $table->unsignedInteger('rating');
+            $table->unsignedInteger('rating_count');
             $table->unsignedInteger('quantity')->default(0);
             $table->unsignedInteger('available_quantity')->default(0);
             $table->unsignedInteger('sold_quantity')->default(0);

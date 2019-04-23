@@ -50,6 +50,17 @@ class CartController extends Controller
         return $cart = Cart::content();
     }
 
+    public function massUpdate()
+    {
+        $quantify = $request->quantify;
+        $quantify = [
+            [
+                'rowId' => 'value',
+                'qty' => 'value'
+            ]
+        ];
+    }
+
     /**
      * Undocumented function
      *

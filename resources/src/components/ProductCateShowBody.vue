@@ -1,5 +1,5 @@
 <template>
-    <section id="productIndexBody">
+    <section id="productCateShowBody">
         <div class="container">
             <div class="columns" id="content-wrapper">
                 <div id="content" class="comlumn is-9">
@@ -11,7 +11,7 @@
                                 <option value="rating">Sort by average rating</option>
                                 <option value="latest">Sort by latest</option>
                                 <option value="price-low-to-high">Sort by price: low to high</option>
-                                <option value="price-hight-to-low">Sort by price: high to low</option>
+                                <option value="price-high-to-low">Sort by price: high to low</option>
                             </select>
                         </div>
                     </div>
@@ -43,7 +43,7 @@ import ProductSidebar from './ProductSidebar.vue'
 import productItem from './ProductItem.vue'
 
 export default {
-    name: 'ProductIndexBody',
+    name: 'ProductCateShowBody',
     components: {
         ProductSidebar,
         productItem
@@ -55,11 +55,12 @@ export default {
     },
     computed: {
         products() { return this.$root.products },
-        pagination() { return this.$root.pagination }
+        pagination() { return this.$root.pagination },
+        category() { return this.$root.category }
     },
     methods: {
         onSelect() {
-            axios.get('/api/products/filter/'+this.filter)
+            axios.get('/api/product/category/'+this.category.id+'/filter/'+this.filter)
                 .then(response => {
                     this.$root.products = response.data.data
                     delete response.data.data
@@ -67,7 +68,7 @@ export default {
                 })
         },
         pageChange(page) {
-            axios.get('/api/products/filter/'+this.filter+'?page='+page)
+            axios.get('/api/product/category/'+this.category.id+'/filter/'+this.filter+'?page='+page)
                 .then(response => {
                     this.$root.products = response.data.data
                     delete response.data.data
@@ -82,7 +83,7 @@ export default {
 </script>
 
 <style lang="scss">
-    #productIndexBody {
+    #productCateShowBody {
         padding: 50px 0;
         #content-wrapper {
             flex-direction: row-reverse;
