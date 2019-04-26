@@ -48,6 +48,7 @@ datalist {
     background-color: #795f4b !important;
     color: #fff !important;
     font-weight: bold;
+    font-family: 'aileron-black';
 }
 .btn-brown-outline {
     border: 2px solid #795f4b;
@@ -75,4 +76,8 @@ datalist {
 .btn-medium {
     width: 140px;
     height: 44px;
+}
+.btn-expand {
+    width: 200px;
+    height: 80px;
 }

@@ -461,6 +461,16 @@ option {
   padding: 0 !important;
 }
 
+/**
+ * input
+ */
+
+input[type=number] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 @font-face {
   font-family: "Lato";
   src: url(/fonts/Lato-Regular.ttf?7f690e503a254e0b8349aec0177e07aa);
@@ -561,6 +571,7 @@ datalist {
   background-color: #795f4b !important;
   color: #fff !important;
   font-weight: bold;
+  font-family: "aileron-black";
 }
 
 .btn-brown-outline {
@@ -594,5 +605,10 @@ datalist {
 .btn-medium {
   width: 140px;
   height: 44px;
+}
+
+.btn-expand {
+  width: 200px;
+  height: 80px;
 }
 

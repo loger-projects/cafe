@@ -17,6 +17,19 @@ export default {
         SitePageCartHeader,
         SitePageCartBody,
         SiteFooter
+    },
+    mounted() {
+        let cart = document.getElementById('sitePageCart')
+        let cartHeader = document.getElementById('sitePageCartHeader')
+        let cartBody = document.getElementById('sitePageCartBody')
+        let cartFooter = document.getElementById('siteFooter')
+        cartBody.style.minHeight = cart.offsetHeight - (cartHeader.offsetHeight + cartFooter.offsetHeight) + 'px'
     }
 }
 </script>
+
+<style lang="scss">
+    #sitePageCart {
+        min-height: 100vh !important;
+    }
+</style>

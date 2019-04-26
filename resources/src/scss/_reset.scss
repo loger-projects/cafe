@@ -356,3 +356,12 @@ button, input, select, option {
 .column {
     padding: 0 !important;
 }
+/**
+ * input
+ */
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+}

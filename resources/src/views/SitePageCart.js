@@ -3,7 +3,7 @@ import axios from 'axios'
 import VueLazyload from 'vue-lazyload'
 import buefy from 'buefy'
 import 'buefy/dist/buefy.css'
-import Form from '../js/From'
+import Form from '../js/Form'
 import SitePageCart from '../templates/SitePageCart.vue'
 
 window.Vue = Vue
@@ -21,7 +21,10 @@ new Vue({
         siteInfo: {},
         cart: [],
         isLogin: false,
-        user: {}
+        user: {},
+        routes: {
+            productIndex: ''
+        }
     },
     methods: {
         getSiteInfo() {
@@ -31,6 +34,15 @@ new Vue({
                 })
                 .catch(error => {
                     console.log(error.response.data.message)
+                })
+        },
+        routePromise(name) {
+            return axios.get('/api/option/route/' + name)
+        },
+        getRoutes() {
+            this.routePromise('product.index')
+                .then(response => {
+                    this.routes.productIndex = response.data
                 })
         },
         getCart() {
@@ -57,5 +69,12 @@ new Vue({
                     console.log(error.response.data)
                 })
         }
+    },
+    created()
+    {
+        this.getSiteInfo()
+        this.getCart()
+        this.checkLogin()
+        this.getRoutes()
     }
 })

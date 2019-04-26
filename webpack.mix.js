@@ -3,7 +3,8 @@ const mix = require('laravel-mix');
 // mix.sass('resources/src/scss/master.scss', 'public/css');
 
 // mix.js('resources/src/views/SitePageHome.js', 'public/js');
-mix.js('resources/src/views/SitePageCart.js', 'public/js');
+// mix.js('resources/src/views/SitePageCart.js', 'public/js');
+mix.js('resources/src/views/SitePageCheckout.js', 'public/js');
 
 
 // mix.js('resources/src/views/PostShow.js', 'public/js')

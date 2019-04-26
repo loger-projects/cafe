@@ -31,7 +31,7 @@ class UserController extends Controller
     
     public function apiAuth()
     {
-        return Auth::check() ? Auth::user() : false;
+        return Auth::check() ? Auth::user() : '';
     }
 
     public static function routes()

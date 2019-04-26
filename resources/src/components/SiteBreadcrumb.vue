@@ -46,6 +46,18 @@ export default {
                         {href: '', name: this.target.name}
                     ]
                 break;
+                case 'SitePageCart': 
+                    return [
+                        {href: this.origin, name: 'Home'},
+                        {href: this.origin + '/cart', name: 'Cart'}
+                    ]
+                break;
+                case 'SitePageCheckout': 
+                    return [
+                        {href: this.origin, name: 'Home'},
+                        {href: this.origin + '/checkout', name: 'Checkout'}
+                    ]
+                break;
                 default:
                     return;
                 break;

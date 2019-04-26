@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -16235,7 +16235,7 @@ var render = function() {
                         expression: "form.checkbox"
                       }
                     ],
-                    attrs: { type: "checkbox", name: "checkbox" },
+                    attrs: { type: "checkbox", name: "remember" },
                     domProps: {
                       checked: Array.isArray(_vm.form.checkbox)
                         ? _vm._i(_vm.form.checkbox, null) > -1
@@ -28953,7 +28953,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
 /***/ }),
 
-/***/ 4:
+/***/ 1:
 /*!************************************************!*\
   !*** multi ./resources/src/views/UserLogin.js ***!
   \************************************************/

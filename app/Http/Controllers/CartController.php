@@ -35,7 +35,7 @@ class CartController extends Controller
                 'thumbnail' => $product['thumbnail'],
             ]
             ]);
-        return $cart = Cart::content();
+        return Cart::content();
     }
 
     /**
@@ -43,22 +43,15 @@ class CartController extends Controller
      *
      * @return void
      */
-    public function update()
+    public function update(Request $request)
     {
-        $product = $request->all();
-        Cart::update($product['rowId'], $product['qty']);
-        return $cart = Cart::content();
-    }
+        $data = $request->all();
 
-    public function massUpdate()
-    {
-        $quantify = $request->quantify;
-        $quantify = [
-            [
-                'rowId' => 'value',
-                'qty' => 'value'
-            ]
-        ];
+        foreach ($data as $key => $value) {
+            Cart::update($key, $value);
+        }
+        
+        return Cart::content();
     }
 
     /**
@@ -107,7 +100,7 @@ class CartController extends Controller
             Route::name('api.cart.')->group(function() {
                 Route::get('/', 'CartController@index')->name('index');
                 Route::post('/add', 'CartController@add')->name('add');
-                Route::patch('/update/{id}', 'CartController@update')->name('update');
+                Route::put('/update', 'CartController@update')->name('update');
                 Route::post('/remove', 'CartController@remove')->name('remove');
                 Route::get('/destroy', 'CartController@destroy')->name('destroy');
                 Route::get('/total', 'CartController@total')->name('total');

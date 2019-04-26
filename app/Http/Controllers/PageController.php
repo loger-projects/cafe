@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Models\MenuMeal;
 use App\Models\Menu;
 use Route;
+use Cart;
 
 class PageController extends Controller
 {
@@ -20,9 +21,20 @@ class PageController extends Controller
      *
      * @return void
      */
-    public function test()
+    public function cart()
     {
-        return view('test');
+        return view('page.cart');
+    }
+
+    public function checkout()
+    {
+        return view('page.checkout');
+    }
+
+    public function getRoutes()
+    {
+        $routes = collect(Route::getRoutes())->map(function ($route) { return $route->uri(); });
+        return collect(Route::getRoutes())->toArray();
     }
 
     /**
@@ -37,6 +49,7 @@ class PageController extends Controller
             Route::get('/', 'PageController@sitePageHome')->name('home');
             Route::get('/cart', 'PageController@cart')->name('cart');
             Route::get('/checkout', 'PageController@checkout')->name('checkout')->middleware('auth');
+            Route::get('/get-routes', 'PageController@getRoutes')->name('getroutes');
         });
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <section id="sitePageCartHeader">
+    <section id="sitePageCheckoutHeader">
         <div class="hero">
             <div class="hero-head">
                 <site-header :isBgWhite="true"></site-header>
@@ -7,7 +7,7 @@
             <div class="hero-body" :style="bodyStyle">
                 <div class="container">
                     <h1 class="title is-2">Cart</h1>
-                    <site-breadcrumb type="SitePageCart"></site-breadcrumb>
+                    <site-breadcrumb type="SitePageCheckout"></site-breadcrumb>
                 </div>
             </div>
         </div>
@@ -19,7 +19,7 @@ import SiteHeader from './SiteHeader.vue'
 import SiteBreadcrumb from './SiteBreadcrumb.vue'
 
 export default {
-    name: 'SitePageCartHeader',
+    name: 'SitePageCheckoutHeader',
     components: {
         SiteHeader,
         SiteBreadcrumb
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    #sitePageCartHeader {
+    #sitePageCheckoutHeader {
         .hero {
             .hero-head {
                 height: 60px;

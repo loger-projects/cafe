@@ -24,7 +24,7 @@
 
                     <div class="field">
                         <label for="remember" class="checkbox">
-                            <input type="checkbox" name="checkbox" v-model="form.checkbox">
+                            <input type="checkbox" name="remember" v-model="form.checkbox">
                             Remember me
                         </label>
                     </div>
