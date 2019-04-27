@@ -9,7 +9,7 @@ Cafe is a basic ecommerce website based on Laravel 5.7 and Vuejs
 1. [Requirements](#requirements)
 2. [Installation](#installation)
 3. [Features](#features)
-4. [Images][#images]
+4. [Images](#images)
 
 ## Requirements
 
