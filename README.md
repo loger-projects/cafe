@@ -1,58 +1,68 @@
-# coffee
-This is  a e-commerce site. use vuejs and laravel
+<p align="center"><img height="100px" src="https://i.imgur.com/MSTz1Y0.png"></p>
 
-# ENV file content
+## Introduction
 
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=base64:mHCLkMwmytEUgaQvcW1+foYw+LcZnG9d0b40AmAiXhM=
-APP_DEBUG=true
-APP_URL=http://localhost
+Cafe is a basic ecommerce website based on Laravel 5.7 and Vuejs
 
-LOG_CHANNEL=stack
+## Table of Contents
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=cafe
-DB_USERNAME=loger
-DB_PASSWORD=loger
+1. [Requirements](#requirements)
+2. [Installation](#installation)
+3. [Features](#features)
+4. [Images][#images]
 
-BROADCAST_DRIVER=log
-CACHE_DRIVER=file
-QUEUE_CONNECTION=sync
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
+## Requirements
 
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
+SEVER REQUIREMENTS:
 
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=null
+- PHP >= 7.1.3
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Mbstring PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+- Ctype PHP Extension
+- JSON PHP Extension
+- BCMath PHP Extension
 
-PUSHER_APP_ID=
-PUSHER_APP_KEY=
-PUSHER_APP_SECRET=
-PUSHER_APP_CLUSTER=mt1
+OPTIONAL REQUIREMENTS:
+- Composer
+- NPM / YARN
 
-MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+## Installation
 
-# .gitignore file content
+1. `git clone https://github.com/loger-projects/cafe.git`
+2. `cd cafe`
+3. `composer install`
+4. `php artisan migrate`
+( optional )
+5. `php artisan db:seed`
 
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
+## Features
+
+- Responsive layout
+- Lazyload images
+- Admin Dashboard
+- Book Table
+- Shopping Cart
+- Restaurant Menu
+- Blog
+- Comment (3 levels)
+- Review(1 level - rating)
+- Media
+- User Login - Register - Email Verify - Forgot Password
+- User Dashboard ( manage orders, favorite food - drink, review, comment)
+
+## Images
+
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/x1yDiD6.jpg"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/zq6Ax5d.jpg"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/bDYRv4I.png"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/Z7MowbY.png"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/M6UlIHO.png"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/WudRS41.png"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/WVG8ojt.png"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/MjjnsCL.png"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/4E8dRYO.png"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/k2zTNUf.png"></p>
+<p align="center"><img style="width: 100%;" src="https://i.imgur.com/v7GHqd5.png"></p>

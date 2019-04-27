@@ -5,6 +5,7 @@
                 <site-header></site-header>
             </div>
             <div class="hero-body">
+                <h1 class="title is-aileron-black is-2">Login</h1>
                 <form @submit.prevent="onSubmit" class="user-login-form" @keydown="form.errors.clear($event.target.name)">
                     <div class="field">
                         <label for="username" class="label">Username:</label>
@@ -31,11 +32,14 @@
 
                     <div class="field has-addons">
                         <div class="control">
-                            <button type="submit" class="button is-success" :disabled="form.errors.any()">Login</button>
+                            <button type="submit" class="button btn-brown" :disabled="form.errors.any()">Login</button>
                         </div>
                         <div class="control">
-                            <a :href="href" class="button is-text" role="button">Forgot your password</a>
+                            <a :href="forgotPasswordLink" class="button is-text" role="button">Forgot your password</a>
                         </div>
+                    </div>
+                    <div class="field register-field">
+                        <a :href="registerLink" class="button is-text" role="button">Register New user</a>
                     </div>
                 </form>
             </div>
@@ -66,7 +70,8 @@ export default {
         }
     },
     computed: {
-        href() { return location.origin + '/password/reset' }
+        forgotPasswordLink() { return location.origin + '/password/reset' },
+        registerLink() { return location.origin + '/register'}
     },
     methods: {
         onSubmit() {
@@ -89,12 +94,21 @@ export default {
             height: 150px;
         }
         .hero-body {
-            background-color: #d0e1d4;
             padding: 100px 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             .user-login-form {
                 margin: 0 auto;
+                .field {
+                    .label {
+                        font-family: 'aileron-black';
+                    }
+                    &.register-field {
+                        text-align: center;
+                    }
+                }
             }
         }
     }

@@ -14727,7 +14727,7 @@ exports.push([module.i, "#siteHeader[data-v-b2a90c0c] {\n  position: fixed;\n  t
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#userRegister .hero-head[data-v-58eae187] {\n  background: #222;\n  height: 150px;\n}\n#userRegister .hero-body[data-v-58eae187] {\n  background-color: #d0e1d4;\n  padding: 100px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  padding: 0 20px;\n}\n#userRegister .hero-body .user-register-form[data-v-58eae187] {\n  margin: 0 auto;\n  width: 100%;\n  max-width: 400px;\n}", ""]);
+exports.push([module.i, "#userRegister .hero-head[data-v-58eae187] {\n  background: #222;\n  height: 150px;\n}\n#userRegister .hero-body[data-v-58eae187] {\n  padding: 100px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  padding: 0 20px;\n}\n#userRegister .hero-body .user-register-form[data-v-58eae187] {\n  margin: 0 auto;\n  width: 100%;\n  max-width: 400px;\n}\n#userRegister .hero-body .user-register-form .field .label[data-v-58eae187] {\n  font-family: \"aileron-black\";\n}", ""]);
 
 
 
@@ -16183,7 +16183,9 @@ var render = function() {
       _c("div", { staticClass: "hero-head" }, [_c("site-header")], 1),
       _vm._v(" "),
       _c("div", { staticClass: "hero-body" }, [
-        _c("h1", { staticClass: "title" }, [_vm._v("Registe a new account")]),
+        _c("h1", { staticClass: "title is-aileron-black is-2" }, [
+          _vm._v("Registe a new account")
+        ]),
         _vm._v(" "),
         _c(
           "form",
@@ -16497,8 +16499,8 @@ var staticRenderFns = [
       _c("div", { staticClass: "control" }, [
         _c(
           "button",
-          { staticClass: "button is-success", attrs: { type: "submit" } },
-          [_vm._v("Submit")]
+          { staticClass: "button btn-brown", attrs: { type: "submit" } },
+          [_vm._v("Create New")]
         )
       ]),
       _vm._v(" "),

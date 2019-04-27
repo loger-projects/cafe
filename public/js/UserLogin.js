@@ -2160,6 +2160,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2178,8 +2182,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    href: function href() {
+    forgotPasswordLink: function forgotPasswordLink() {
       return location.origin + '/password/reset';
+    },
+    registerLink: function registerLink() {
+      return location.origin + '/register';
     }
   },
   methods: {
@@ -14668,7 +14675,7 @@ exports.push([module.i, "#siteHeader[data-v-b2a90c0c] {\n  position: fixed;\n  t
 
 exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "#userLogin .hero-head[data-v-31782196] {\n  background: #222;\n  height: 150px;\n}\n#userLogin .hero-body[data-v-31782196] {\n  background-color: #d0e1d4;\n  padding: 100px 0;\n  display: flex;\n  justify-content: center;\n}\n#userLogin .hero-body .user-login-form[data-v-31782196] {\n  margin: 0 auto;\n}", ""]);
+exports.push([module.i, "#userLogin .hero-head[data-v-31782196] {\n  background: #222;\n  height: 150px;\n}\n#userLogin .hero-body[data-v-31782196] {\n  padding: 100px 0;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#userLogin .hero-body .user-login-form[data-v-31782196] {\n  margin: 0 auto;\n}\n#userLogin .hero-body .user-login-form .field .label[data-v-31782196] {\n  font-family: \"aileron-black\";\n}\n#userLogin .hero-body .user-login-form .field.register-field[data-v-31782196] {\n  text-align: center;\n}", ""]);
 
 
 
@@ -16124,6 +16131,10 @@ var render = function() {
       _c("div", { staticClass: "hero-head" }, [_c("site-header")], 1),
       _vm._v(" "),
       _c("div", { staticClass: "hero-body" }, [
+        _c("h1", { staticClass: "title is-aileron-black is-2" }, [
+          _vm._v("Login")
+        ]),
+        _vm._v(" "),
         _c(
           "form",
           {
@@ -16278,7 +16289,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "button is-success",
+                    staticClass: "button btn-brown",
                     attrs: { type: "submit", disabled: _vm.form.errors.any() }
                   },
                   [_vm._v("Login")]
@@ -16290,11 +16301,22 @@ var render = function() {
                   "a",
                   {
                     staticClass: "button is-text",
-                    attrs: { href: _vm.href, role: "button" }
+                    attrs: { href: _vm.forgotPasswordLink, role: "button" }
                   },
                   [_vm._v("Forgot your password")]
                 )
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "field register-field" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "button is-text",
+                  attrs: { href: _vm.registerLink, role: "button" }
+                },
+                [_vm._v("Register New user")]
+              )
             ])
           ]
         )

@@ -1,3 +1,9 @@
 {
-    "/js/SitePageCheckout.js": "/js/SitePageCheckout.js"
+    "/js/SitePageCheckout.js": "/js/SitePageCheckout.js",
+    "/js/UserHome.js": "/js/UserHome.js",
+    "/js/UserLogin.js": "/js/UserLogin.js",
+    "/js/UserPasswordEmail.js": "/js/UserPasswordEmail.js",
+    "/js/UserPasswordReset.js": "/js/UserPasswordReset.js",
+    "/js/UserRegister.js": "/js/UserRegister.js",
+    "/js/UserVerify.js": "/js/UserVerify.js"
 }

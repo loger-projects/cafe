@@ -5,7 +5,7 @@
                 <site-header></site-header>
             </div>
             <div class="hero-body">
-                <h1 class="title">Registe a new account</h1>
+                <h1 class="title is-aileron-black is-2">Registe a new account</h1>
                 <form class="user-register-form" @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)">
                     <div class="field">
                         <label for="name" class="label">Name:</label>
@@ -86,7 +86,7 @@
 
                     <div class="field is-grouped is-grouped-centered">
                         <div class="control">
-                            <button type="submit" class="button is-success">Submit</button>
+                            <button type="submit" class="button btn-brown">Create New</button>
                         </div>
                         <div class="control">
                             <button type="reset" class="button is-danger">Reset</button>
@@ -149,7 +149,6 @@ export default {
             height: 150px;
         }
         .hero-body {
-            background-color: #d0e1d4;
             padding: 100px 0;
             display: flex;
             justify-content: center;
@@ -160,6 +159,11 @@ export default {
                 margin: 0 auto;
                 width: 100%;
                 max-width: 400px;
+                .field {
+                    .label {
+                        font-family: 'aileron-black';
+                    }
+                }
             }
         }
     }
