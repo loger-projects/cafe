@@ -18,7 +18,19 @@ new Vue({
     data: {
         siteInfo: {},
         cart: [],
-        user: {}
+        user: {
+            name: '',
+            email: '',
+            phone: '',
+            street_address: '',
+            city: '',
+            country: '',
+            zipcode: ''
+        },
+        routes: {
+            sitePageCheckout: '',
+            sitePageCheckoutEnd: '',
+        }
     },
     methods: {
         getSiteInfo() {
@@ -42,18 +54,32 @@ new Vue({
         getUser() {
             axios.get('/api/user/auth')
                 .then(response => {
-                    if(response.data.length) {
+                    if(response.data) {
                         this.user = response.data
                     }
                 })
                 .catch(error => {
                     console.log(error.response.data)
                 })
-        }
+        },
+        routePromise(name) {
+            return axios.get('/api/option/route/' + name)
+        },
+        getRoutes() {
+            this.routePromise('site.page.checkout')
+                .then(response => {
+                    this.routes.sitePageCheckout = response.data
+                })
+            this.routePromise('site.page.checkout.end')
+                .then(response => {
+                    this.routes.sitePageCheckoutEnd = response.data
+                })
+        },
     },
     created() {
         this.getSiteInfo()
         this.getCart()
         this.getUser()
+        this.getRoutes()
     }
 })

@@ -4,82 +4,63 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Route;
+use OrderDetail;
+use Cart;
 
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Undocumented function
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function apiStore(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'street_address' => 'required',
+            'city' => 'requried',
+            'country' => 'required',
+            'zipcode' => 'required',
+        ]);
+        
+        $order = Order::create($request->all);
+
+        if($order) {
+           $request->session()->put('user_'.$request->user_id.'_last_order', $order);
+        }
+
+        $cart = Cart::content();
+
+        foreach($cart as $key => $product) {
+            OrderDetail::create([
+                'order_id' => $order->id,
+                'product_id' => $product['id'],
+                'quantity' => $product['qty'],
+                'price' => $product['price']
+            ]);
+        }
+
+        return 1;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Undocumented function
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function create()
+    public static function routes()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
+        Route::group([
+            'prefix' => 'api/order'
+        ], function() {
+            Route::name('api.order.')->group(function() {
+                Route::post('store', 'OrderController@apiStore')->name('store');
+            });
+        });
     }
 }

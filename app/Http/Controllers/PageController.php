@@ -26,11 +26,37 @@ class PageController extends Controller
         return view('page.cart');
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function checkout()
     {
         return view('page.checkout');
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function checkoutEnd()
+    {
+        $user = Auth::user();
+
+        if(session('user_'.$user->id.'_last_order')) {
+            return redirect()->route('site.page.home');
+        }
+
+        return view('page.checkoutEnd');
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function getRoutes()
     {
         $routes = collect(Route::getRoutes())->map(function ($route) { return $route->uri(); });
@@ -49,6 +75,7 @@ class PageController extends Controller
             Route::get('/', 'PageController@sitePageHome')->name('home');
             Route::get('/cart', 'PageController@cart')->name('cart');
             Route::get('/checkout', 'PageController@checkout')->name('checkout')->middleware('auth');
+            Route::get('/checkout/end', 'PageController@checkoutEnd')->name('checkout.end')->middleware('auth');
             Route::get('/get-routes', 'PageController@getRoutes')->name('getroutes');
         });
     }

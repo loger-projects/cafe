@@ -85,7 +85,7 @@
                     <div class="total title is-1"><span>Total</span>${{ total }}</div>
                 </div>
                 <div class="column checkout">
-                    <button class="button btn-brown">Proceed to checkout</button>
+                    <a :href="$root.routes.productIndex"  class="button btn-brown" role="button">Proceed to checkout</a>
                 </div>
             </div>
         </div>

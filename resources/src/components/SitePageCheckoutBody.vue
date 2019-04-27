@@ -1,8 +1,8 @@
 <template>
     <div id="sitePageCheckoutBody">
         <div class="container">
-            <div class="checkout-form">
-                <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" id="checkoutForm">
+            <div id="checkoutForm">
+                <form @submit.prevent="onSubmit" @keydown="form.errors.clear($event.target.name)" id="submitInfoForm">
                     <div class="columns">
                         <div class="column">
                             <h1 class="title is-aileron-black">Billing Details</h1>
@@ -23,7 +23,7 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <label for="email" class="label">email<span class="has-text-danger">*</span></label>
+                                    <label for="email" class="label">Email<span class="has-text-danger">*</span></label>
                                     <input 
                                         type="email" 
                                         name="email"
@@ -37,7 +37,7 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <label for="phone" class="label">phone<span class="has-text-danger">*</span></label>
+                                    <label for="phone" class="label">Phone<span class="has-text-danger">*</span></label>
                                     <input 
                                         type="text" 
                                         name="phone"
@@ -51,7 +51,7 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <label for="street_address" class="label">street_address<span class="has-text-danger">*</span></label>
+                                    <label for="street_address" class="label">Street address<span class="has-text-danger">*</span></label>
                                     <input 
                                         type="text" 
                                         name="street_address"
@@ -65,7 +65,7 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <label for="city" class="label">city<span class="has-text-danger">*</span></label>
+                                    <label for="city" class="label">City<span class="has-text-danger">*</span></label>
                                     <input 
                                         type="text" 
                                         name="city"
@@ -79,7 +79,7 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <label for="country" class="label">country<span class="has-text-danger">*</span></label>
+                                    <label for="country" class="label">Country<span class="has-text-danger">*</span></label>
                                     <input 
                                         type="text" 
                                         name="country"
@@ -93,21 +93,7 @@
 
                             <div class="field">
                                 <div class="control">
-                                    <label for="country" class="label">country<span class="has-text-danger">*</span></label>
-                                    <input 
-                                        type="text" 
-                                        name="country"
-                                        :class="{'input': true, 'is-danger': form.errors.has('country')}"
-                                        v-model="form.country">
-                                </div>
-                                <p class="help is-danger" v-if="form.errors.has('country')">
-                                    {{ form.errors.get('country') }}
-                                </p>
-                            </div>
-
-                            <div class="field">
-                                <div class="control">
-                                    <label for="zipcode" class="label">zipcode<span class="has-text-danger">*</span></label>
+                                    <label for="zipcode" class="label">Zipcode<span class="has-text-danger">*</span></label>
                                     <input 
                                         type="text" 
                                         name="zipcode"
@@ -128,7 +114,7 @@
                                     <textarea 
                                         name="order_note"
                                         placeholder="Notes about your order, e.g. special notes for delivery"
-                                        :class="{'textarea': true, 'is-danger': form.errors.has('order_note')}"
+                                        :class="{'textarea': true, 'is-success': form.errors.any()}"
                                         v-model="form.order_note">
                                     </textarea>
                                 </div>
@@ -140,7 +126,7 @@
                     </div>
                 </form>
             </div>
-            <div class="checkout-cart">
+            <div id="checkoutCart">
                 <h1 class="title is-aileron-black">Your order</h1>
                 <table class="cart-table">
                     <thead>
@@ -151,9 +137,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="item in cart" :key="item.id">
-                            <td class="name-col"><span>{{ item.name }}</span></td>
+                            <td class="name-col"><span>{{ item.name }} x {{ item.qty }}</span></td>
                             <td class="total-col"><span>${{ item.subtotal }}</span></td>
                         </tr>
+                    </tbody>
+                    <tfoot>
                         <tr class="subtotal-row">
                             <td>Subtotal</td>
                             <td>${{ subtotal }}</td>
@@ -162,12 +150,12 @@
                             <td>Total</td>
                             <td>${{ total }}</td>
                         </tr>
-                    </tbody>
+                    </tfoot>
                 </table>
             </div>
-            <div class="checkout-transer"></div>
-            <div>
-                <button type="submit" class="button btn-brown" formtarget="checkoutForm">Place order</button>
+            <div id="checkoutTranser"></div>
+            <div id="placeOrder">
+                <button type="submit" class="button btn-brown" form="submitInfoForm" :disabled="form.errors.any()">Place order</button>
             </div>
         </div>
     </div>
@@ -192,6 +180,7 @@ export default {
     },
     computed: {
         cart() { return this.$root.cart },
+        user() { return this.$root.user },
         subtotal() {
             let subtotal = 0
             this.cart.forEach(item => {
@@ -209,14 +198,97 @@ export default {
     },
     methods: {
         onSubmit() {
-            alert('oke')
-        }
-    }
+            this.form.post('/api/order/store')
+                    .then(response => {
+                        if(response.data) {
+                            location.href = this.$root.routes.sitePageCheckoutEnd
+                        }
+                    })
+        },
+       
+    },
 }
 </script>
 
 <style lang="scss" scoped>
     #sitePageCheckoutBody {
-        
+        #checkoutForm {
+            padding: 30px 0;
+            .column {
+                padding: 0 20px !important;
+            }
+        }
+        #checkoutCart {
+            .cart-table {
+                display: block;
+                tr {
+                    display: flex;
+                    td:first-child {
+                        width: 80%;
+                    }
+                    td:last-child {
+                        width: 20%;
+                    }
+                }
+                thead {
+                    width: 100%;
+                    display: block;
+                    tr {
+                        td {
+                            background-color: #c0aa83;
+                            color: #fff;
+                            font-family: 'aileron-black';
+                            padding: 20px 28px;
+                            font-size: 1.5rem;
+                            text-align: center;
+                        }
+                    }
+                }
+                tbody {
+                    display: block;
+                    border-bottom: 2px solid #000;
+                    tr:nth-child(odd) {
+                        background-color: #f6f6f6;
+                    }
+                    tr {
+                        td:first-child {
+                            color: #000;
+                            font-family: 'aileron-black'
+                        }
+                        td {
+                            padding: 10px 20px;
+                            border: 1px solid #f2f2f2;
+                        }
+                    }
+                }
+                tfoot {
+                    display: block;
+                    tr {
+                        td {
+                            color: #000;
+                            font-family: 'aileron-black';
+                            padding: 10px 20px;
+                            &:first-child {
+                                text-align: end;
+                                background-color: #f6f6f6;
+                            }
+                        }
+                        &.total-row {
+                            font-size: 30px;
+                        }
+                    }
+                }
+            }
+        }
+        #placeOrder {
+            padding: 20px 10px;
+            margin-top: 20px;
+            text-align: end;
+            border-top: 1px solid #757575;
+            button {
+                height: 60px;
+                width: 150px;
+            }
+        }
     }
 </style>

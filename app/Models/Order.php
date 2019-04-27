@@ -8,12 +8,14 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id',
-        'price',
-        'quantity',
-        'note',
-        'address',
-        'city',
-        'country'
+        'total',
+        'name',
+        'email',
+        'phone',
+        'street_address',
+        'country',
+        'zipcode',
+        'order_note'
     ];
 
     // belongsTo: User

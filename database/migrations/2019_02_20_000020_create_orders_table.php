@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('street_address');
             $table->string('city');
             $table->string('country');
-            $table->string('zipcode')->nullable();
+            $table->string('zipcode');
             $table->text('order_note')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
