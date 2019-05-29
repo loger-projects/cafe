@@ -71,13 +71,13 @@ export default {
     },
     computed: {
         forgotPasswordLink() { return location.origin + '/password/reset' },
-        registerLink() { return location.origin + '/register'}
+        registerLink() { return location.origin + '/register'},
     },
     methods: {
         onSubmit() {
             this.form.post('/login')
                 .then(response => {
-                    location.href="/user/home"
+                    location.href = this.$root.previousURL
                 })
                 .catch(error => {
                     console.log(error)

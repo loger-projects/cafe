@@ -23,6 +23,13 @@ class OptionController extends Controller
         return route($name);
     }
 
+    public function previousURL(Request $request)
+    {
+        $previousURL = $request->session()->get('previousURL');
+        $request->session()->forget('previousURL');
+        return $previousURL;
+    }
+
     public static function routes()
     {
         Route::group([
@@ -31,6 +38,7 @@ class OptionController extends Controller
             Route::name('api.option.')->group(function() {
                 Route::get('/site-info', 'OptionController@siteInfo')->name('siteInfo');
                 Route::get('/route/{name}', 'OptionController@route')->name('route');
+                Route::get('/previous-url', 'OptionController@previousURL')->name('previousURL');
             });
         });
     }

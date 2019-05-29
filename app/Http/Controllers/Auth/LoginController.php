@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -38,8 +39,9 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
+        $request->session()->put('previousURL', URL::previous());
         return view('user.login');
     }
 

@@ -16,9 +16,17 @@ new Vue({
         UserLogin
     },
     data: {
-        siteInfo: {}
+        siteInfo: {},
+        previousURL: ''
     },
     created() {
+        axios.get('/api/option/previous-url')
+            .then(response => {
+                this.previousURL = response.data
+            })
+            .catch(error => {
+                console.log(error.response.data.message)
+            });
         axios.get('/api/option/site-info')
             .then(response => {
                 this.siteInfo = response.data
@@ -26,5 +34,6 @@ new Vue({
             .catch(error => {
                 console.log(error.response.data.message)
             });
+        
     }
 });

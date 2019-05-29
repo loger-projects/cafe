@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Carbon\Carbon;
 use App\Models\MenuMeal;
 use App\Models\Menu;
@@ -64,19 +65,28 @@ class PageController extends Controller
     }
 
     /**
+     * 
+     * @return void
+     */
+    public function checkUrl()
+    {
+        return URL::previous();
+    }
+
+    /**
      * Undocumented function
      *
      * @return void
      */
     public static function routes()
     {
-        Route::get('/test', 'PageController@test')->name('test');
         Route::name('site.page.')->group(function() {
             Route::get('/', 'PageController@sitePageHome')->name('home');
             Route::get('/cart', 'PageController@cart')->name('cart');
             Route::get('/checkout', 'PageController@checkout')->name('checkout')->middleware('auth');
             Route::get('/checkout/end', 'PageController@checkoutEnd')->name('checkout.end')->middleware('auth');
             Route::get('/get-routes', 'PageController@getRoutes')->name('getroutes');
+            Route::get('/check-url', 'PageController@checkUrl')->name('checkUrl');
         });
     }
 }
