@@ -23,7 +23,7 @@
         "vue": "^2.5.17",
         "vue-carousel": "^0.18.0-alpha",
         "vue-lazyload": "^1.2.6",
-        "vue-moment": "^4.0.0",
+        "vue-moment": "^4.1.0",
         "vue-router": "^3.0.2",
         "vue-star-rating": "^1.6.1",
         "vue-template-compiler": "^2.6.7"
